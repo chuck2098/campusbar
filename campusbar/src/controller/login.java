@@ -19,7 +19,7 @@ public class login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("saverio gay");
+		System.out.println("ciao a tutti e benvenuti!!! :D");
 	}
 
 	/**
