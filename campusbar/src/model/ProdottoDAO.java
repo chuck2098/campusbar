@@ -26,7 +26,7 @@ public class ProdottoDAO {
 				p.setId(rs.getInt(1));
 				p.setNome(rs.getString(2));
 				p.setDescrizione(rs.getString(3));
-				p.setPrezzo(rs.getLong(4));
+				p.setPrezzo(rs.getFloat(4));
 				p.setCategoria(getCategoria(con, p.getId()));
 				prodotti.add(p);
 				
