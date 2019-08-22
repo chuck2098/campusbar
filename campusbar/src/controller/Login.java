@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Utente;
 import model.UtenteDAO;
@@ -30,12 +31,16 @@ public class Login extends HttpServlet {
 		Utente c=new UtenteDAO().doRetrieveByMatricolaPassword(matr, pass);
 		if(c==null)
 			response.sendRedirect("errati.html");
-		else if(c.getRuolo()==3)
-			response.sendRedirect("index.jsp");
+		else if(c.getRuolo()==3) {
+			request.getRequestDispatcher("").forward(request,response);
+			HttpSession sess=request.getSession();
+			sess.setAttribute("logUtente", "ok");
+		}
+			
 		else if(c.getRuolo()==2)
-			response.sendRedirect("indexbar.jsp");
+			request.getRequestDispatcher("WEB-INF/jsp/indexbar.jsp").forward(request,response);
 		else
-			response.sendRedirect("indexadmin.jsp");
+			request.getRequestDispatcher("WEB-INF/jsp/indexadmin.jsp").forward(request,response);
 	}
 
 	/**

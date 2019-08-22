@@ -15,8 +15,8 @@ public class UtenteDAO {
 			
 			PreparedStatement ps = con.prepareStatement(
 					"SELECT matricola,nome,cognome,email,password,id_ruolo,id_edificio "
-				  + "FROM utenti,ruoli "
-				  + "WHERE matricola=? AND password=?");
+				  + "FROM utenti "
+				  + "WHERE matricola=? AND password=? ");
 			
 			ps.setString(1, matricola);
 			ps.setString(2, password);

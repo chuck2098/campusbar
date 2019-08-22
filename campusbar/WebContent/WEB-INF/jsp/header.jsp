@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c"
+	uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,7 +31,14 @@
                         <div class="col-md-3 head-search-sign" >
                                 <table class="head-search-sign">
                                     <tr>
-                                        <td align="left"><span class="head-sign"><i class="fas fa-user">&nbsp;&nbsp;<a href="WEB-INF/jsp/sign.html">Accedi/Registrati</a></i></span></td>
+                                    <c:choose>
+                                    	<c:when test="${logUtente!=null}">
+                                    		 <td align="left"><span class="head-sign"><i class="fas fa-user">&nbsp;&nbsp;<a href="Logout">Logout</a></i></span></td>
+                                    	</c:when>
+                                    	<c:otherwise>
+                                    		<td align="left"><span class="head-sign"><i class="fas fa-user">&nbsp;&nbsp;<a href="sign.html">Accedi/Registrati</a></i></span></td>
+                                    	</c:otherwise>
+                                    </c:choose>
                                         <td align="right"><span class="head-cart"><i class="fas fa-shopping-cart">&nbsp;&nbsp;<a href="Carrello">Carrello</a></i></span></td>
                                     </tr>
                                 </table>
