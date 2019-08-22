@@ -15,7 +15,7 @@ import model.UtenteDAO;
 /**
  * Servlet implementation class login
  */
-@WebServlet("/login")
+@WebServlet("/Login")
 public class Login extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -32,11 +32,10 @@ public class Login extends HttpServlet {
 		if(c==null)
 			response.sendRedirect("errati.html");
 		else if(c.getRuolo()==3) {
-			request.getRequestDispatcher("").forward(request,response);
 			HttpSession sess=request.getSession();
 			sess.setAttribute("logUtente", "ok");
+			response.sendRedirect(".");
 		}
-			
 		else if(c.getRuolo()==2)
 			request.getRequestDispatcher("WEB-INF/jsp/indexbar.jsp").forward(request,response);
 		else
