@@ -1,35 +1,46 @@
 package model;
 
 public class Utente {
-	public int getMatricola() {
+	
+	public Utente() {}
+	public Utente(String matricola, String nome, String cognome, String email, String password,int edificio, int ruolo) {
+		super();
+		this.matricola = matricola;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.email = email;
+		this.password = password;
+		this.id_edificio = edificio;
+		this.id_ruolo = ruolo;
+	}
+	
+	public String getMatricola() {
 		return matricola;
 	}
 	
 	public String getNome() {
 		return nome;
 	}
+
 	public String getCognome() {
 		return cognome;
 	}
-	public String getRuolo() {
-		return ruolo;
+	public int getRuolo() {
+		return id_ruolo;
 	}
-	public String getEdificio() {
-		return  edificio;
-	}
-	public  String getPass() {
-		return password;
-	}
-	
-	public String getPassword() {
-		return password;
+	public int getEdificio() {
+		return  id_edificio;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setMatricola(int matricola) {
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setMatricola(String matricola) {
 		this.matricola = matricola;
 	}
 
@@ -41,19 +52,28 @@ public class Utente {
 		this.cognome = cognome;
 	}
 
-	public void setRuolo(String ruolo) {
-		this.ruolo = ruolo;
+	public void setRuolo(int ruolo) {
+		this.id_ruolo = ruolo;
 	}
 
-	public void setEdificio(String edificio) {
-		this.edificio = edificio;
+	public void setEdificio(int edificio) {
+		this.id_edificio = edificio;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 
-	private int matricola;
+	private String matricola;
 	private String nome;
 	private String cognome;
+	private String email;
 	private String password;
-	private String ruolo;
-	private String edificio;
+	private int id_ruolo;
+	private int id_edificio;
 }

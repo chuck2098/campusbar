@@ -1,17 +1,21 @@
 package controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Utente;
+import model.UtenteDAO;
+
 /**
  * Servlet implementation class login
  */
 @WebServlet("/login")
-public class login extends HttpServlet {
+public class Login extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -19,15 +23,19 @@ public class login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ciao a tutti e benvenuti!!!");
-		System.out.println("ciao a tutti e benvenuti!!!");
-		System.out.println("ciao a tutti e benvenuti!!!");
-		System.out.println("ciao a tutti e benvenuti!!!");
-		System.out.println("ciao a tutti e benvenuti!!!");
-		System.out.println("ciao a tutti e benvenuti!!!");
-		System.out.println("ciao sono saverio e lo succhio a tutti!!");
-		System.out.println("ciao sono vincenzo e soni gay");
 		
+		String matr=request.getParameter("matricola");
+		String pass=request.getParameter("password");
+		
+		Utente c=new UtenteDAO().doRetrieveByMatricolaPassword(matr, pass);
+		if(c==null)
+			response.sendRedirect("errati.html");
+		else if(c.getRuolo()==3)
+			response.sendRedirect("index.jsp");
+		else if(c.getRuolo()==2)
+			response.sendRedirect("indexbar.jsp");
+		else
+			response.sendRedirect("indexadmin.jsp");
 	}
 
 	/**
