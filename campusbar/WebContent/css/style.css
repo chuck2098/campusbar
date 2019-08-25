@@ -1,8 +1,4 @@
-html,
-body
-{
-   height: 100%;
-}
+html, body{ height: 100%; margin: 0; padding: 0; }
 body{
     background-color:rgba(170, 172, 133, 0.79);
     color:rgb(241, 248, 248);
@@ -185,8 +181,55 @@ body{
     padding-bottom: 1px;
 }
 
+
+/*********************TABELLA RESPONSIVE********************************/
+/* larghezza del div che contiene la tabella (facoltativo): il valore potrebbe essere omesso se vale 100% oppure se viene definito altrove */
+
+.table-responsive {
+    width: 100%;
+}
+
+
+/* istruzioni per le celle (alcune sono obbligatorie) */
+
+.table-responsive table td,
+.table-responsive table th {
+    min-width: 100px;
+    word-break: break-all;
+    text-align: center;
+    padding-right:15px;
+    padding-left:15px;
+}
+
+.table-responsive tr {
+    border: 2px solid #ccc;
+}
+
+.table-responsive td {
+    font-size: 15px;
+    border-color: white;
+    border: 0;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+.table-responsive th {
+    font-size: 18px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.table-responsive table {
+		margin:auto;
+    border-collapse: separate;
+    text-align: center;
+}
+
 /*FOOTER*/
 footer{
+	position:relative;
+	bottom:0;
+	width:100%;
     padding-top: 50px;
     text-align: center;
 }
