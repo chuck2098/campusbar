@@ -22,7 +22,7 @@
 		                                  <textarea name="nota" maxlength="255"  placeholder="Inserisci una nota per questo prodotto"></textarea>
 		                              </div>
 		                              <input type="number" class="card-quant" name="quant" placeholder="Qt.">
-		                              <a href="#" class="btn">Aggiungi al carrello</a>
+		                              <button class="btn" onclick="addToCart(<c:out value="${prodotto.id}"/>)">Aggiungi al carrello</button>
 		                          </div>
 	                        </div>
 												</div>
@@ -32,5 +32,19 @@
                </section>
         </section>
 <jsp:include page="footer.html"/>
+<script>
+	function addToCart(){
+        $.ajax({
+            type: "POST",
+            url: "AddToCart",
+            async: true,
+            cache: false,
+            success: function (data) {
+                var json = eval('(' + data + ')');
+                document.getElementById('contaProd').innerHTML = json['conta'];
+            }
+        });
+	}
+</script>
 </body>
 </html>
