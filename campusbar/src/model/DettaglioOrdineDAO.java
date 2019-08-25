@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DettaglioOrdineDAO {
 
@@ -41,6 +42,42 @@ public class DettaglioOrdineDAO {
 		}
 		
 		return true;
+		
+	}
+	
+	//funzione per prelevare tutti i dettaglki ordini non confermati dell'utente loggagto.
+	public ArrayList<DettaglioOrdine> doRetrieveNotConfirmedByUser(Utente u) {
+		
+		try{
+			Connection con = ConnectionPool.getConnection();
+			
+			PreparedStatement ps = con.prepareStatement("SELECT * " + 
+														"FROM dettaglio_ordini " + 
+														"WHERE prodotto_ordinato=0 AND id_utente=? ");
+			
+			ps.setString(1,u.getMatricola());
+			
+			ResultSet rs = ps.executeQuery();
+			ArrayList<DettaglioOrdine> e = new ArrayList<>();
+			
+			if (rs.next()) {
+				DettaglioOrdine d =new DettaglioOrdine();
+				d.setCliente(u);
+				d.setNota(rs.getString(2));
+				d.setPrezzo_acquisto(rs.getInt(4));
+				d.setQuantita(rs.getInt(3));
+				d.setProdotto_ordinato(rs.getBoolean(5));
+				d.setProdotto(new ProdottoDAO().doRetrieveById(rs.getInt(7)));
+				
+				e.add(d);
+				
+			}
+			System.out.println("sssss"+e.size());
+			return e;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 		
 	}
 }
