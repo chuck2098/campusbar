@@ -32,7 +32,7 @@ public class UtenteDAO {
 				u.setCognome(rs.getString(3));
 				u.setEmail(rs.getString(4));
 				u.setPassword(rs.getString(5));
-				u.setRuolo(getRuolo(con,rs.getInt(6) ));
+				u.setRuolo(getRuolo(con,rs.getInt(6)));
 				u.setEdificio(getEdificio(con,rs.getInt(7)));
 				return u;
 			}
@@ -70,9 +70,9 @@ public class UtenteDAO {
 	
 	private static Ruolo getRuolo(Connection con, int idRuolo) throws SQLException {
 		PreparedStatement ps = con.prepareStatement(
-				"SELECT c.id_ruolo,nome_ruolo " + 
-				"FROM ruolo c" + 
-				"WHERE p.id_ruolo=?");
+				"SELECT c.id_ruolo,c.nome_ruolo " + 
+				"FROM ruoli c " + 
+				"WHERE c.id_ruolo=?");
 
 		ps.setInt(1, idRuolo);
 		
@@ -87,9 +87,9 @@ public class UtenteDAO {
 	}
 	private static Edificio getEdificio(Connection con, int idEdificio) throws SQLException {
 		PreparedStatement ps = con.prepareStatement(
-				"SELECT c.id_ruolo,nome, orario_chiusura " + 
-				"FROM macro_edifici c" + 
-				"WHERE p.idEdificio=?");
+				"SELECT nome,id_edificio,orario_chiusura " + 
+				"FROM macro_edifici  " + 
+				"WHERE id_edificio=?");
 
 		ps.setInt(1, idEdificio);
 		
@@ -97,8 +97,9 @@ public class UtenteDAO {
 		Edificio c=null;
 		while (rs.next()) {
 		    c = new Edificio();
-			c.setId_edificio(rs.getInt(1));
-			c.setNome(rs.getString(2));
+			c.setId_edificio(rs.getInt(2));
+			c.setOrario_chiusura(rs.getInt(3));
+			c.setNome(rs.getString(1));
 		}
 		return c;
 	}
