@@ -17,10 +17,10 @@ public class ConnectionPool {
 			p.setDriverClassName("com.mysql.cj.jdbc.Driver");
 			p.setUsername("root");
 			p.setPassword("sasa");
-			p.setMaxActive(100);
+			p.setMaxActive(500);
 			p.setInitialSize(10);
 			p.setMinIdle(10);
-			p.setRemoveAbandonedTimeout(60);
+			p.setRemoveAbandonedTimeout(120);
 			p.setRemoveAbandoned(true);
 			datasource = new DataSource();
 			datasource.setPoolProperties(p);
