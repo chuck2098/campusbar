@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,20 +21,33 @@ public class AddToCart extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id_prod=request.getParameter("id");
+		String quant=request.getParameter("quant");
+		String nota=request.getParameter("nota");
+		
+		
 		
 		Utente u=(Utente)request.getSession().getAttribute("logUtente");
+		
 		//se l'utente e' loggato
 		if(u!=null) {
 			
-			Prodotto p=new Prodotto();
-			p.setId(Integer.parseInt(id_prod));
+			ProdottoDAO prod=new ProdottoDAO();
+			Prodotto p=prod.doRetrieveById(Integer.parseInt(id_prod));
 			
 			DettaglioOrdine d=new DettaglioOrdine();
+			d.setNota(nota);
+			d.setQuantita(Integer.parseInt(quant));
+			d.setProdotto_ordinato(false);
+			d.setPrezzo_acquisto(p.getPrezzo());
 			d.setCliente(u);
 			d.setProdotto(p);
 			
 			DettaglioOrdineDAO dett=new DettaglioOrdineDAO();
-			dett.doSaveCart(d);
+			if(dett.doSaveCart(d)) {
+				PrintWriter out=response.getWriter();
+				out.println("Prodotto aggiunto al carrello");
+			}
+
 			
 		}else { //utente non loggato,gestire il carrello con i cookie
 			

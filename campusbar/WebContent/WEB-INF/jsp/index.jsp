@@ -15,14 +15,14 @@
 	                              <img class="card-img-top" src="images/<c:out value="${prodotto.id}"/>.png" alt="Card image" >
 	                          </div>
 														<div class="card-body">
-		                              <h4 class="card-title"><c:out value="${prodotto.nome}" /></h4>
+															    <h4 class="card-title"><c:out value="${prodotto.nome}" /></h4>
 		                              <p class="card-text"><c:out value="${prodotto.descrizione}" /></p>
 		                              <div class="card-info">
 		                                  <span class="card-price"><c:out value="${prodotto.prezzo}" /></span>
-		                                  <textarea name="nota" maxlength="255"  placeholder="Inserisci una nota per questo prodotto"></textarea>
+		                                  <textarea id="nota" maxlength="255"  placeholder="Inserisci una nota per questo prodotto"></textarea>
 		                              </div>
-		                              <input type="number" class="card-quant" name="quant" placeholder="Qt.">
-		                              <button class="btn" onclick="addToCart(<c:out value="${prodotto.id}"/>)">Aggiungi al carrello</button>
+		                              <input type="number" min="1" required class="card-quant" id="quant" placeholder="Qt.">
+		                              <button type="button" class="btn" onclick="addToCart(<c:out value="${prodotto.id}"/>)">Aggiungi al carrello</button>
 		                          </div>
 	                        </div>
 												</div>
@@ -34,16 +34,19 @@
 <jsp:include page="footer.html"/>
 <script>
 	function addToCart(id){
-        $.ajax({
-            type: "POST",
-            url: "AddToCart?id="+id,
-            async: true,
-            cache: false,
-            success: function (data) {
-                var json = eval('(' + data + ')');
-                document.getElementById('contaProd').innerHTML = json['conta'];
-            }
-        });
+		
+		var quant=document.getElementById("quant").value;
+		var not=document.getElementById("nota").value;
+		if(!quant){
+			alert("inserisci quantita'");
+			return;
+		}
+
+		$.get("AddToCart?id=" + id + "&quant=" + quant + "&nota=" + not, 
+			function(data){
+					alert(data);
+		});
+	
 	}
 </script>
 </body>

@@ -37,6 +37,33 @@ public class ProdottoDAO {
 		}
 	}
 	
+public Prodotto doRetrieveById(int id) {
+		Prodotto p=null;
+		try{
+			Connection con = ConnectionPool.getConnection();
+			PreparedStatement ps = con
+					.prepareStatement("SELECT id_prodotto,nome,descrizione,prezzo,id_categoria "
+									+ "FROM prodotti "
+									+ "WHERE id_prodotto=?");
+			ps.setInt(1,id);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				p = new Prodotto();
+				p.setId(rs.getInt(1));
+				p.setNome(rs.getString(2));
+				p.setDescrizione(rs.getString(3));
+				p.setPrezzo(rs.getFloat(4));
+				p.setCategoria(getCategoria(con, p.getId()));
+				
+			}
+			return p;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	
 	private static Categoria getCategoria(Connection con, int idProdotto) throws SQLException {
 		PreparedStatement ps = con.prepareStatement(
 				"SELECT c.id_categoria,nome_categoria " + 
