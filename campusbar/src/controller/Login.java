@@ -31,12 +31,12 @@ public class Login extends HttpServlet {
 		Utente c=new UtenteDAO().doRetrieveByMatricolaPassword(matr, pass);
 		if(c==null)
 			response.sendRedirect("errati.html");
-		else if(c.getRuolo()==3) {
+		else if(c.getRuolo().getId_ruolo()==3) {
 			HttpSession sess=request.getSession();
 			sess.setAttribute("logUtente",c);
 			response.sendRedirect(".");
 		}
-		else if(c.getRuolo()==2)
+		else if(c.getRuolo().getId_ruolo()==2)
 			request.getRequestDispatcher("WEB-INF/jsp/indexbar.jsp").forward(request,response);
 		else
 			request.getRequestDispatcher("WEB-INF/jsp/indexadmin.jsp").forward(request,response);

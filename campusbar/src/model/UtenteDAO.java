@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import controller.Categoria;
+
 public class UtenteDAO {
 
 	public Utente doRetrieveByMatricolaPassword(String matricola, String password) {
@@ -30,8 +32,8 @@ public class UtenteDAO {
 				u.setCognome(rs.getString(3));
 				u.setEmail(rs.getString(4));
 				u.setPassword(rs.getString(5));
-				u.setRuolo(rs.getInt(6));
-				u.setEdificio(rs.getInt(7));
+				u.setRuolo(getRuolo(con,rs.getInt(6) ));
+				u.setEdificio(getEdificio(con,rs.getInt(7)));
 				return u;
 			}
 			return null;
@@ -55,8 +57,8 @@ public class UtenteDAO {
 			ps.setString(3, utente.getCognome());
 			ps.setString(4, utente.getEmail());
 			ps.setString(5, utente.getPassword());
-			ps.setInt(6, utente.getEdificio());
-			ps.setInt(7, utente.getRuolo());
+			ps.setInt(6, utente.getEdificio().getId_edificio());
+			ps.setInt(7, utente.getRuolo().getId_ruolo());
 			if (ps.executeUpdate() != 1) {
 				throw new RuntimeException("INSERT error.");
 			}
@@ -64,5 +66,40 @@ public class UtenteDAO {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	private static Ruolo getRuolo(Connection con, int idRuolo) throws SQLException {
+		PreparedStatement ps = con.prepareStatement(
+				"SELECT c.id_ruolo,nome_ruolo " + 
+				"FROM ruolo c" + 
+				"WHERE p.id_ruolo=?");
+
+		ps.setInt(1, idRuolo);
+		
+		ResultSet rs = ps.executeQuery();
+		Ruolo c=null;
+		while (rs.next()) {
+		    c = new Ruolo();
+			c.setId_ruolo(rs.getInt(1));
+			c.setNome_ruolo(rs.getString(2));
+		}
+		return c;
+	}
+	private static Edificio getEdificio(Connection con, int idEdificio) throws SQLException {
+		PreparedStatement ps = con.prepareStatement(
+				"SELECT c.id_ruolo,nome, orario_chiusura " + 
+				"FROM macro_edifici c" + 
+				"WHERE p.idEdificio=?");
+
+		ps.setInt(1, idEdificio);
+		
+		ResultSet rs = ps.executeQuery();
+		Edificio c=null;
+		while (rs.next()) {
+		    c = new Edificio();
+			c.setId_edificio(rs.getInt(1));
+			c.setNome(rs.getString(2));
+		}
+		return c;
 	}
 }
