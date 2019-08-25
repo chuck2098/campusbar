@@ -33,7 +33,7 @@
                                     <tr>
                                     <c:choose>
                                     	<c:when test="${logUtente!=null}">
-                                    		 <td align="left"><span class="head-sign"><i class="fas fa-user">&nbsp;&nbsp;<a href="Logout">Logout</a></i></span></td>
+                                    		 <td align="left"><span class="head-sign"><i class="fas fa-user">&nbsp;&nbsp;<a href="Logout"><c:out value="Ciao ${logUtente.nome},"></c:out>Logout</a></i></span></td>
                                     	</c:when>
                                     	<c:otherwise>
                                     		<td align="left"><span class="head-sign"><i class="fas fa-user">&nbsp;&nbsp;<a href="login.html">Accedi/Registrati</a></i></span></td>

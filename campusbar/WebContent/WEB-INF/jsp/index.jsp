@@ -33,10 +33,10 @@
         </section>
 <jsp:include page="footer.html"/>
 <script>
-	function addToCart(){
+	function addToCart(id){
         $.ajax({
             type: "POST",
-            url: "AddToCart",
+            url: "AddToCart?id="+id,
             async: true,
             cache: false,
             success: function (data) {

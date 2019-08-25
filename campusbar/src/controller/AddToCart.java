@@ -7,34 +7,40 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.*;
+
 /**
  * Servlet implementation class AddToCart
  */
 @WebServlet("/AddToCart")
 public class AddToCart extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddToCart() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String id_prod=request.getParameter("id");
+		
+		Utente u=(Utente)request.getSession().getAttribute("logUtente");
+		//se l'utente e' loggato
+		if(u!=null) {
+			
+			Prodotto p=new Prodotto();
+			p.setId(Integer.parseInt(id_prod));
+			
+			DettaglioOrdine d=new DettaglioOrdine();
+			d.setCliente(u);
+			d.setProdotto(p);
+			
+			DettaglioOrdineDAO dett=new DettaglioOrdineDAO();
+			dett.doSaveCart(d);
+			
+		}else { //utente non loggato,gestire il carrello con i cookie
+			
+		}
+		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

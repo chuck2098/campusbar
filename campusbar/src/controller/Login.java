@@ -33,7 +33,7 @@ public class Login extends HttpServlet {
 			response.sendRedirect("errati.html");
 		else if(c.getRuolo()==3) {
 			HttpSession sess=request.getSession();
-			sess.setAttribute("logUtente", "ok");
+			sess.setAttribute("logUtente",c);
 			response.sendRedirect(".");
 		}
 		else if(c.getRuolo()==2)
