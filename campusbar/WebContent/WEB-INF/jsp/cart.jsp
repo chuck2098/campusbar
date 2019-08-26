@@ -36,7 +36,7 @@
 							</div>
 						</div>
 					</div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 
 <jsp:include page="footer.html"/>
 <script>
