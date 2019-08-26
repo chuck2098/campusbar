@@ -28,17 +28,19 @@ body{
     border-radius: 3px;
 }
 
-.head-search-sign{
-    margin: auto;
-    padding-top:5px; 
-    font-weight: 500;
+.logo{
+	width:25%;
 }
-
-/*lo spazio accedi e carrello*/
-.head-search-sign table{
-    width:90%;
-    border-collapse: separate;
-    border-spacing: 10px;
+.form-search{
+	width:50%;
+	padding-top:15px;
+	padding-left:15px;
+}
+.head-span{
+	width:25%;
+	padding-top:25px;
+	padding-left:15px;
+	padding-right:15px;
 }
 
 /*colore delle icone 'carrello' e 'acc/reg' */
@@ -46,19 +48,21 @@ body{
     color: #F5F5F4;
     font-size:17px;
 }
-
+.head-sign{
+	float:left;
+}
+.head-cart{
+	float:right;
+	
+}
+/*colore delle scritte "accedi" e "carrello"*/
 .head-sign a,.head-cart a{
 	color:white;
 }
 
-.form-inline{
-    position: relative;
-    width:100%;
-    padding: 0;
-}
-.form-inline > .form-control{
-    width:80%;
-    padding:0 10px;
+
+.form-search .form-inline .form-control{
+	width:84%;
 }
 
 .form-inline > .btn{
@@ -66,9 +70,9 @@ body{
     background-color: #A7B4A9;
     border: 3px solid rgba(150, 163, 152, 0.7);
     position: relative;
-	height: 100%;
-	left: 2px;
-	top: 0;
+	  height: 100%;
+	  left: 2px;
+	  top: 0;
 }
 
 .form-inline > .btn:active,:focus{
@@ -88,6 +92,7 @@ body{
 }
 /*FINE MENU HEADER*/
 
+/******************************************************************/
 /*CONTENT*/
 .content{
     height: auto !important;
@@ -241,7 +246,7 @@ footer > .container-fluid{
     width:100%;
 	list-style-type:none;
 	padding:0px;
-	display:table;
+	display:table;1197
 	margin-top: 10px;
 	margin-right: auto;
 	margin-bottom: 10px;
@@ -290,25 +295,51 @@ footer > .container-fluid{
     margin:auto;
 }
 
+/****************************************************************************************/
 /*@MEDIA SCREEN*/
-@media screen and (min-width: 768px) and (max-width: 992px) { 
-    .head-search-sign{
-        padding-top:7px; 
-    }
-    .form-inline > .form-control{
-        width:100%
-    }
-    .form-inline > .btn{
-        margin:auto;
-        margin-top:5px;
-    }
+@media screen and (max-width: 1200px) {
+		.logo{
+			width:15%;
+		}
+		.form-search{
+			width:65%;
+		}
+		.head-span{
+			width:20%;
+		}
 }
 
-@media screen and (max-width: 767px) { 
-    .form-inline > .form-control {
-        margin-left:2%;
-        width:80%;
-    }
+@media screen and (max-width: 992px) {
+	  
+	  .logo{
+			width:20%;
+		}
+		.form-search{
+			width:80%;
+		}
+		.head-span{
+			width:100%;
+		}
+		
+}
+
+@media screen and (max-width: 768px) {
+	  .logo{
+			width:100%;
+		}
+		.form-search{
+			width:100%;
+			padding-left:5%;
+		}
+		
+		.form-search .form-inline .form-control{
+			width:70%;
+		}
+		
+		.head-span{
+			width:100%;
+			padding-bottom:5px;
+		}
     .navbar.navbar-expand-md:before{
         content:"MENU";
         font-size:19px;
@@ -321,11 +352,6 @@ footer > .container-fluid{
         width:90%;
         margin:auto;
         margin-bottom: 25px;
-    }
-
-    .form-inline > .form-control {
-        width:72%;
-        margin-left:1px;
     }
 }
 
