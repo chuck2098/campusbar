@@ -27,13 +27,10 @@ public class Carrello extends HttpServlet {
 		//se e' loggato
 		if(u != null) {
 			ArrayList<DettaglioOrdine> cart = new DettaglioOrdineDAO().doRetrieveNotConfirmedByUser(u);
-			System.out.println("--->"+cart.size());
-			
 			request.getSession().setAttribute("cart", cart);
 		}
 		
 		request.getRequestDispatcher("WEB-INF/jsp/cart.jsp").forward(request, response);
-		
 		
 	}
 

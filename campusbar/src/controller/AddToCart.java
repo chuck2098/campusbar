@@ -43,7 +43,7 @@ public class AddToCart extends HttpServlet {
 			d.setProdotto(p);
 			
 			DettaglioOrdineDAO dett=new DettaglioOrdineDAO();
-			if(dett.doSaveCart(d)) {
+			if(dett.doSaveOrUpdateCart(d)) {
 				PrintWriter out=response.getWriter();
 				out.println("Prodotto aggiunto al carrello");
 			}

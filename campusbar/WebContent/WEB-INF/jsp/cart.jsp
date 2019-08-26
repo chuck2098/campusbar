@@ -22,12 +22,14 @@
 								      </thead>
 								      <tbody>
 								      	   <c:forEach items="${cart}" var="carrello">
+								      	   	<tr>
 									      	   	<td><c:out value="${carrello.getProdotto().getCategoria().getNomeCategoria()}"></c:out></td>
-									      	   	<td><c:out value="${carrello.getProdotto().getNome()}"></c:out></td>
+									      	   	<td><img width='100px' src='images/<c:out value="${carrello.getProdotto().getId()}"/>.png'><br><b><c:out value="${carrello.getProdotto().getNome()}"></c:out></b></td>
 									      	   	<td><c:out value="${carrello.getPrezzo_acquisto()}"></c:out></td>
 									      	   	<td><c:out value="${carrello.getQuantita()}"></c:out></td>
 									      	   	<td><c:out value="${carrello.getNota()}"></c:out></td>
 									      	   	<td><a href=#>elimina</a></td>
+									      	   </tr>
 								      	  </c:forEach> 
 								      </tbody>
 							     </table>

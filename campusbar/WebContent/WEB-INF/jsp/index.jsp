@@ -19,9 +19,9 @@
 		                              <p class="card-text"><c:out value="${prodotto.descrizione}" /></p>
 		                              <div class="card-info">
 		                                  <span class="card-price"><c:out value="${prodotto.prezzo}" /></span>
-		                                  <textarea id="nota" maxlength="255"  placeholder="Inserisci una nota per questo prodotto"></textarea>
+		                                  <textarea id="nota<c:out value="${prodotto.id}"/>" maxlength="255"  placeholder="Inserisci una nota per questo prodotto"></textarea>
 		                              </div>
-		                              <input type="number" min="1" required class="card-quant" id="quant" placeholder="Qt.">
+		                              <input type="number" min="1" required class="card-quant" id="quant<c:out value="${prodotto.id}"/>" placeholder="Qt.">
 		                              <button type="button" class="btn" onclick="addToCart(<c:out value="${prodotto.id}"/>)">Aggiungi al carrello</button>
 		                          </div>
 	                        </div>
@@ -35,8 +35,12 @@
 <script>
 	function addToCart(id){
 		
-		var quant=document.getElementById("quant").value;
-		var not=document.getElementById("nota").value;
+		var quant=document.getElementById("quant"+id).value;
+		var not=document.getElementById("nota"+id).value;
+		
+		document.getElementById("quant"+id).value="";
+		document.getElementById("nota"+id).value="";
+		
 		if(!quant){
 			alert("inserisci quantita'");
 			return;

@@ -14,8 +14,8 @@ public class ProdottoDAO {
 	
 	public List<Prodotto> doRetrieveAll() {
 		
-		try{
-			Connection con = ConnectionPool.getConnection();
+		try(Connection con = ConnectionPool.getConnection()){
+			
 			PreparedStatement ps = con
 					.prepareStatement("SELECT id_prodotto,nome,descrizione,prezzo,id_categoria "
 									+ "FROM prodotti ");
@@ -39,8 +39,8 @@ public class ProdottoDAO {
 	
 public Prodotto doRetrieveById(int id) {
 		Prodotto p=null;
-		try{
-			Connection con = ConnectionPool.getConnection();
+		try(Connection con = ConnectionPool.getConnection()){
+			
 			PreparedStatement ps = con
 					.prepareStatement("SELECT id_prodotto,nome,descrizione,prezzo,id_categoria "
 									+ "FROM prodotti "
