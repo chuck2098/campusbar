@@ -12,8 +12,8 @@ public class UtenteDAO {
 
 	public Utente doRetrieveByMatricolaPassword(String matricola, String password) {
 		
-		try{
-			Connection con = ConnectionPool.getConnection();
+		try(Connection con = ConnectionPool.getConnection()){
+			
 			
 			PreparedStatement ps = con.prepareStatement(
 					"SELECT matricola,nome,cognome,email,password,id_ruolo,id_edificio "
@@ -45,8 +45,8 @@ public class UtenteDAO {
 	
 	public void doSave(Utente utente) {
 		
-		try{
-			Connection con = ConnectionPool.getConnection();
+		try(Connection con = ConnectionPool.getConnection()){
+			
 			PreparedStatement ps = con.prepareStatement(
 					"INSERT INTO utenti (matricola, nome,cognome,email,password,id_edificio,id_ruolo) "
 				   +"VALUES(?,?,?,?,?,?,?)",
