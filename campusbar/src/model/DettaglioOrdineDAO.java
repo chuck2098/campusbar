@@ -74,7 +74,7 @@ public class DettaglioOrdineDAO {
 		
 	}
 	
-	//funzione per prelevare tutti i dettagli ordini non confermati dell'utente loggagto.
+	//CARRELLO:funzione per prelevare tutti i dettagli ordini non confermati dell'utente loggagto.
 	public ArrayList<DettaglioOrdine> doRetrieveNotConfirmedByUser(Utente u) {
 		
 		try(Connection con = ConnectionPool.getConnection()){
@@ -91,6 +91,7 @@ public class DettaglioOrdineDAO {
 			
 			while(rs.next()) {
 				DettaglioOrdine d =new DettaglioOrdine();
+				d.setId_dettaglio(rs.getInt(1));
 				d.setCliente(u);
 				d.setNota(rs.getString(2));
 				d.setPrezzo_acquisto(rs.getFloat(4));
@@ -108,4 +109,26 @@ public class DettaglioOrdineDAO {
 		}
 		
 	}
+	
+	public boolean doDeleteById(int id) {
+		
+		try(Connection con = ConnectionPool.getConnection()) {
+			
+			
+			PreparedStatement ps0 = con.prepareStatement("DELETE FROM dettaglio_ordini "
+														+"WHERE id_dettaglio_ordine=?");
+			ps0.setInt(1,id);
+			if(ps0.executeUpdate()==0)
+				return false;
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+		
+	}
+	
 }

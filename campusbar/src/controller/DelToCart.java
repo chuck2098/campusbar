@@ -9,20 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.*;
+import model.DettaglioOrdine;
+import model.DettaglioOrdineDAO;
+import model.Prodotto;
+import model.ProdottoDAO;
+import model.Utente;
 
 /**
- * Servlet implementation class AddToCart
+ * Servlet implementation class DelToCart
  */
-@WebServlet("/AddToCart")
-public class AddToCart extends HttpServlet {
+@WebServlet("/DelToCart")
+public class DelToCart extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String id_prod=request.getParameter("id");
-		String quant=request.getParameter("quant");
-		String nota=request.getParameter("nota");
 		
 		
 		Utente u=(Utente)request.getSession().getAttribute("logUtente");
@@ -30,31 +33,20 @@ public class AddToCart extends HttpServlet {
 		//se l'utente e' loggato
 		if(u!=null) {
 			
-			ProdottoDAO prod=new ProdottoDAO();
-			Prodotto p=prod.doRetrieveById(Integer.parseInt(id_prod));
+			DettaglioOrdineDAO d=new DettaglioOrdineDAO();
+			boolean r=d.doDeleteById(Integer.parseInt(id_prod));
+			PrintWriter out=response.getWriter();
 			
-			DettaglioOrdine d=new DettaglioOrdine();
-			d.setNota(nota);
-			d.setQuantita(Integer.parseInt(quant));
-			d.setProdotto_ordinato(false);
-			d.setPrezzo_acquisto(p.getPrezzo());
-			d.setCliente(u);
-			d.setProdotto(p);
-			
-			DettaglioOrdineDAO dett=new DettaglioOrdineDAO();
-			if(dett.doSaveOrUpdateCart(d)) {
-				PrintWriter out=response.getWriter();
-				out.println("Prodotto aggiunto al carrello");
-			}
+			if(r) out.println("Prodotto eliminato dal carrello");
+			else  out.println("Impossibile eliminare il prodotto dal carrello");
 
-			
 		}else { //utente non loggato,gestire il carrello con i cookie
 			
 		}
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -4,7 +4,7 @@
 	uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp"/>
 
-        <div class="container">
+        <div class="container" id="cart">
         	<h2 style="text-align:center;">Carrello</h2><br>
             <div class="row">
              
@@ -28,7 +28,7 @@
 									      	   	<td><c:out value="${carrello.getPrezzo_acquisto()}"></c:out></td>
 									      	   	<td><c:out value="${carrello.getQuantita()}"></c:out></td>
 									      	   	<td><c:out value="${carrello.getNota()}"></c:out></td>
-									      	   	<td><a href=#>elimina</a></td>
+									      	   	<td><a href=# onclick="del(<c:out value="${carrello.getId_dettaglio()}"/>)" >elimina</a></td>
 									      	   </tr>
 								      	  </c:forEach> 
 								      </tbody>
@@ -37,6 +37,17 @@
 						</div>
 					</div>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 <jsp:include page="footer.html"/>
+<script>
+	function del(cod){
+		alert();
+		$.get("DelToCart?id=" + cod,
+				function(data){
+						alert(data);
+						$('#cart').load(document.URL +  ' #cart');
+			});
+	}
+</script>
 </body>
 </html>

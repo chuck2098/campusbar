@@ -2,6 +2,13 @@ package model;
 
 public class DettaglioOrdine {
 	
+	
+	public int getId_dettaglio() {
+		return id_dettaglio;
+	}
+	public void setId_dettaglio(int id_dettaglio) {
+		this.id_dettaglio = id_dettaglio;
+	}
 	public String getNota() {
 		return nota;
 	}
@@ -39,6 +46,7 @@ public class DettaglioOrdine {
 		this.prodotto = prodotto;
 	}
 	
+	private int id_dettaglio;
 	private String nota;
 	private int quantita;
 	private float prezzo_acquisto;
