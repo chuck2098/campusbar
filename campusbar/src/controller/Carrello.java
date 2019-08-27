@@ -28,6 +28,7 @@ public class Carrello extends HttpServlet {
 		if(u != null) {
 			ArrayList<DettaglioOrdine> cart = new DettaglioOrdineDAO().doRetrieveNotConfirmedByUser(u);
 			request.getSession().setAttribute("cart", cart);
+			
 		}
 		
 		request.getRequestDispatcher("WEB-INF/jsp/cart.jsp").forward(request, response);

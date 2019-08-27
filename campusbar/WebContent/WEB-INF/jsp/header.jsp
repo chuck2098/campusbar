@@ -29,7 +29,7 @@
                                <button class="btn" type="submit">Search</button>
                            </form>
 											</div>
-                                    
+ 
                       <div class="head-span">
                       	 <c:choose>
                          	<c:when test="${logUtente!=null}">
@@ -41,7 +41,6 @@
                          </c:choose>
                          <span class="head-cart"><i class="fas fa-shopping-cart">&nbsp;&nbsp;<a href="Carrello">Carrello</a></i></span>
                       </div> 
-
 
 								</div>
 
