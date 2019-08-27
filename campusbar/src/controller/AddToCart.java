@@ -44,7 +44,6 @@ public class AddToCart extends HttpServlet {
 		//se l'utente e' loggato
 		if(u!=null) {
 			
-			
 			DettaglioOrdineDAO dett=new DettaglioOrdineDAO();
 			if(dett.doSaveOrUpdateCart(d)) {
 				PrintWriter out=response.getWriter();
@@ -53,7 +52,6 @@ public class AddToCart extends HttpServlet {
 
 			
 		}else { //utente non loggato,gestire il carrello con la sessione
-			
 			
 			ArrayList<DettaglioOrdine> dettagli=null;
 			

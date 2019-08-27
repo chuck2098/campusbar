@@ -31,14 +31,13 @@ public class Ordine {
 	public void setConsegnato(boolean consegnato) {
 		this.consegnato = consegnato;
 	}
-	
-	public Edificio getId_edificio() {
-		return id_edificio;
-	}
-	public void setId_edificio(Edificio id_edificio) {
-		this.id_edificio = id_edificio;
-	}
 
+	public Edificio getEdificio() {
+		return edificio;
+	}
+	public void setEdificio(Edificio edificio) {
+		this.edificio = edificio;
+	}
 	public ArrayList<DettaglioOrdine> getDettaglio() {
 		return dettaglio;
 	}
@@ -51,6 +50,6 @@ public class Ordine {
 	private String nota_ordine;
 	private GregorianCalendar data_ordine;
 	private boolean consegnato;
-	private Edificio id_edificio;
+	private Edificio edificio;
 	private ArrayList<DettaglioOrdine> dettaglio;
 }

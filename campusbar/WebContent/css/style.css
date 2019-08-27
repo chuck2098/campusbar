@@ -273,6 +273,24 @@ body{
 	top:1px;
 }
 
+#chooseBar{
+
+    z-index: 10;
+    border-radius: 3px;
+    position: fixed;
+    display: none;
+    padding: 18px 10px;
+    top: 45%;
+    left: 50%;
+    width: 550px;
+    height: 220px;
+    margin-left: -275px;
+    margin-top: -60px;
+    background-color: #808768;
+    -webkit-box-shadow: 2px 2px 12px 3px rgba(64,63,64,1);
+
+}
+
 /*FOOTER*/
 footer{
 	width:100%;
@@ -414,6 +432,13 @@ footer > .container-fluid{
         width:90%;
         margin:auto;
         margin-bottom: 25px;
+    }
+    
+    #chooseBar{
+    	width:95%;
+    	left:2%;
+    	margin-left:1px;
+    	height:250px;
     }
 }
 

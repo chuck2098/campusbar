@@ -3,10 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="header.jsp"/>
- <%!
-	float totale;
-%>
-        <div class="container" id="cart">
+
+        <div class="container" id="cart" onclick="nascondiDiv()">
         	<h2 style="text-align:center;">Carrello</h2><br>
             <div class="row">
              
@@ -46,13 +44,16 @@
              	<c:when test="${cart!=null}">
 								<span>Totale da pagare: <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${tot}"/> €</span><br><br>
 		            		<textarea name='notet' id='messaget' maxlength='255' placeholder='Aggiungi nota per questo ordine.'></textarea><br><br>
-		            		<button id="submitOrder" onclick="confirm()"> Conferma Ordine</button>
+		            		<button id="submitOrder" onclick="check_availability()"> Continua Ordine</button>
 	            	</c:when>
 	            </c:choose>
-            	
+					</div>
+					<div id="chooseBar">
+						<h3>Scegli dove ritirare i prodotti</h3><br>
+						Prodotti disponibili nei seguenti bar: <select id="bars"></select><br><br>
+						<button id="submitOrder" onclick="confirm()">Conferma</button>
 					</div>
 				</div>
-
 
 <jsp:include page="footer.html"/>
 <script>
@@ -75,6 +76,30 @@
 						$('#cart').load(document.URL +  ' #cart');
 			});
 	}
+	
+	//serve per evitare che quando si preme sul pulsante,venga richiamata la funzione "nascondiDIV"
+	$('#confirmOrder').click(function(event){
+	     event.stopPropagation();
+	 });
+	$('#chooseBar').click(function(event){
+	     event.stopPropagation();
+	 });
+	
+	function check_availability(){
+		
+		document.getElementById("chooseBar").style.display = "block";
+		
+		$.get("CheckAvailability",
+				function(data){
+						alert(data);
+						$('#cart').load(document.URL +  ' #cart');
+			});
+	}
+	
+	function nascondiDiv(){
+		document.getElementById("chooseBar").style.display="none";
+	}
+	
 </script>
 </body>
 </html>

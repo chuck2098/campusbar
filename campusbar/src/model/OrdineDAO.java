@@ -28,7 +28,7 @@ public class OrdineDAO {
 				int secondi = o.getData_ordine().get(GregorianCalendar.SECOND);
 				
 				ps.setString(2,""+anno+"-"+mese+"-"+giorno+" "+ore+":"+minuti+":"+secondi);
-				ps.setInt(3,o.getId_edificio().getId_edificio());
+				ps.setInt(3,o.getEdificio().getId_edificio());
 				
 				if (ps.executeUpdate() != 1) {
 					throw new RuntimeException("INSERT error.");
@@ -48,6 +48,20 @@ public class OrdineDAO {
 				ps.setString(4,u.getMatricola());
 				
 				ps.executeUpdate();
+				
+				//per ogni prodotto presente nell'arraylist(carrello),scalo quantita
+				for(DettaglioOrdine d: o.getDettaglio()){
+					
+					ps = con.prepareStatement("UPDATE disponibilita "
+											+ "SET quantita=quantita-? "
+											+ "WHERE id_bar=? AND id_prod=?");
+	
+					ps.setInt(1,d.getQuantita());
+					ps.setInt(2,o.getEdificio().getId_edificio());
+					ps.setInt(3,d.getProdotto().getId());
+					ps.executeUpdate();
+				}
+
 				
 			} catch (SQLException e) {
 				throw new RuntimeException(e);

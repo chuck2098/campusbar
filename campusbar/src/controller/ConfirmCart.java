@@ -38,7 +38,7 @@ public class ConfirmCart extends HttpServlet {
 			ord.setConsegnato(false);
 			
 			//edificio da modificar dopo lo prendiamo da parametro
-			ord.setId_edificio(u.getEdificio());
+			ord.setEdificio(u.getEdificio());
 			
 			//mi restituisce il carrello dell'utente loggato
 			ord.setDettaglio(det.doRetrieveNotConfirmedByUser(u));
@@ -47,6 +47,7 @@ public class ConfirmCart extends HttpServlet {
 			
 			PrintWriter out=response.getWriter();
 			out.println("Ordine confermato!!");
+			request.getSession().removeAttribute("cart");
 		}
 	}
 

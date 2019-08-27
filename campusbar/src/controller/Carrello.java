@@ -30,8 +30,11 @@ public class Carrello extends HttpServlet {
 		//se e' loggato
 		if(u != null) {
 			ArrayList<DettaglioOrdine> cart = new DettaglioOrdineDAO().doRetrieveNotConfirmedByUser(u);
+
 			if(cart.size()>0)
-				request.setAttribute("cart", cart);
+				request.getSession().setAttribute("cart", cart);
+			else
+				request.getSession().removeAttribute("cart");
 			
 		}else {
 			@SuppressWarnings("unchecked")
