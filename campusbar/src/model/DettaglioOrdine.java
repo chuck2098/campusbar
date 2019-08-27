@@ -1,6 +1,8 @@
 package model;
 
+
 public class DettaglioOrdine {
+	
 	
 	
 	public int getId_dettaglio() {

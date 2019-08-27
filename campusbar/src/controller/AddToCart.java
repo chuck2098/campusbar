@@ -52,7 +52,7 @@ public class AddToCart extends HttpServlet {
 			}
 
 			
-		}else { //utente non loggato,gestire il carrello con i cookie
+		}else { //utente non loggato,gestire il carrello con la sessione
 			
 			
 			ArrayList<DettaglioOrdine> dettagli=null;
