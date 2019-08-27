@@ -42,18 +42,21 @@
 						</div>
 					<br><br>
 					<div id="confirmOrder">
-						<span>Totale da pagare: <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${tot}"/> €</span><br><br>
-						 <form method='post' name='contactform' id='contactform'>
-            	<textarea name='notet' id='messaget' maxlength='255' placeholder='Aggiungi nota per questo ordine.'></textarea><br><br>
-            		<button id="submitOrder" onclick="coonfirm(<c:out value="${carrello.getCliente().getMatricola()}"/>)"> Conferma Ordine</button>
-            		
-            </form>		
+						<c:choose>
+             	<c:when test="${cart!=null}">
+								<span>Totale da pagare: <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${tot}"/> €</span><br><br>
+		            		<textarea name='notet' id='messaget' maxlength='255' placeholder='Aggiungi nota per questo ordine.'></textarea><br><br>
+		            		<button id="submitOrder" onclick="confirm()"> Conferma Ordine</button>
+	            	</c:when>
+	            </c:choose>
+            	
 					</div>
 					</div>
 
 
 <jsp:include page="footer.html"/>
 <script>
+
 	function del(cod){
 		$.get("DelToCart?id=" + cod,
 				function(data){
@@ -62,9 +65,11 @@
 			});
 	}
 	
-	function coonfirm(matr){
-		alert();
-		$.get("ConfirmCart?id=" + matr,
+	function confirm(){
+		
+		var not=$.trim($("#messaget").val());
+		
+		$.get("ConfirmCart?not="+not,
 				function(data){
 						alert(data);
 						$('#cart').load(document.URL +  ' #cart');

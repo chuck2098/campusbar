@@ -35,7 +35,6 @@ public class Carrello extends HttpServlet {
 			ArrayList<DettaglioOrdine> cart = (ArrayList<DettaglioOrdine>) session.getAttribute("dettaglio");
 			request.setAttribute("cart", cart);
 
-
 			request.getSession().setAttribute("cart", cart);
 			
 		}

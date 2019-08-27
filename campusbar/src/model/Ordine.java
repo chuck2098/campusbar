@@ -1,6 +1,8 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class Ordine {
 	
@@ -17,30 +19,38 @@ public class Ordine {
 	public void setNota_ordine(String nota_ordine) {
 		this.nota_ordine = nota_ordine;
 	}
-	public Date getData_ordine() {
+	public GregorianCalendar getData_ordine() {
 		return data_ordine;
 	}
-	public void setData_ordine(Date data_ordine) {
-		this.data_ordine = data_ordine;
+	public void setData_ordine(GregorianCalendar gregorianCalendar) {
+		this.data_ordine = gregorianCalendar;
 	}
-	public Boolean getConsegnato() {
+	public boolean getConsegnato() {
 		return consegnato;
 	}
-	public void setConsegnato(Boolean consegnato) {
+	public void setConsegnato(boolean consegnato) {
 		this.consegnato = consegnato;
 	}
 	
-	public int getId_edificio() {
+	public Edificio getId_edificio() {
 		return id_edificio;
 	}
-	public void setId_edificio(int id_edificio) {
+	public void setId_edificio(Edificio id_edificio) {
 		this.id_edificio = id_edificio;
 	}
-	
-	
+
+	public ArrayList<DettaglioOrdine> getDettaglio() {
+		return dettaglio;
+	}
+	public void setDettaglio(ArrayList<DettaglioOrdine> dettaglio) {
+		this.dettaglio = dettaglio;
+	}
+
+
 	private int id_ordine;
 	private String nota_ordine;
-	private Date data_ordine;
-	private Boolean consegnato;
-	private int id_edificio;
+	private GregorianCalendar data_ordine;
+	private boolean consegnato;
+	private Edificio id_edificio;
+	private ArrayList<DettaglioOrdine> dettaglio;
 }
