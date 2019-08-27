@@ -45,6 +45,13 @@ public class DettaglioOrdine {
 	public void setProdotto(Prodotto prodotto) {
 		this.prodotto = prodotto;
 	}
+	private int id_ordine;
+	public int getId_ordine() {
+		return id_ordine;
+	}
+	public void setId_ordine(int id_ordine) {
+		this.id_ordine = id_ordine;
+	}
 	
 	private int id_dettaglio;
 	private String nota;
