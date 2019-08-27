@@ -34,6 +34,7 @@ public class Carrello extends HttpServlet {
 				request.setAttribute("cart", cart);
 			
 		}else {
+			@SuppressWarnings("unchecked")
 			ArrayList<DettaglioOrdine> cart = (ArrayList<DettaglioOrdine>) session.getAttribute("dettaglio");
 			request.getSession().setAttribute("cart", cart);
 			
