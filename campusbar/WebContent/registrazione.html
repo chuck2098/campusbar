@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 
 <title>Registrazione </title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -37,22 +38,22 @@
 </head>
 <body>
 <div class="login-form">
-    <form action="Registrazione" method="POST">
+    <form action="Registrazione" method="POST" name="form1">
         <h2 class="text-center">Registrazione</h2>       
         <div class="form-group">
-            <input type="text" class="form-control" name="matricola" placeholder="Matricola" required="required">
+            <input type="text" class="form-control" name="matricola" placeholder="Matricola" onchange=" return ValidateMatricola(matricola)" required="required">
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+            <input type="password" class="form-control" minlength="6" name="password" placeholder="Password" onchange=" return ValidatePassword(password)" required="required">
         </div>
         <div class="form-group">
-                <input type="text" class="form-control" name="nome" placeholder="Nome" required="required">
+                <input type="text" class="form-control" name="nome" placeholder="Nome" onchange="return ValidateName(nome)" required="required">
         </div>
         <div class="form-group">
-                <input type="text" class="form-control" name="cognome" placeholder="Cognome" required="required">
+                <input type="text" class="form-control" name="cognome" placeholder="Cognome" onchange=" return ValidateSurname(cognome)" required="required">
         </div>
         <div class="form-group">
-                <input type="text" class="form-control" name="email" placeholder="E-mail" required="required">
+                <input type="email" class="form-control" name="email" placeholder="E-mail" onchange=" return ValidateEmail(email)" required="required">
         </div>
         <div class="form-group">
                 <select  class="form-control" name='bar'>
@@ -67,12 +68,76 @@
                 </select>  
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block">Registrati</button>
+            <button type="submit" class="btn btn-primary btn-block"  >Registrati</button>
         </div>
         
        
     </form>
     <p class="text-center"><a href="login.html">Sei gia registrato?Accedi</a></p>
 </div>
+
+<script>
+function ValidateEmail(uemail){
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w+)+$/;
+	if(uemail.value.match(mailformat)){
+		return true;
+	}
+	else{
+		alert("Hai inserito un indirizzo mail non valido");
+		uemail.focus();
+		return false;
+	}
+}
+function ValidateName(name){
+	var nameFormat = /^[ a-zA-Z]+$/;
+	if(name.value.match(nameFormat)){
+		return true;
+	}
+	else{
+		alert("Hai inserito un nome non valido");
+		name.focus();
+		return false;
+	}
+}
+function ValidateSurname(sur){
+	var surnFormat = /^[ a-zA-Z]+$/;
+	if(sur.value.match(surnFormat)){
+		return true;
+	}
+	else{
+		alert("Hai inserito un cognome non valido");
+		sur.focus();
+		return false;
+	}
+}
+function ValidateMatricola(mat){
+	var matFormat = /^[0-9]+$/;
+	if(mat.value.match(matFormat)){
+		return true;
+	}
+	else{
+		alert("Hai inserito una matricola non valida");
+		mat.focus();
+		return false;
+	}
+}
+function ValidatePassword(pass){
+	var passFormat1 = /[0-9]+/;
+	var passFormat2=/[a-z]+/;
+	var passFormat3=/[A-Z]+/;	
+	if(pass.value.match(passFormat1) && pass.value.match(passFormat2)  && pass.value.match(passFormat3)){
+		return true;
+	}
+	else{
+		alert("Hai inserito una password non valida");
+		pass.focus();
+		return false;
+	}
+}
+
+
+
+
+</script>
 </body>
 </html>                                		
