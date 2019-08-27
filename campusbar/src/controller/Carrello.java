@@ -30,11 +30,11 @@ public class Carrello extends HttpServlet {
 		//se e' loggato
 		if(u != null) {
 			ArrayList<DettaglioOrdine> cart = new DettaglioOrdineDAO().doRetrieveNotConfirmedByUser(u);
-			request.setAttribute("cart", cart);
+			if(cart.size()>0)
+				request.setAttribute("cart", cart);
+			
 		}else {
 			ArrayList<DettaglioOrdine> cart = (ArrayList<DettaglioOrdine>) session.getAttribute("dettaglio");
-			request.setAttribute("cart", cart);
-
 			request.getSession().setAttribute("cart", cart);
 			
 		}

@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.GregorianCalendar;
 
@@ -23,7 +24,6 @@ public class ConfirmCart extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String nota_ordine=request.getParameter("not");
-		System.out.println(nota_ordine);
 		
 		Utente u=(Utente)request.getSession().getAttribute("logUtente");
 		
@@ -37,18 +37,20 @@ public class ConfirmCart extends HttpServlet {
 			ord.setData_ordine(new GregorianCalendar());
 			ord.setConsegnato(false);
 			
-			//edificio da modificare.
+			//edificio da modificar dopo lo prendiamo da parametro
 			ord.setId_edificio(u.getEdificio());
 			
 			//mi restituisce il carrello dell'utente loggato
 			ord.setDettaglio(det.doRetrieveNotConfirmedByUser(u));
 			
-			o.doSave(ord);
+			o.doSaveByUser(ord,u);
+			
+			PrintWriter out=response.getWriter();
+			out.println("Ordine confermato!!");
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

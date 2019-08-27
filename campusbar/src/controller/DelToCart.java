@@ -52,7 +52,12 @@ public class DelToCart extends HttpServlet {
 					index=i;
 			}
 			dettagli.remove(index);
-			session.setAttribute("dettaglio", dettagli);
+			
+			if(dettagli.size()==0)
+				session.removeAttribute("dettaglio");
+			else
+				session.setAttribute("dettaglio", dettagli);
+			
 			PrintWriter out=response.getWriter();
 			out.println("Prodotto rimosso dal carrello");
 		}
