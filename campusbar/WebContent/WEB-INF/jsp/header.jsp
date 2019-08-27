@@ -17,35 +17,33 @@
         <header>
             <nav class="container-fluid ">
                 <div class="row text-center">
-                        <div class="col-md-3">
-                                <a class="navbar-brand" href="#">
-                                        <img src="images/logo.png" style="width: 150px" alt="Logo">
-                                    </a>
-                        </div>
-                        <div class="col-md-6 head-search-sign">
-                            <!--mt=margin top    mr=margin-right-->
-                                <form class="form-inline mt-2" action="/action_page.php">
-                                    <input class="form-control  mr-2" type="text" placeholder="Cerca un prodotto">
-                                    <button class="btn" type="submit">Search</button>
-                                </form>
-                        </div>
-                        <div class="col-md-3 head-search-sign" >
-                                <table class="head-search-sign">
-                                    <tr>
-                                    <c:choose>
-                                    	<c:when test="${logUtente!=null}">
-                                    		 <td align="left"><span class="head-sign"><i class="fas fa-user">&nbsp;&nbsp;<a href="Logout"><c:out value="Ciao ${logUtente.nome},"></c:out>Logout</a></i></span></td>
-                                    	</c:when>
-                                    	<c:otherwise>
-                                    		<td align="left"><span class="head-sign"><i class="fas fa-user">&nbsp;&nbsp;<a href="login.html">Accedi/Registrati</a></i></span></td>
-                                    	</c:otherwise>
-                                    </c:choose>
-                                        <td align="right"><span class="head-cart"><i class="fas fa-shopping-cart">&nbsp;&nbsp;<a href="Carrello">Carrello</a></i></span></td>
-                                    </tr>
-                                </table>
+	                		<div class="logo">
+	          	            <a class="navbar-brand" href="#">
+	                     		     <img src="images/logo.png" style="width: 150px" alt="Logo">
+	                        </a>	
+	                		
+	                		</div>
+											<div class="form-search">
+													<!--mt=margin top    mr=margin-right-->
+                           <form class="form-inline mt-2" action="/action_page.php">
+                               <input class="form-control  mr-2" type="text" placeholder="Cerca un prodotto">
+                               <button class="btn" type="submit">Search</button>
+                           </form>
+											</div>
+ 
+                      <div class="head-span">
+                      	 <c:choose>
+                         	<c:when test="${logUtente!=null}">
+                         		<span class="head-sign"><i class="fas fa-user">&nbsp;&nbsp;<a href="Logout"><c:out value="Ciao ${logUtente.nome},"></c:out>Logout</a></i></span>
+                         	</c:when>
+                         	<c:otherwise>
+                         		<span class="head-sign"><i class="fas fa-user">&nbsp;&nbsp;<a href="login.html">Accedi/Registrati</a></i></span>
+                         	</c:otherwise>
+                         </c:choose>
+                         <span class="head-cart"><i class="fas fa-shopping-cart">&nbsp;&nbsp;<a href="Carrello">Carrello</a></i></span>
+                      </div> 
 
-                        </div>
-                </div>
+								</div>
 
             </nav>
                 <nav class="navbar navbar-expand-md ">
