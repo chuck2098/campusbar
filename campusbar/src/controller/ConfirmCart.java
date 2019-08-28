@@ -24,6 +24,7 @@ public class ConfirmCart extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String nota_ordine=request.getParameter("not");
+		String id_edificio=request.getParameter("ed");
 		
 		Utente u=(Utente)request.getSession().getAttribute("logUtente");
 		
@@ -37,8 +38,9 @@ public class ConfirmCart extends HttpServlet {
 			ord.setData_ordine(new GregorianCalendar());
 			ord.setConsegnato(false);
 			
-			//edificio da modificar dopo lo prendiamo da parametro
-			ord.setEdificio(u.getEdificio());
+			Edificio e=new Edificio();
+			e.setId_edificio(Integer.parseInt(id_edificio));
+			ord.setEdificio(e);
 			
 			//mi restituisce il carrello dell'utente loggato
 			ord.setDettaglio(det.doRetrieveNotConfirmedByUser(u));

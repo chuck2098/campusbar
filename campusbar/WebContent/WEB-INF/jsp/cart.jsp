@@ -70,8 +70,9 @@
 	function confirm(){
 		
 		var not=$.trim($("#messaget").val());
+		var id=$('#bars').find(":selected").val();
 		
-		$.get("ConfirmCart?not="+not,
+		$.get("ConfirmCart?not="+not+"&ed="+id,
 				function(data){
 						alert(data);
 						$('#cart').load(document.URL +  ' #cart');
