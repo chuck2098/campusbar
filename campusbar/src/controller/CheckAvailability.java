@@ -38,7 +38,6 @@ public class CheckAvailability extends HttpServlet {
 			if(!ed.doCheckAvailabilityByEdifcioAndCart(iter.next(),dett)) {
 				iter.remove();
 			}
-				
 		}
 		
 		JSONObject obj=new JSONObject();
