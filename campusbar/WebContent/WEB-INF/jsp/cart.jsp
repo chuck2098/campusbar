@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="header.jsp"/>
 
-        <div class="container" id="cart" onclick="nascondiDiv()">
+        <div class="container" id="cart">
         	<h2 style="text-align:center;">Carrello</h2><br>
             <div class="row">
              
@@ -52,6 +52,7 @@
 						<h3>Scegli dove ritirare i prodotti</h3><br>
 						Prodotti disponibili nei seguenti bar: <select id="bars"></select><br><br>
 						<button id="submitOrder" onclick="confirm()">Conferma</button>
+						<button id="closePoupup" onclick="nascondiDiv()">Chiudi</button>
 					</div>
 				</div>
 
@@ -77,6 +78,25 @@
 			});
 	}
 	
+	function check_availability(){
+		
+		mostraDiv();
+		
+		$.get("CheckAvailability",
+				function(data){
+						var res=data["edifici"];
+						caricaEdifici(res);
+			});
+	}
+	
+	function caricaEdifici(edifici){
+		var response="";
+		for(i=0;i<edifici.length;i++){
+			response+="<option value='"+edifici[i]["id_edificio"]+"'>"+edifici[i]["nome"]+"</option>";
+		}
+		$("#bars").html(response);
+	}
+	
 	//serve per evitare che quando si preme sul pulsante,venga richiamata la funzione "nascondiDIV"
 	$('#confirmOrder').click(function(event){
 	     event.stopPropagation();
@@ -85,17 +105,9 @@
 	     event.stopPropagation();
 	 });
 	
-	function check_availability(){
-		
+	function mostraDiv(){
 		document.getElementById("chooseBar").style.display = "block";
-		
-		$.get("CheckAvailability",
-				function(data){
-						alert(data);
-						$('#cart').load(document.URL +  ' #cart');
-			});
 	}
-	
 	function nascondiDiv(){
 		document.getElementById("chooseBar").style.display="none";
 	}

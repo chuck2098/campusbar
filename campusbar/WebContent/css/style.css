@@ -251,7 +251,7 @@ body{
 	padding-left:3px;
 }
 
-#submitOrder {
+#submitOrder,#closePoupup {
 	background-color:#ffffff;
 	-moz-border-radius:6px;
 	-webkit-border-radius:6px;
@@ -271,6 +271,14 @@ body{
 #submitOrder:active {
 	position:relative;
 	top:1px;
+}
+
+#closePoupup{
+	margin-top:20px;
+	font-size:12px;
+	padding:10px 12px;
+	border:1 px solid #2A80B9;
+	float:right;
 }
 
 #chooseBar{
@@ -438,7 +446,7 @@ footer > .container-fluid{
     	width:95%;
     	left:2%;
     	margin-left:1px;
-    	height:250px;
+    	height:270px;
     }
 }
 

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Edificio {
 
 	public int getId_edificio() {
@@ -21,7 +23,16 @@ public class Edificio {
 		this.orario_chiusura = orario_chiusura;
 	}
 	
+	public ArrayList<Disponibilita> getGiacenze() {
+		return giacenze;
+	}
+	public void setGiacenze(ArrayList<Disponibilita> giacenze) {
+		this.giacenze = giacenze;
+	}
+
+
 	private int id_edificio;
 	private String nome;
 	private int orario_chiusura;
+	private ArrayList<Disponibilita> giacenze;
 }
