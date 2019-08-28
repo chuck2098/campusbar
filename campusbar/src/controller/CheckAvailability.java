@@ -45,7 +45,6 @@ public class CheckAvailability extends HttpServlet {
 		obj.put("edifici",bars);
 		
 		response.setContentType("application/json");
-		System.out.println(obj.toString());
 		response.getWriter().println(obj.toString());
 	}
 
