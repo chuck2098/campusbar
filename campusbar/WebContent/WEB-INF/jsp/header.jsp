@@ -25,8 +25,9 @@
 	                		</div>
 											<div class="form-search">
 													<!--mt=margin top    mr=margin-right-->
-                           <form class="form-inline mt-2" action="/action_page.php">
-                               <input class="form-control  mr-2" type="text" placeholder="Cerca un prodotto">
+													
+                           <form class="form-inline mt-2" action="/Search.java">
+                               <input class="form-control  mr-2" type="text" placeholder="Cerca un prodotto" >
                                <button class="btn" type="submit">Search</button>
                            </form>
 											</div>
@@ -70,3 +71,10 @@
                     </nav>
 
         </header>
+        
+        
+        <script>
+        
+        </script>
+        
+</body>
