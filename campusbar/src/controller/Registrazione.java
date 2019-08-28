@@ -51,7 +51,7 @@ public class Registrazione extends HttpServlet {
 			throw new ServletException("Email non valida.");
 		}
 		
-		if (!(password != null && password.length() >= 6 && password.matches("[0-9]+") && password.matches("[a-z]+") && password.matches("[A-Z]+"))) {
+		if (!(password != null && password.trim().length() >= 6 && password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9_]{6,25})$")) ) {
 			throw new ServletException("Password non valida.");
 		}
 		
