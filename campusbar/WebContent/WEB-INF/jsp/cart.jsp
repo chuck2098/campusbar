@@ -23,8 +23,8 @@
 								      <tbody>
 								      	<c:set var="tot" value="0" scope="page"/>
 								      	   <c:forEach items="${cart}" var="carrello">
-								      	   <c:set var="t" value="${carrello.getPrezzo_acquisto()}" scope="page"/>
-								      	   <c:set var="tot" value="${(tot + t) *carrello.getQuantita()}" scope="page"/>
+								      	   <c:set var="t" value="${carrello.getPrezzo_acquisto()*carrello.getQuantita()}" scope="page"/>
+								      	   <c:set var="tot" value="${(tot + t)}" scope="page"/>
 								      	   	<tr>
 									      	   	<td><c:out value="${carrello.getProdotto().getCategoria().getNomeCategoria()}"></c:out></td>
 									      	   	<td><img width='100px' src='images/<c:out value="${carrello.getProdotto().getId()}"/>.png'><br><b><c:out value="${carrello.getProdotto().getNome()}"></c:out></b></td>
