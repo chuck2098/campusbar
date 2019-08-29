@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class OrdineDAO {
@@ -19,15 +20,7 @@ public class OrdineDAO {
 						Statement.RETURN_GENERATED_KEYS);
 				
 				ps.setString(1,o.getNota_ordine());
-				
-				int anno = o.getData_ordine().get(GregorianCalendar.YEAR);
-				int mese = o.getData_ordine().get(GregorianCalendar.MONTH) + 1;
-				int giorno = o.getData_ordine().get(GregorianCalendar.DAY_OF_MONTH);
-				int ore = o.getData_ordine().get(GregorianCalendar.HOUR_OF_DAY);//formato 24 ore
-				int minuti = o.getData_ordine().get(GregorianCalendar.MINUTE);
-				int secondi = o.getData_ordine().get(GregorianCalendar.SECOND);
-				
-				ps.setString(2,""+anno+"-"+mese+"-"+giorno+" "+ore+":"+minuti+":"+secondi);
+				ps.setString(2,o.getData_ordine());
 				ps.setInt(3,o.getEdificio().getId_edificio());
 				
 				if (ps.executeUpdate() != 1) {
@@ -67,4 +60,42 @@ public class OrdineDAO {
 				throw new RuntimeException(e);
 			}
 		}
+	
+	public ArrayList<Ordine> doRetrieveOrderNotDeliveredByUser(Utente u) {
+		
+		try(Connection con = ConnectionPool.getConnection()){
+			
+			ArrayList<Ordine> ordini=new ArrayList<>();
+			Ordine o=null;
+			
+			PreparedStatement ps = con.prepareStatement(
+					"SELECT nota_ordine,data_ordine,id_ordine "
+					+ "FROM ordini "
+					+ "WHERE consegnato=? AND id_edificio=?",
+					Statement.RETURN_GENERATED_KEYS);
+			
+			ps.setBoolean(1,false); //ordini non consegnati
+			ps.setInt(2,u.getEdificio().getId_edificio());
+			
+			ResultSet rs =ps.executeQuery();
+			
+			while(rs.next()) {
+				o=new Ordine();
+				
+				o.setNota_ordine(rs.getString(1));
+				o.setData_ordine(rs.getString(2));
+				o.setConsegnato(false);
+				o.setEdificio(u.getEdificio());
+				o.setId_ordine(rs.getInt(3));
+				o.setDettaglio(new DettaglioOrdineDAO().doRetrieveConfirmedByOrderId(rs.getInt(3)));
+				
+				ordini.add(o);
+			}
+			
+			return ordini;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

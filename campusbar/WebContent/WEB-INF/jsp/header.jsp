@@ -41,7 +41,11 @@
                          		<span class="head-sign"><i class="fas fa-user">&nbsp;&nbsp;<a href="login.html">Accedi/Registrati</a></i></span>
                          	</c:otherwise>
                          </c:choose>
-                         <span class="head-cart"><i class="fas fa-shopping-cart">&nbsp;&nbsp;<a href="Carrello">Carrello</a></i></span>
+                         <c:choose>
+                         	<c:when test="${logUtente.getRuolo().getId_ruolo()==3 || logUtente==null}">
+                         		<span class="head-cart"><i class="fas fa-shopping-cart">&nbsp;&nbsp;<a href="Carrello">Carrello</a></i></span>
+                        	</c:when>
+                        </c:choose>
                       </div> 
 
 								</div>
