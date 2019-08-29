@@ -90,9 +90,9 @@ public List<Prodotto> doRetrieveByName(String patt) {
 			PreparedStatement ps = con
 					.prepareStatement("SELECT id_prodotto,nome,descrizione,prezzo,id_categoria " + 
 									"FROM prodotti " + 
-									"WHERE nome LIKE '?%'");
+									"WHERE nome LIKE '"+patt+"%'");
 			
-			ps.setString(1,patt);
+			//ps.setString(1,patt);
 			
 			ArrayList<Prodotto> prodotti = new ArrayList<>();
 			ResultSet rs = ps.executeQuery();
