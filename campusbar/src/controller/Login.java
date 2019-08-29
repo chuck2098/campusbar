@@ -31,6 +31,7 @@ public class Login extends HttpServlet {
 		Utente c=new UtenteDAO().doRetrieveByMatricolaPassword(matr, pass);
 		if(c==null)
 			response.sendRedirect("errati.html");
+			
 		else if(c.getRuolo().getId_ruolo()==3) {
 			HttpSession sess=request.getSession();
 			sess.setMaxInactiveInterval(1800); //dopo 30 min scade la sessione

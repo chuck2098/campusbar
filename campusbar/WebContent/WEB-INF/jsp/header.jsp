@@ -26,8 +26,8 @@
 											<div class="form-search">
 													<!--mt=margin top    mr=margin-right-->
 													
-                           <form class="form-inline mt-2" action="Search.java" name="formRicerca" method="get">
-                               <input class="form-control  mr-2" type="text" placeholder="Cerca un prodotto"  onchange="search()" name="ricerca">
+                           <form class="form-inline mt-2" action="Search" name="formRicerca" method="get">
+                               <input class="form-control  mr-2" type="text" placeholder="Cerca un prodotto"   name="ricerca">
                                <button class="btn"  type="submit">Search</button>
                            </form>
 											</div>
@@ -83,7 +83,7 @@
     			return;
     		}
 
-    		$.get("Search?=ricerca" + ricerca, 
+    		$.get("Search?ricerca=" + ricerca, 
     			function(data){
     					alert(data);
     		});

@@ -14,8 +14,8 @@
 	                          <div class="img-container">
 	                              <img class="card-img-top" src="images/<c:out value="${prodotto.id}"/>.png" alt="Card image" >
 	                          </div>
-														<div class="card-body">
-															    <h4 class="card-title"><c:out value="${prodotto.nome}" /></h4>
+								<div class="card-body">
+									<h4 class="card-title"><c:out value="${prodotto.nome}" /></h4>
 		                              <p class="card-text"><c:out value="${prodotto.descrizione}" /></p>
 		                              <div class="card-info">
 		                                  <span class="card-price"><c:out value="${prodotto.prezzo}" /></span>
