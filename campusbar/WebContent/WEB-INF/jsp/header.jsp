@@ -26,9 +26,9 @@
 											<div class="form-search">
 													<!--mt=margin top    mr=margin-right-->
 													
-                           <form class="form-inline mt-2" action="/Search.java">
-                               <input class="form-control  mr-2" type="text" placeholder="Cerca un prodotto" >
-                               <button class="btn" type="submit">Search</button>
+                           <form class="form-inline mt-2" action="Search.java" name="formRicerca" method="get">
+                               <input class="form-control  mr-2" type="text" placeholder="Cerca un prodotto"  onchange="search()" name="ricerca">
+                               <button class="btn"  type="submit">Search</button>
                            </form>
 											</div>
  
@@ -74,7 +74,21 @@
         
         
         <script>
-        
+        function search(){
+    		
+    		var ricerca=document.formRicerca.ricerca.value;
+    		
+    		if(!quant){
+    			alert("per ricercare scrivere nel campo di ricerca");
+    			return;
+    		}
+
+    		$.get("Search?=ricerca" + ricerca, 
+    			function(data){
+    					alert(data);
+    		});
+    	
+    	}
         </script>
         
 </body>

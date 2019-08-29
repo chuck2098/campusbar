@@ -81,30 +81,35 @@ public Prodotto doRetrieveById(int id) {
 		}
 		return c;
 	}
-	public Prodotto doRetrieveBySearch(String patt) {
-		Prodotto p=null;
+	
+
+public List<Prodotto> doRetrieveByName(String patt) {
+		
 		try(Connection con = ConnectionPool.getConnection()){
 			
 			PreparedStatement ps = con
 					.prepareStatement("SELECT id_prodotto,nome,descrizione,prezzo,id_categoria " + 
-									  "FROM prodotti " + 
-									  "WHERE nome LIKE '?%'");
+									"FROM prodotti " + 
+									"WHERE nome LIKE '?%'");
+			
 			ps.setString(1,patt);
-
+			
+			ArrayList<Prodotto> prodotti = new ArrayList<>();
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				p = new Prodotto();
+				Prodotto p = new Prodotto();
 				p.setId(rs.getInt(1));
 				p.setNome(rs.getString(2));
 				p.setDescrizione(rs.getString(3));
 				p.setPrezzo(rs.getFloat(4));
 				p.setCategoria(getCategoria(con, p.getId()));
+				prodotti.add(p);
 				
 			}
-			return p;
+			return prodotti;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
-
 }
+
