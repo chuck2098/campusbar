@@ -14,6 +14,5 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/saver/Downloads/eclipse-jee-2019-06-R-win32-x86_64/eclipse/plugins/javax.mail_1.4.0.v201005080615.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
