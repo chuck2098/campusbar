@@ -50,6 +50,9 @@ public class ConfirmCart extends HttpServlet {
 			PrintWriter out=response.getWriter();
 			out.println("Ordine confermato!!");
 			request.getSession().removeAttribute("cart");
+		}else {// l'utente non è loggato
+			PrintWriter out=response.getWriter();
+			out.println("notLogged");
 		}
 	}
 

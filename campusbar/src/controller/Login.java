@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,14 +30,20 @@ public class Login extends HttpServlet {
 		String pass=request.getParameter("password");
 		
 		Utente c=new UtenteDAO().doRetrieveByMatricolaPassword(matr, pass);
-		if(c==null)
+		if(c==null) 
 			response.sendRedirect("errati.html");
+		
 			
 		else if(c.getRuolo().getId_ruolo()==3) {
 			HttpSession sess=request.getSession();
 			sess.setMaxInactiveInterval(1800); //dopo 30 min scade la sessione
 			sess.setAttribute("logUtente",c);
-			response.sendRedirect(".");
+			
+			if(sess.getAttribute("dettaglio") == null) {// condizione per l'utente che si è loggato senza passare per il carrello
+				response.sendRedirect(".");
+			}else {// condizione per l'utente che ha prima caricato il carrello, poi in fase di conferma si è loggato
+				
+			}
 		}
 		else if(c.getRuolo().getId_ruolo()==2)
 			request.getRequestDispatcher("WEB-INF/jsp/indexbar.jsp").forward(request,response);
