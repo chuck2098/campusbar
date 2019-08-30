@@ -52,6 +52,7 @@
 	           			<c:choose>
 	          		 		<c:when test="${edificioDefault!=null}">
 	         						<h2>Tutti i prodotti sono disponibili nel tuo bar!</h2>
+	         						<input type="hidden" id="ed" value="${cart.get(0).getCliente().getEdificio().getId_edificio()}">
 	         						<button id="submitOrder" onclick="confirm()">Conferma Ordine</button><br>oppure <br> 
 	         					</c:when>
 	         					<c:otherwise>
@@ -87,6 +88,8 @@
 		
 		var not=$.trim($("#messaget").val());
 		var id=$('#bars').find(":selected").val();
+		if(id===undefined)
+			id=$('#ed').val();
 		
 		$.get("ConfirmCart?not="+not+"&ed="+id,
 				function(data){
