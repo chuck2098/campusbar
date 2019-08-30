@@ -25,27 +25,25 @@
 	            <c:choose>	
 		            <c:when test="${logUtente.getRuolo().getId_ruolo()==3 || logUtente==null}">    		
 					<div class="form-search">
-						<!--mt=margin top    mr=margin-right-->
-													
-	                           <form class="form-inline mt-2" action="Search" name="formRicerca" method="get">
-	                               <input class="form-control  mr-2" type="text" placeholder="Cerca un prodotto"   name="ricerca">
-	                               <button class="btn"  type="submit">Search</button>
-	                           </form>
+							<!--mt=margin top    mr=margin-right-->
+              <form class="form-inline mt-2" action="Search" name="formRicerca" method="get">
+                  <input class="form-control  mr-2" type="text" placeholder="Cerca un prodotto"   name="ricerca">
+                  <button class="btn"  type="submit">Search</button>
+              </form>
 					</div>
-					
 					</c:when>
 				<c:otherwise>
+				<c:choose>
 					<c:when test="${logUtente.getRuolo().getId_ruolo()==2 }">  
 							<div class="form-search">
-						<!--mt=margin top    mr=margin-right-->
-													
-	                           <form class="form-inline mt-2" action="SearchBar" name="formRicerca" method="get">
-	                               <input class="form-control  mr-2" type="text" placeholder="Cerca id Prodotto"   name="ricerca">
-	                               <button class="btn"  type="submit">Search</button>
-	                           </form>
+								<!--mt=margin top    mr=margin-right-->			
+                <form class="form-inline mt-2" action="SearchBar" name="formRicerca" method="get">
+                    <input class="form-control  mr-2" type="text" placeholder="Cerca id Prodotto"   name="ricerca">
+                    <button class="btn"  type="submit">Search</button>
+                </form>
 							</div>
-					
 					</c:when>
+				</c:choose>
 				
 				</c:otherwise>
 				</c:choose>
