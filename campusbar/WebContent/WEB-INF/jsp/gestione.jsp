@@ -20,7 +20,7 @@
 								 <c:forEach items="${prodotti}" var="prodotto">
 								 		<tr style="font-weight: bold;">
 								 			<td style="width:32%;"><c:out value="${prodotto.getNome()}"/></td>
-									 		<td><input type=number style="width:50px; height:40px; padding-right:2px; border: 3px solid #f1f8f8;" value=<c:out value="${prodotto.getPrezzo()}"/>></td>
+									 		<td><input type=number step="0.01" style="width:70px; height:40px; padding-right:2px; border: 3px solid #f1f8f8;" value=<c:out value="${prodotto.getPrezzo()}"/>></td>
 									 		<td><button id="submitOrder" style="width:auto;" onclick="updateProduct(<c:out value="${ordine.getId_ordine()}"/>)">Modifica</button></td>
 									 	</tr>
 								 </c:forEach>
