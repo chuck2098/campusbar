@@ -28,7 +28,7 @@ public class ConfirmCart extends HttpServlet {
 		
 		Utente u=(Utente)request.getSession().getAttribute("logUtente");
 		
-		//se l'utente e' loggato   
+		//se l'utente e' loggato     
 		if(u!=null) {
 			Ordine ord=new Ordine();
 			OrdineDAO o=new OrdineDAO();
