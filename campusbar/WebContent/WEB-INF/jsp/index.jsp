@@ -5,7 +5,7 @@
 <jsp:include page="header.jsp"/>
 
 			<section class="content">
-					<br><h1 class="text-center">Alimenti</h1>
+					<br><h1 class="text-center">Prodotti piu venduti</h1>
              <section class="container">
                   <div class="row">
 								    <c:forEach items="${prodotti}" var="prodotto">
