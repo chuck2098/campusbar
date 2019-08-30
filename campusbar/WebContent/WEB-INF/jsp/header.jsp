@@ -19,9 +19,8 @@
                 <div class="row text-center">
 	                		<div class="logo">
 	          	            <a class="navbar-brand" href="#">
-	                     		     <img src="images/logo.png" style="width: 150px" alt="Logo">
+                     		     <img src="images/logo.png" style="width: 150px" alt="Logo">
 	                        </a>	
-	                		
 	                		</div>
 											<div class="form-search">
 													<!--mt=margin top    mr=margin-right-->
@@ -64,10 +63,21 @@
                                 <a class="nav-link" href=".">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="Categorie">Categorie</a>
+                             <c:choose>
+                         			<c:when test="${logUtente!=null && logUtente.getRuolo().getId_ruolo()==2}">
+                                <a class="nav-link" href="IndexBar">Ordini</a>
+                              </c:when>
+                              <c:otherwise>
+                              	<a class="nav-link" href="Categorie">Categorie</a>
+                              </c:otherwise>
+                             </c:choose>
                             </li>
                             <li class="nav-item">
+                             <c:choose>
+                         			<c:when test="${logUtente!=null && logUtente.getRuolo().getId_ruolo()==3}">
                                 <a class="nav-link" href="#">Miei Ordini</a>
+                              </c:when>
+                              </c:choose>
                             </li>    
                             </ul>
             
