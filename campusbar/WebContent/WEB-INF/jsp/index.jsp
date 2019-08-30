@@ -19,7 +19,11 @@
 		                              <p class="card-text"><c:out value="${prodotto.descrizione}" /></p>
 		                              <div class="card-info">
 		                                  <span class="card-price"><c:out value="${prodotto.prezzo}" /></span>
-		                                  <textarea id="nota<c:out value="${prodotto.id}"/>" maxlength="255"  placeholder="Inserisci una nota per questo prodotto"></textarea>
+		                                <c:choose>
+		                              		<c:when test="${logUtente.getRuolo().getId_ruolo()==3}">
+		                                  	<textarea id="nota<c:out value="${prodotto.id}"/>" maxlength="255"  placeholder="Inserisci una nota per questo prodotto"></textarea>
+				                              </c:when>
+					                           </c:choose>
 		                              </div>
 		                              <c:choose>
 		                              	<c:when test="${logUtente.getRuolo().getId_ruolo()==3}">
