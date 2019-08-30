@@ -32,7 +32,7 @@ public class IndexBarServlet extends HttpServlet {
 			ArrayList<Ordine> ordini=(ArrayList<Ordine>) new OrdineDAO().doRetrieveOrderNotDeliveredByUser(u);
 			request.setAttribute("ordini", ordini);
 			RequestDispatcher req= request.getRequestDispatcher("WEB-INF/jsp/indexbar.jsp");
-			req.forward(request, response);
+			req.forward(request, response); 
 			
 		}else {
 			response.sendRedirect("login.html");

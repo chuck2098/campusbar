@@ -66,7 +66,7 @@
 							</div><br>
 							<h4><button id="submitOrder" style="border:3px solid #f1f8ee;" onclick="deliver(<c:out value="${ordine.getId_ordine()}"/>)">Consegna</button></h4>
 						</div>
-				</c:forEach>
+				</c:forEach> 
 			</div>
 <jsp:include page="footer.html"/>
 <script>
