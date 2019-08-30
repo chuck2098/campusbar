@@ -65,6 +65,8 @@ public class OrdineDAO {
 		
 		try(Connection con = ConnectionPool.getConnection()){
 			
+			DettaglioOrdineDAO d=new DettaglioOrdineDAO();
+			ArrayList<DettaglioOrdine> dett;
 			ArrayList<Ordine> ordini=new ArrayList<>();
 			Ordine o=null;
 			
@@ -87,7 +89,9 @@ public class OrdineDAO {
 				o.setConsegnato(false);
 				o.setEdificio(u.getEdificio());
 				o.setId_ordine(rs.getInt(3));
-				o.setDettaglio(new DettaglioOrdineDAO().doRetrieveConfirmedByOrderId(rs.getInt(3)));
+				dett=d.doRetrieveConfirmedByOrderId(rs.getInt(3));
+				if(dett.size()==0) continue;
+				o.setDettaglio(dett);
 				
 				ordini.add(o);
 			}

@@ -110,6 +110,7 @@ public class DettaglioOrdineDAO {
 		
 	}
 	
+	//prelevo tutti i prodotti di un ordine dato l'id ordine
 	public ArrayList<DettaglioOrdine> doRetrieveConfirmedByOrderId(int id_order) {
 		
 		try(Connection con = ConnectionPool.getConnection()){
