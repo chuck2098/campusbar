@@ -13,10 +13,13 @@ public class ConnectionPool {
 	public static Connection getConnection() throws SQLException {
 		if (datasource == null) {
 			PoolProperties p = new PoolProperties();
-			p.setUrl("jdbc:mysql://localhost:3306/campusbar?serverTimezone=" + TimeZone.getDefault().getID());
+			p.setUrl("jdbc:mysql://remotemysql.com:3306/fCDBBQwrx0?serverTimezone=" + TimeZone.getDefault().getID());
 			p.setDriverClassName("com.mysql.cj.jdbc.Driver");
-			p.setUsername("root");
-			p.setPassword("sasa");
+			//p.setUrl("jdbc:mysql://localhost:3306/campusbar?serverTimezone=" + TimeZone.getDefault().getID());
+			//p.setUsername("root");
+			//p.setPassword("sasa");
+			p.setUsername("fCDBBQwrx0");
+			p.setPassword("VVAoJuTmci");
 			p.setMaxActive(150);
 			p.setInitialSize(10);
 			p.setMinIdle(10);

@@ -29,7 +29,7 @@
 									 		<td><c:out value="${ordine.getData_ordine()}"/></td>
 									 		<td><textarea maxlength='255' rows='2' readonly='readonly' style='width:150px;resize: none;'><c:out value="${ordine.getNota_ordine()}"/></textarea></td>
 									 		<td><c:out value="${ordine.getDettaglio().size()}"/></td>
-									 		<td><a href=# onclick="OpenDetails(<c:out value=""/>)">Dettagli</a></td>
+									 		<td><a href=# onclick="OpenDetails(<c:out value="${ordine.getId_ordine()}"/>)">Dettagli</a></td>
 									 		<td><a href=# onclick="DelOrder(<c:out value="${ordine.getId_ordine()}"/>)">Elimina</a></td>
 									 	</tr>
 								 </c:forEach>
@@ -37,17 +37,40 @@
 							</table>
 						</div>
 					</div>
-					<div class="chooseBar">
-						<h3>Scegli dove ritirare i prodotti</h3><br>
-						Prodotti disponibili nei seguenti bar: <select id="bars"></select><br><br>
-						<button id="submitOrder" onclick="confirm()">Conferma</button>
-						<button id="closePoupup" onclick="nascondiDiv()">Chiudi</button>
-					</div>
+					<c:forEach items="${ordini}" var="ordine">
+						<div class="detailsOrder" id="details<c:out value="${ordine.getId_ordine()}"/>">
+							<h2>Dettaglio Ordine <c:out value="${ordine.getId_ordine()}"/></h2><br>
+							<div class='table-responsive' style='border: 2px solid #f1f8f8; border-radius: 5px; overflow-x: auto; white-space: nowrap; text-align: center;'>
+								<table style='width: 95%;'>
+									<thead>
+										<tr>
+                      <th style='color:#f1f8f8;'>Codice Prodotto</th>
+                      <th style='color:#f1f8f8;'>Prodotto</th>
+                      <th style='color:#f1f8f8;'>Prezzo</th>
+                      <th style='color:#f1f8f8;'>Qnt. Ordinata</th>
+                      <th style='color:#f1f8f8;'>Note</th>
+                     </tr>
+										</thead>
+									<tbody>
+									 <c:forEach items="${ordine.getDettaglio()}" var="dettaglio">
+									 		<tr style="font-weight: bold;">
+									 			<td><c:out value="${dettaglio.getProdotto().getId()}"/></td>
+										 		<td><img width='100px' src='images/<c:out value="${dettaglio.getProdotto().getId()}"/>.png'><br><c:out value="${dettaglio.getProdotto().getNome()}"/></td>
+										 		<td><c:out value="${dettaglio.getPrezzo_acquisto()}"/></td>
+											 	<td><c:out value="${dettaglio.getQuantita()}"/></td>
+										 		<td><textarea maxlength='255' rows='2' readonly='readonly' style='width:150px;resize: none;'><c:out value="${dettaglio.getNota()}"/></textarea></td>
+										 	</tr>
+									 </c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+				</c:forEach>
 			</div>
 <jsp:include page="footer.html"/>
 <script>
 
-setInterval(updateOrders, 5000);
+	var t=setInterval(updateOrders, 5000);
 
  function DelOrder(ord){
 	 $.get("DeleteOrder?id=" +ord, 
@@ -61,6 +84,16 @@ setInterval(updateOrders, 5000);
 				function(data){
 					$('#orders').load(document.URL +  ' #orders');
 			});
+ }
+ function OpenDetails(ord){
+	 clearInterval(t);
+	 $("#details"+ord).fadeToggle();
+	 $("#details"+ord).visible();
+		//document.getElementById("chooseBars").style.display = "block";
+ }
+ function CloseDetails(ord){
+	 $("#details"+ord).fadeToggle();
+		//document.getElementById("chooseBars").style.display = "block";
  }
 </script>
 </body>

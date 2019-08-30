@@ -1,7 +1,7 @@
 html,body { margin: 0; padding: 0; height: 100%; }
 body{
     background-color:rgba(170, 172, 133, 0.79);
-    color:rgb(241, 248, 248);
+    color:#f1f8f8;
     margin:0;
 }
 /*RESPONSIVE MENU*/
@@ -296,7 +296,24 @@ body{
     margin-top: -60px;
     background-color: #808768;
     -webkit-box-shadow: 2px 2px 12px 3px rgba(64,63,64,1);
+}
 
+.detailsOrder{
+		text-align:center;
+	  z-index: 10;
+    border-radius: 3px;
+    position: fixed;
+    display: none;
+    padding: 18px 10px;
+    top: 45%;
+    left: 50%;
+    width: 1000px;
+    height: auto;
+    padding-bottom:auto;
+    margin-left: -500px;
+    margin-top: -330px;
+    background-color: #808768;
+    -webkit-box-shadow: 2px 2px 12px 3px rgba(64,63,64,1);
 }
 
 /*FOOTER*/
@@ -395,6 +412,13 @@ footer > .container-fluid{
 		.head-span{
 			width:20%;
 		}
+		.detailsOrder{
+    	width:95%;
+    	left:2%;
+    	margin-top:-200px;
+    	margin-left:1px;
+    	height:500px;
+    }
 }
 
 @media screen and (max-width: 992px) {
