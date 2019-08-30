@@ -26,6 +26,7 @@ public class Search extends HttpServlet {
 		
 		ArrayList<Prodotto> prod=(ArrayList<Prodotto>) new ProdottoDAO().doRetrieveByName(patt);
 		request.setAttribute("prodotti", prod);
+		request.setAttribute("pattern", patt);
 		RequestDispatcher req= request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
 		req.forward(request, response);
 	}

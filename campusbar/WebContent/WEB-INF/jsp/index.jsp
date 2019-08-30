@@ -5,7 +5,23 @@
 <jsp:include page="header.jsp"/>
 
 			<section class="content">
-					<br><h1 class="text-center">Prodotti piu venduti</h1>
+						 <c:choose>
+		      
+			 <c:when test="${categoria != null }">
+			 		<br><h1 class="text-center"><c:out value="${categoria.getNomeCategoria()}"/></h1>
+			 </c:when>
+			 <c:otherwise>
+				<c:choose>
+					<c:when  test="${pattern != null }">
+						<br><h1 class="text-center">Risultati per '<c:out value="${pattern}"/>'</h1>
+					</c:when>
+					<c:otherwise>
+						<br><h1 class="text-center">Prodotti piu venduti</h1>
+					</c:otherwise>
+				</c:choose>
+			 </c:otherwise>
+			 </c:choose>
+
              <section class="container">
                   <div class="row">
 								    <c:forEach items="${prodotti}" var="prodotto">
