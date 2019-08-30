@@ -281,7 +281,7 @@ body{
 	float:right;
 }
 
-#chooseBar{
+.chooseBar{
 
     z-index: 10;
     border-radius: 3px;
@@ -442,7 +442,7 @@ footer > .container-fluid{
         margin-bottom: 25px;
     }
     
-    #chooseBar{
+    .chooseBar{
     	width:95%;
     	left:2%;
     	margin-left:1px;

@@ -37,7 +37,7 @@
 							</table>
 						</div>
 					</div>
-					<div id="chooseBar">
+					<div class="chooseBar">
 						<h3>Scegli dove ritirare i prodotti</h3><br>
 						Prodotti disponibili nei seguenti bar: <select id="bars"></select><br><br>
 						<button id="submitOrder" onclick="confirm()">Conferma</button>

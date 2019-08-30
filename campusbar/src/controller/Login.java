@@ -45,9 +45,9 @@ public class Login extends HttpServlet {
 			sess.setMaxInactiveInterval(1800); //dopo 30 min scade la sessione
 			sess.setAttribute("logUtente",c);
 			
-			if(sess.getAttribute("dettaglio") == null) {// condizione per l'utente che si è loggato senza passare per il carrello
+			if(sess.getAttribute("dettaglio") == null) {// condizione per l'utente che si ï¿½ loggato senza passare per il carrello
 				response.sendRedirect(".");    
-			}else {// condizione per l'utente che ha prima caricato il carrello, poi in fase di conferma si è loggato
+			}else {// condizione per l'utente che ha prima caricato il carrello, poi in fase di conferma si ï¿½ loggato
 				
 				ArrayList<DettaglioOrdine> dettagli=null;
 				DettaglioOrdineDAO det=new DettaglioOrdineDAO();
@@ -63,7 +63,7 @@ public class Login extends HttpServlet {
 		else if(c.getRuolo().getId_ruolo()==2) {
 			sess.setMaxInactiveInterval(1800); //dopo 30 min scade la sessione
 			sess.setAttribute("logUtente",c);
-			response.sendRedirect("IndexBarServlet");
+			response.sendRedirect("IndexBar");
 		}
 		else
 			request.getRequestDispatcher("WEB-INF/jsp/indexadmin.jsp").forward(request,response);

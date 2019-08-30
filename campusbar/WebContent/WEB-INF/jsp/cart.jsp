@@ -67,7 +67,7 @@
          		</c:when>
 					</c:choose>
 					</div>
-					<div id="chooseBar">
+					<div class="chooseBar" id="chooseBars">
 						<h3>Scegli dove ritirare i prodotti</h3><br>
 						Prodotti disponibili nei seguenti bar: <select id="bars"></select><br><br>
 						<button id="submitOrder" onclick="confirm()">Conferma</button>
@@ -123,19 +123,11 @@
 		$("#bars").html(response);
 	}
 	
-	//serve per evitare che quando si preme sul pulsante,venga richiamata la funzione "nascondiDIV"
-	$('#confirmOrder').click(function(event){
-	     event.stopPropagation();
-	 });
-	$('#chooseBar').click(function(event){
-	     event.stopPropagation();
-	 });
-	
 	function mostraDiv(){
-		document.getElementById("chooseBar").style.display = "block";
+		document.getElementById("chooseBars").style.display = "block";
 	}
 	function nascondiDiv(){
-		document.getElementById("chooseBar").style.display="none";
+		document.getElementById("chooseBars").style.display="none";
 	}
 	
 </script>
