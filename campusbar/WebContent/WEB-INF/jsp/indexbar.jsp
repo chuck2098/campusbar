@@ -63,7 +63,8 @@
 									 </c:forEach>
 									</tbody>
 								</table>
-							</div>
+							</div><br>
+							<h4><button id="submitOrder" style="border:3px solid #f1f8ee;" onclick="deliver(<c:out value="${ordine.getId_ordine()}"/>)">Consegna</button></h4>
 						</div>
 				</c:forEach>
 			</div>
@@ -95,6 +96,19 @@
 	 $("#details"+ord).fadeToggle();
 		//document.getElementById("chooseBars").style.display = "block";
  }
+ 
+ function deliver(ord){
+	 
+	 $.get("DeliveryOrder?id=" +ord, 
+				function(data){
+						alert(data);
+						//riavvio il timer
+						t=setInterval(updateOrders, 5000);
+						CloseDetails(ord);
+						updateOrders();
+			}); 
+ }
+ 
 </script>
 </body>
 </html>

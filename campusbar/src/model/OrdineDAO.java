@@ -119,4 +119,26 @@ public class OrdineDAO {
 		return true;
 		
 	}
+
+public boolean doDeliveryOrderById(int id) {
+		
+	try(Connection con = ConnectionPool.getConnection()) {
+			
+			
+			PreparedStatement ps0 = con.prepareStatement("UPDATE ordini "
+														+"SET consegnato=? "
+														+"WHERE id_ordine=? ");
+			ps0.setBoolean(1,true);
+			ps0.setInt(2, id);
+			
+			if(ps0.executeUpdate()==0)
+				return false;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
 }
