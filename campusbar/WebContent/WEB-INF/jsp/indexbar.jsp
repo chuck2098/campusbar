@@ -29,7 +29,7 @@
 									 		<td><c:out value="${ordine.getData_ordine()}"/></td>
 									 		<td><textarea maxlength='255' rows='2' readonly='readonly' style='width:150px;resize: none;'><c:out value="${ordine.getNota_ordine()}"/></textarea></td>
 									 		<td><c:out value="${ordine.getDettaglio().size()}"/></td>
-									 		<td><a href=# onclick="OpenDetails(<c:out value="${ordine.()}"/>)">Dettagli</a></td>
+									 		<td><a href=# onclick="OpenDetails(<c:out value=""/>)">Dettagli</a></td>
 									 		<td><a href=# onclick="DelOrder(<c:out value="${ordine.getId_ordine()}"/>)">Elimina</a></td>
 									 	</tr>
 								 </c:forEach>

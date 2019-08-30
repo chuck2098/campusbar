@@ -45,10 +45,11 @@ public class AddToCart extends HttpServlet {
 		if(u!=null) {
 			
 			DettaglioOrdineDAO dett=new DettaglioOrdineDAO();
-			if(dett.doSaveOrUpdateCart(d)) {
-				PrintWriter out=response.getWriter();
+			PrintWriter out=response.getWriter();
+			if(dett.doSaveOrUpdateCart(d))
 				out.println("Prodotto aggiunto al carrello");
-			}
+			else
+				out.println("Nessun bar ha questa quantita'");
 
 			
 		}else { //utente non loggato,gestire il carrello con la sessione
