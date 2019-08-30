@@ -40,7 +40,7 @@ public class Login extends HttpServlet {
 			sess.setAttribute("logUtente",c);
 			
 			if(sess.getAttribute("dettaglio") == null) {// condizione per l'utente che si è loggato senza passare per il carrello
-				response.sendRedirect(".");
+				response.sendRedirect(".");  
 			}else {// condizione per l'utente che ha prima caricato il carrello, poi in fase di conferma si è loggato
 				
 			}
