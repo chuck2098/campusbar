@@ -88,23 +88,4 @@
                     </nav>
 
         </header>
-        
-        <script>
-        function search(){
-    		
-    		var ricerca=document.formRicerca.ricerca.value;
-    		
-    		if(!quant){
-    			alert("per ricercare scrivere nel campo di ricerca");
-    			return;
-    		}
-
-    		$.get("Search?ricerca=" + ricerca, 
-    			function(data){
-    					alert(data);
-    		});
-    	
-    	}
-        </script>
-        
 </body>
