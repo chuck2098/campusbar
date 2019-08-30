@@ -43,7 +43,9 @@
 					<c:choose>
            	<c:when test="${cart!=null}">
 							<span>Totale da pagare: <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${tot}"/> €</span><br><br>
-           		<textarea name='notet' id='messaget' maxlength='255' placeholder='Aggiungi nota per questo ordine.'></textarea><br><br>
+           		<c:if test="${logUtente!=null}">
+           			<textarea name='notet' id='messaget' maxlength='255' placeholder='Aggiungi nota per questo ordine.'></textarea><br><br>
+           		</c:if>
          		<c:choose> 
            			<c:when test="${logUtente==null}">
            				<button id="submitOrder" onclick="confirm()">Prosegui</button>
