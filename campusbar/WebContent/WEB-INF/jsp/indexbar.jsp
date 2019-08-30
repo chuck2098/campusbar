@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="header.jsp"/>
 
-        <div class="container" id="cart">
+        <div class="container" id="orders">
 				<h2 style="text-align:center;">Lista Ordini </h2><br>
 					<div class="row">
 				
@@ -29,9 +29,8 @@
 									 		<td><c:out value="${ordine.getData_ordine()}"/></td>
 									 		<td><textarea maxlength='255' rows='2' readonly='readonly' style='width:150px;resize: none;'><c:out value="${ordine.getNota_ordine()}"/></textarea></td>
 									 		<td><c:out value="${ordine.getDettaglio().size()}"/></td>
-									 		<td><a href=#>Dettagli</a></td>
-									 		<td><a href=#>Elimina</a></td>
-
+									 		<td><a href=# onclick="OpenDetails(<c:out value="${ordine.()}"/>)">Dettagli</a></td>
+									 		<td><a href=# onclick="DelOrder(<c:out value="${ordine.getId_ordine()}"/>)">Elimina</a></td>
 									 	</tr>
 								 </c:forEach>
 								</tbody>
@@ -41,7 +40,13 @@
 			</div>
 <jsp:include page="footer.html"/>
 <script>
-
+ function DelOrder(ord){
+	 $.get("DeleteOrder?id=" +ord, 
+				function(data){
+						alert(data);
+						$('#orders').load(document.URL +  ' #orders');
+			});
+ }
 </script>
 </body>
 </html>

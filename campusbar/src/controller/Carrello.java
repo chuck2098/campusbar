@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import model.DettaglioOrdine;
 import model.DettaglioOrdineDAO;
+import model.EdificioDAO;
 import model.Utente;
 
 /**
@@ -31,8 +32,12 @@ public class Carrello extends HttpServlet {
 		if(u != null) {
 			ArrayList<DettaglioOrdine> cart = new DettaglioOrdineDAO().doRetrieveNotConfirmedByUser(u);
 
-			if(cart.size()>0)
+			if(cart.size()>0) {
 				request.getSession().setAttribute("cart", cart);
+				//se e' disponibile nell'edificio di default
+				if(new EdificioDAO().doCheckAvailabilityByEdifcioAndCart(u.getEdificio(),cart))
+					request.setAttribute("edificioDefault",u.getEdificio());
+			}
 			else
 				request.getSession().removeAttribute("cart");
 			
