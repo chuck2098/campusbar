@@ -33,9 +33,17 @@ public class ConfirmCart extends HttpServlet {
 			Ordine ord=new Ordine();
 			OrdineDAO o=new OrdineDAO();
 			DettaglioOrdineDAO det=new DettaglioOrdineDAO();
-			 
+			
+			GregorianCalendar g=new GregorianCalendar();
+			int anno = g.get(GregorianCalendar.YEAR);
+			int mese = g.get(GregorianCalendar.MONTH) + 1;
+			int giorno = g.get(GregorianCalendar.DAY_OF_MONTH);
+			int ore = g.get(GregorianCalendar.HOUR_OF_DAY);//formato 24 ore
+			int minuti = g.get(GregorianCalendar.MINUTE);
+			int secondi = g.get(GregorianCalendar.SECOND);
+			
 			ord.setNota_ordine(nota_ordine);
-			ord.setData_ordine(new GregorianCalendar());
+			ord.setData_ordine(anno+"-"+mese+"-"+giorno+" "+ore+":"+minuti+":"+secondi);
 			ord.setConsegnato(false);
 			
 			Edificio e=new Edificio();

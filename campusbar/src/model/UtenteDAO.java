@@ -105,6 +105,7 @@ public class UtenteDAO {
 	}
 	
 public Utente doRetrieveByMail(String email) {
+
 		
 		try(Connection con = ConnectionPool.getConnection()){
 			
@@ -136,5 +137,36 @@ public Utente doRetrieveByMail(String email) {
 		}
 		
 	}
+public Utente doRetrieveByMatricola(String matricola) {
+	
+	try(Connection con = ConnectionPool.getConnection()){
+		
+		
+		PreparedStatement ps = con.prepareStatement(
+				"SELECT matricola,nome,cognome,email,password,id_ruolo,id_edificio "
+			  + "FROM utenti "
+			  + "WHERE matricola=?");
+		
+		ps.setString(1, matricola);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		if (rs.next()) {
+			Utente u = new Utente();
+			u.setMatricola(rs.getString(1));
+			u.setNome(rs.getString(2));
+			u.setCognome(rs.getString(3));
+			u.setEmail(rs.getString(4));
+			u.setPassword(rs.getString(5));
+			u.setRuolo(getRuolo(con,rs.getInt(6)));
+			u.setEdificio(getEdificio(con,rs.getInt(7)));
+			return u;
+		}
+		return null;
+	} catch (SQLException e) {
+		throw new RuntimeException(e);
+	}
+	
+}
 }
 

@@ -19,10 +19,10 @@ public class Ordine {
 	public void setNota_ordine(String nota_ordine) {
 		this.nota_ordine = nota_ordine;
 	}
-	public GregorianCalendar getData_ordine() {
+	public String getData_ordine() {
 		return data_ordine;
 	}
-	public void setData_ordine(GregorianCalendar gregorianCalendar) {
+	public void setData_ordine(String gregorianCalendar) {
 		this.data_ordine = gregorianCalendar;
 	}
 	public boolean getConsegnato() {
@@ -48,7 +48,7 @@ public class Ordine {
 
 	private int id_ordine;
 	private String nota_ordine;
-	private GregorianCalendar data_ordine;
+	private String data_ordine;
 	private boolean consegnato;
 	private Edificio edificio;
 	private ArrayList<DettaglioOrdine> dettaglio;

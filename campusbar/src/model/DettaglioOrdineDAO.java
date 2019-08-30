@@ -110,6 +110,41 @@ public class DettaglioOrdineDAO {
 		
 	}
 	
+	public ArrayList<DettaglioOrdine> doRetrieveConfirmedByOrderId(int id_order) {
+		
+		try(Connection con = ConnectionPool.getConnection()){
+			
+			
+			PreparedStatement ps = con.prepareStatement("SELECT id_dettaglio_ordine,nota_prodotto,quantita,prezzo_acquisto,id_prodotto,id_utente " + 
+														"FROM dettaglio_ordini " + 
+														"WHERE id_ordine=?");
+			
+			ps.setInt(1,id_order);
+			
+			ResultSet rs = ps.executeQuery();
+			ArrayList<DettaglioOrdine> e = new ArrayList<>();
+			
+			while(rs.next()) {
+				DettaglioOrdine d =new DettaglioOrdine();
+				d.setId_dettaglio(rs.getInt(1));
+				d.setNota(rs.getString(2));
+				d.setQuantita(rs.getInt(3));
+				d.setPrezzo_acquisto(rs.getFloat(4));
+				d.setProdotto_ordinato(true);
+				d.setProdotto(new ProdottoDAO().doRetrieveById(rs.getInt(5)));
+				d.setCliente(new UtenteDAO().doRetrieveByMatricola(rs.getString(6)));
+				
+				e.add(d);
+				
+			}
+			return e;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+	}
+	
 	public boolean doDeleteById(int id) {
 		
 		try(Connection con = ConnectionPool.getConnection()) {

@@ -44,7 +44,17 @@
              	<c:when test="${cart!=null}">
 								<span>Totale da pagare: <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${tot}"/> €</span><br><br>
 		            		<textarea name='notet' id='messaget' maxlength='255' placeholder='Aggiungi nota per questo ordine.'></textarea><br><br>
-		            		<button id="submitOrder" onclick="check_availability()"> Continua Ordine</button>
+		            		<c:choose>
+             					<c:when test="${edificioDefault!=null}">
+             						<h2>Tutti i prodotti sono disponibili nel tuo bar!</h2>
+             						<button id="submitOrder" onclick="confirm()">Conferma Ordine</button><br>oppure <br> 
+             					</c:when>
+             					<c:otherwise>
+             						<h2>I prodotti non sono disponibili nel tuo bar!</h2> Scegli un altro bar:
+             					</c:otherwise>
+             					</c:choose>
+             					
+		            		<button id="submitOrder" onclick="check_availability()"> Scegli un bar</button>
 	            	</c:when>
 	            </c:choose>
 					</div>
@@ -74,6 +84,8 @@
 		
 		$.get("ConfirmCart?not="+not+"&ed="+id,
 				function(data){
+					if(data=="notLoggeg")
+							window.href="login.html";
 						alert(data);
 						$('#cart').load(document.URL +  ' #cart');
 			});
