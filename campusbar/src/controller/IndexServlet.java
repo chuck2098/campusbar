@@ -25,7 +25,7 @@ public class IndexServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Prodotto> prod=(ArrayList<Prodotto>) new ProdottoDAO().doRetrieveAll();
+		ArrayList<Prodotto> prod=(ArrayList<Prodotto>) new ProdottoDAO().doRetrieveByProductMostSold();
 		request.setAttribute("prodotti", prod);
 		RequestDispatcher req= request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
 		req.forward(request, response);
