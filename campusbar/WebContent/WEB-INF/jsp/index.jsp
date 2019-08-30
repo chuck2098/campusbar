@@ -22,7 +22,7 @@
 		                                  <textarea id="nota<c:out value="${prodotto.id}"/>" maxlength="255"  placeholder="Inserisci una nota per questo prodotto"></textarea>
 		                              </div>
 		                              <input type="number" min="1" required class="card-quant" id="quant<c:out value="${prodotto.id}"/>" placeholder="Qt.">
-		                              <button type="button" class="btn" onclick="addToCart(<c:out value="${prodotto.id}"/>)">Aggiungi al carrello</button>
+		                              <button type="button" class="btn" onclick ="addToCart(<c:out value="${prodotto.id}"/>)">Aggiungi al carrello</button>
 		                          </div>
 	                        </div>
 												</div>

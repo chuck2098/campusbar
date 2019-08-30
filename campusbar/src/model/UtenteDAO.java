@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import controller.Categoria;
-
 public class UtenteDAO {
 
 	public Utente doRetrieveByMatricolaPassword(String matricola, String password) {

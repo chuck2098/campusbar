@@ -1,7 +1,5 @@
 package model;
 
-import controller.Categoria;
-
 public class Prodotto {
 
 	
