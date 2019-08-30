@@ -81,7 +81,7 @@
                                 <a class="nav-link" href="#">Miei Ordini</a>
                               </c:when>
                               </c:choose>
-                            </li>    
+                            </li>
                             </ul>
             
                         </div>
