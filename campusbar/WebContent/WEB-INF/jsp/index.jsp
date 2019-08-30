@@ -5,8 +5,8 @@
 <jsp:include page="header.jsp"/>
 
 			<section class="content">
-						 <c:choose>
-		      
+		
+		<c:choose>      
 			 <c:when test="${categoria != null }">
 			 		<br><h1 class="text-center"><c:out value="${categoria.getNomeCategoria()}"/></h1>
 			 </c:when>
@@ -20,7 +20,7 @@
 					</c:otherwise>
 				</c:choose>
 			 </c:otherwise>
-			 </c:choose>
+		 </c:choose>
 
              <section class="container">
                   <div class="row">
@@ -39,12 +39,12 @@
 		                              		<c:when test="${logUtente.getRuolo().getId_ruolo()==3 || logUtente==null}">
 		                                  	<textarea id="nota<c:out value="${prodotto.id}"/>" maxlength="255"  placeholder="Inserisci una nota per questo prodotto"></textarea>
 				                              </c:when>
-					                           </c:choose>
+					                          </c:choose>
 		                              </div>
 		                              <c:choose>
 		                              	<c:when test="${logUtente.getRuolo().getId_ruolo()==3 || logUtente==null} ">
-			                              <input type="number" min="1" required class="card-quant" id="quant<c:out value="${prodotto.id}"/>" placeholder="Qt.">
-			                              <button type="button" class="btn" onclick ="addToCart(<c:out value="${prodotto.id}"/>)">Aggiungi al carrello</button>
+				                              <input type="number" min="1" required class="card-quant" id="quant<c:out value="${prodotto.id}"/>" placeholder="Qt.">
+				                              <button type="button" class="btn" onclick ="addToCart(<c:out value="${prodotto.id}"/>)">Aggiungi al carrello</button>
 			                             </c:when>
 			                           </c:choose>
 		                          </div>
