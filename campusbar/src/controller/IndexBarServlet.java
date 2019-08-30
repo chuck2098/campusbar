@@ -19,7 +19,7 @@ import model.Utente;
 /**
  * Servlet implementation class IndexBarServlet
  */
-@WebServlet("/IndexBarServlet")
+@WebServlet("/IndexBar")
 public class IndexBarServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;

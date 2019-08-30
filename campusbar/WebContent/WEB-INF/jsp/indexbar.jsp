@@ -40,11 +40,20 @@
 			</div>
 <jsp:include page="footer.html"/>
 <script>
+
+setInterval(updateOrders, 5000);
+
  function DelOrder(ord){
 	 $.get("DeleteOrder?id=" +ord, 
 				function(data){
 						alert(data);
 						$('#orders').load(document.URL +  ' #orders');
+			});
+ }
+ function updateOrders(){
+	 $.get("IndexBar", 
+				function(data){
+					$('#orders').load(document.URL +  ' #orders');
 			});
  }
 </script>

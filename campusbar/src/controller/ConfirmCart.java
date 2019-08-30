@@ -25,7 +25,7 @@ public class ConfirmCart extends HttpServlet {
 		
 		String nota_ordine=request.getParameter("not");
 		String id_edificio=request.getParameter("ed");
-		
+
 		Utente u=(Utente)request.getSession().getAttribute("logUtente");
 		
 		//se l'utente e' loggato     
@@ -58,7 +58,7 @@ public class ConfirmCart extends HttpServlet {
 			PrintWriter out=response.getWriter();
 			out.println("Ordine confermato!!");
 			request.getSession().removeAttribute("cart");
-		}else {// l'utente non è loggato
+		}else {// l'utente non ï¿½ loggato
 			PrintWriter out=response.getWriter();
 			out.println("notLogged");
 		}
