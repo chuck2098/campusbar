@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
+
+import model.DettaglioOrdine;
+import model.DettaglioOrdineDAO;
 import model.Utente;
 import model.UtenteDAO;
 
@@ -28,6 +33,7 @@ public class Login extends HttpServlet {
 		
 		String matr=request.getParameter("matricola");
 		String pass=request.getParameter("password");
+		HttpSession sess=request.getSession();
 		
 		Utente c=new UtenteDAO().doRetrieveByMatricolaPassword(matr, pass);
 		if(c==null) 
@@ -35,7 +41,7 @@ public class Login extends HttpServlet {
 		
 			
 		else if(c.getRuolo().getId_ruolo()==3) {
-			HttpSession sess=request.getSession();
+			
 			sess.setMaxInactiveInterval(1800); //dopo 30 min scade la sessione
 			sess.setAttribute("logUtente",c);
 			
@@ -43,10 +49,18 @@ public class Login extends HttpServlet {
 				response.sendRedirect(".");    
 			}else {// condizione per l'utente che ha prima caricato il carrello, poi in fase di conferma si è loggato
 				
+				ArrayList<DettaglioOrdine> dettagli=null;
+				DettaglioOrdineDAO det=new DettaglioOrdineDAO();
+				
+				dettagli = (ArrayList<DettaglioOrdine>) sess.getAttribute("dettaglio");
+				for(DettaglioOrdine dettOrd: dettagli) {
+					dettOrd.setCliente(c);
+					det.doSaveOrUpdateCart(dettOrd);
+				}
+				response.sendRedirect("Carrello");  
 			}
 		}
 		else if(c.getRuolo().getId_ruolo()==2) {
-			HttpSession sess=request.getSession();
 			sess.setMaxInactiveInterval(1800); //dopo 30 min scade la sessione
 			sess.setAttribute("logUtente",c);
 			response.sendRedirect("IndexBarServlet");

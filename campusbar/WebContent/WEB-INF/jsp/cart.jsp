@@ -93,10 +93,11 @@
 		
 		$.get("ConfirmCart?not="+not+"&ed="+id,
 				function(data){
-					if(data=="notLoggeg")
-							window.location.href="login.html";
+					if(data.trim()=="notLogged")
+						window.location.href="login.html";
 					
-						alert(data);
+							
+						
 						$('#cart').load(document.URL +  ' #cart');
 			});
 	}
