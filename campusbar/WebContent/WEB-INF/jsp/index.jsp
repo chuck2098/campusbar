@@ -20,13 +20,13 @@
 		                              <div class="card-info">
 		                                  <span class="card-price"><c:out value="${prodotto.prezzo}" /></span>
 		                                <c:choose>
-		                              		<c:when test="${logUtente.getRuolo().getId_ruolo()==3}">
+		                              		<c:when test="${logUtente.getRuolo().getId_ruolo()==3 || logUtente==null}">
 		                                  	<textarea id="nota<c:out value="${prodotto.id}"/>" maxlength="255"  placeholder="Inserisci una nota per questo prodotto"></textarea>
 				                              </c:when>
 					                           </c:choose>
 		                              </div>
 		                              <c:choose>
-		                              	<c:when test="${logUtente.getRuolo().getId_ruolo()==3}">
+		                              	<c:when test="${logUtente.getRuolo().getId_ruolo()==3 || logUtente==null} ">
 			                              <input type="number" min="1" required class="card-quant" id="quant<c:out value="${prodotto.id}"/>" placeholder="Qt.">
 			                              <button type="button" class="btn" onclick ="addToCart(<c:out value="${prodotto.id}"/>)">Aggiungi al carrello</button>
 			                             </c:when>

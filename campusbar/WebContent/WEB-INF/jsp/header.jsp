@@ -62,16 +62,19 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href=".">Home</a>
                             </li>
-                            <li class="nav-item">
+                           	<li class="nav-item">
+                             	<a class="nav-link" href="Categorie">Categorie</a>
+                            </li>
                              <c:choose>
                          			<c:when test="${logUtente!=null && logUtente.getRuolo().getId_ruolo()==2}">
-                                <a class="nav-link" href="IndexBar">Ordini</a>
+                         				<li class="nav-item">
+                                	<a class="nav-link" href="IndexBar">Ordini</a>
+                                </li>
+                                <li class="nav-item">
+                                	<a class="nav-link" href="GestioneProdotti">Gestione</a>
+                                </li>
                               </c:when>
-                              <c:otherwise>
-                              	<a class="nav-link" href="Categorie">Categorie</a>
-                              </c:otherwise>
-                             </c:choose>
-                            </li>
+                            </c:choose>
                             <li class="nav-item">
                              <c:choose>
                          			<c:when test="${logUtente!=null && logUtente.getRuolo().getId_ruolo()==3}">
