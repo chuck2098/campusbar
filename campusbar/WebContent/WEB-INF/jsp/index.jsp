@@ -56,7 +56,7 @@
                </section>
         </section>
 <jsp:include page="footer.html"/>
-<script>
+<script> 
 	function addToCart(id){
 		
 		var quant=document.getElementById("quant"+id).value;
