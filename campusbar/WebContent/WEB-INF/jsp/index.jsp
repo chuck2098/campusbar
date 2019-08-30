@@ -46,7 +46,7 @@
 				                              <input type="number" min="1" required class="card-quant" id="quant<c:out value="${prodotto.id}"/>" placeholder="Qt.">
 				                              <button type="button" class="btn" onclick ="addToCart(<c:out value="${prodotto.id}"/>)">Aggiungi al carrello</button>
 			                             </c:when>
-			                           </c:choose>
+			                           </c:choose> 
 		                          </div>
 	                        </div>
 												</div>
