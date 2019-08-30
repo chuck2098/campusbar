@@ -17,7 +17,7 @@
 							<div class="card-body">
 										<h4 class="card-title"><c:out value="${categoria.nomeCategoria}" /></h4>
 		                              
-		                                <button type="button" class="btn" onclick ="">Visualizza Categoria</button>
+		                                <button type="button" class="btn" onclick ="visualizza(<c:out value="${categoria.id_categoria}"/>)">Visualizza Categoria</button>
 		                     </div>
 	                   </div>
 												</div>
@@ -28,7 +28,10 @@
         </section>
 <jsp:include page="footer.html"/>
 <script>
-	
+function visualizza(id){
+	window.location.href="VisualizzaCategoria?id="+id;
+
+}
 	
 	
 </script>

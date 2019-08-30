@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.*;
 
 
 public class ProdottoDAO {
@@ -134,5 +133,33 @@ public List<Prodotto> doRetrieveByName(String patt) {
 			throw new RuntimeException(e);
 		}
 	}
+
+public List<Prodotto> doRetrieveByIdCategoria(int id) {
+	Prodotto p=null;
+	try(Connection con = ConnectionPool.getConnection()){
+		
+		PreparedStatement ps = con
+				.prepareStatement("SELECT id_prodotto,nome,descrizione,prezzo,id_categoria "
+								+ "FROM prodotti "
+								+ "WHERE id_categoria=?");
+		ps.setInt(1,id);
+		
+		ArrayList<Prodotto> prodotti = new ArrayList<>();
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			p = new Prodotto();
+			p.setId(rs.getInt(1));
+			p.setNome(rs.getString(2));
+			p.setDescrizione(rs.getString(3));
+			p.setPrezzo(rs.getFloat(4));
+			p.setCategoria(getCategoria(con, p.getId()));
+			prodotti.add(p);
+			
+		}
+		return prodotti;
+	} catch (SQLException e) {
+		throw new RuntimeException(e);
+	}
+}
 }
 
