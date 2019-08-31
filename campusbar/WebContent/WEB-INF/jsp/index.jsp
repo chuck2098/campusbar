@@ -34,7 +34,7 @@
 	                          </div>
 														<div class="card-body">
 															<h4 class="card-title"><c:out value="${prodotto.nome}" /></h4>
-		                              <p class="card-text"><c:out value="${prodotto.descrizione}" /></p>
+		                              <div style="overflow-y: auto; height:35px; margin-bottom:10px;"><p class="card-text"><c:out value="${prodotto.descrizione}" /></p></div>
 		                              <div class="card-info">
 		                                  <span class="card-price"><c:out value="${prodotto.prezzo}" /></span>
 		                                <c:choose>

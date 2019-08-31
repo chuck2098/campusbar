@@ -76,6 +76,7 @@
 
                         <div class="collapse navbar-collapse" id="collapsibleNavbar">
                             <ul class="navbar-nav">
+                            
                             <!-- pulsante home -->
                             <c:choose>
                             	<c:when test="${param.active_menu eq 'home'}">
