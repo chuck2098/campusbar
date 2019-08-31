@@ -64,7 +64,7 @@ public class AddToCart extends HttpServlet {
 				dettagli = (ArrayList<DettaglioOrdine>) session.getAttribute("dettaglio");
 			
 			
-			PrintWriter out=response.getWriter();
+			PrintWriter out=response.getWriter(); 
 			
 			//se e' disponibile in qualche bar,allora lo aggiunto
 			if(new DisponibilitaDAO().doCheckByQuantityAndProduct(d.getProdotto(), d.getQuantita())) {
