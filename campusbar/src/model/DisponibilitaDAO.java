@@ -34,7 +34,7 @@ public class DisponibilitaDAO  {
 		} catch (SQLException e1) {
 			throw new RuntimeException(e1);
 		}
-	}
+	} 
 	
 	public boolean doCheckByQuantityAndProduct(Prodotto p,int quant) {
 		

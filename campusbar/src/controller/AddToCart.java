@@ -55,7 +55,7 @@ public class AddToCart extends HttpServlet {
 		}else { //utente non loggato,gestire il carrello con la sessione
 			
 			ArrayList<DettaglioOrdine> dettagli=null;
-			
+			 
 			HttpSession session = request.getSession(true);
 			
 			if(session.getAttribute("dettaglio") == null)

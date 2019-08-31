@@ -12,7 +12,7 @@ public class DettaglioOrdineDAO {
 			//se la quantita non e' disponibilie in nessun bar,esco
 			if(!new DisponibilitaDAO().doCheckByQuantityAndProduct(d.getProdotto(),d.getQuantita()))
 				return false;
-			
+			 
 			ResultSet rs;
 		    PreparedStatement ps0 = con.prepareStatement("SELECT id_dettaglio_ordine "
 								     + "FROM dettaglio_ordini "
