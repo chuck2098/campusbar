@@ -64,6 +64,7 @@ public class EdificioDAO {
 		}
 	}
 
+	//dato un carrello di un utente verifica se l'edificio ha le quantita richieste
 	public boolean doCheckAvailabilityByEdifcioAndCart(Edificio ed, ArrayList<DettaglioOrdine> cart) {
 		PreparedStatement ps;
 		

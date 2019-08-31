@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="header.jsp">
-	<jsp:param value="lista_ordini" name="active_menu"/>
+	<jsp:param value="myorders" name="active_menu"/>
 </jsp:include>
 
         <div class="container" id="orders">
@@ -75,20 +75,6 @@
 <script>
 
 	var t=setInterval(updateOrders, 5000);
-
- function DelOrder(ord){
-	 $.get("DeleteOrder?id=" +ord, 
-				function(data){
-						alert(data);
-						$('#orders').load(document.URL +  ' #orders');
-			});
- }
- function updateOrders(){
-	 $.get("IndexBar", 
-				function(data){
-					$('#orders').load(document.URL +  ' #orders');
-			});
- }
  function OpenDetails(ord){
 	 clearInterval(t);
 	 $("#details"+ord).fadeToggle();
@@ -99,18 +85,7 @@
 	 $("#details"+ord).fadeToggle();
 		//document.getElementById("chooseBars").style.display = "block";
  }
- 
- function deliver(ord){
-	 
-	 $.get("DeliveryOrder?id=" +ord, 
-				function(data){
-						alert(data);
-						//riavvio il timer
-						t=setInterval(updateOrders, 5000);
-						CloseDetails(ord);
-						updateOrders();
-			}); 
- }
+
  
 </script>
 </body>

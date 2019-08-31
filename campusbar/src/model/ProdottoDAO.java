@@ -35,6 +35,8 @@ public class ProdottoDAO {
 			throw new RuntimeException(e);
 		}
 	}
+	
+//30 prodotti piu venduti
 public List<Prodotto> doRetrieveByProductMostSold() {	
 	try(Connection con = ConnectionPool.getConnection()){
 		
@@ -83,7 +85,7 @@ public Prodotto doRetrieveById(int id) {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-	}
+}
 	
 	
 	private static Categoria getCategoria(Connection con, int idProdotto) throws SQLException {

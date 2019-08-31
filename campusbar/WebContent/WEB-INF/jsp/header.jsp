@@ -76,29 +76,74 @@
 
                         <div class="collapse navbar-collapse" id="collapsibleNavbar">
                             <ul class="navbar-nav">
-                            <li class="nav-item active">
-                                <a class="nav-link" href=".">Home</a>
+                            <!-- pulsante home -->
+                            <c:choose>
+                            	<c:when test="${param.active_menu eq 'home'}">
+                            		<li class="nav-item active">
+                            	</c:when>
+                            	<c:otherwise>
+                            		<li class="nav-item">
+                            	</c:otherwise>
+                             </c:choose>
+                             		<a class="nav-link" href=".">Home</a>
+	                            </li>
+	                           
+	                          <!-- pulsante categorie -->
+	                          <c:choose>
+	                          	<c:when test="${param.active_menu eq 'categorie'}">
+	                          			<li class="nav-item active">
+	                          	</c:when>
+	                          	<c:otherwise>
+	                          		<li class="nav-item">
+	                          	</c:otherwise>
+	                          </c:choose>
+                             		<a class="nav-link" href="Categorie">Categorie</a>
                             </li>
-                           	<li class="nav-item">
-                             	<a class="nav-link" href="Categorie">Categorie</a>
-                            </li>
+                            
+                            <!-- pulsante ordini -->
                              <c:choose>
                          			<c:when test="${logUtente!=null && logUtente.getRuolo().getId_ruolo()==2}">
-                         				<li class="nav-item">
-                                	<a class="nav-link" href="IndexBar">Ordini</a>
-                                </li>
-                                <li class="nav-item">
-                                	<a class="nav-link" href="GestioneProdotti">Gestione</a>
+                         			
+				                          <c:choose>
+				                          	<c:when test="${param.active_menu eq 'lista_ordini'}">
+				                          			<li class="nav-item active">
+				                          	</c:when>
+				                          	<c:otherwise>
+				                          		<li class="nav-item">
+				                          	</c:otherwise>
+				                          </c:choose>
+			                             		<a class="nav-link" href="IndexBar">Ordini</a>
+			                            </li>
+                                
+                                <!-- pulsante gestione quantita(bar) -->
+                                 <c:choose>
+		                            	<c:when test="${param.active_menu eq 'gestione_quantita'}">
+		                            		<li class="nav-item active">
+		                            	</c:when>
+		                            	<c:otherwise>
+		                            		<li class="nav-item">		                            	
+		                            	</c:otherwise>
+                            		</c:choose>
+	                            		<a class="nav-link" href="GestioneQuantita">Gestione Quantità</a>
                                 </li>
                               </c:when>
                             </c:choose>
-                            <li class="nav-item">
+                            
+                              <!-- pulsante miei ordini(cliente) -->
                              <c:choose>
                          			<c:when test="${logUtente!=null && logUtente.getRuolo().getId_ruolo()==3}">
-                                <a class="nav-link" href="#">Miei Ordini</a>
+                         				<c:choose>
+		                            	<c:when test="${param.active_menu eq 'myorders'}">
+		                            		<li class="nav-item active">
+		                            	</c:when>
+		                            	<c:otherwise>
+		                            		<li class="nav-item">		                            	
+		                            	</c:otherwise>
+                            		</c:choose>
+                                	<a class="nav-link" href="MyOrders">Miei Ordini</a>
+                                </li>
                               </c:when>
                               </c:choose>
-                            </li>
                             </ul>
             
                         </div>

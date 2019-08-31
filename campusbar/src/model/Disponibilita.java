@@ -3,6 +3,12 @@ package model;
 public class Disponibilita {
 	
 	
+	public Edificio getEdificio() {
+		return edificio;
+	}
+	public void setEdificio(Edificio edificio) {
+		this.edificio = edificio;
+	}
 	public Prodotto getProdotto() {
 		return prodotto;
 	}
@@ -16,6 +22,7 @@ public class Disponibilita {
 		this.quantita = quantita;
 	}
 	
+	private Edificio edificio;
 	private Prodotto prodotto;
 	private int quantita;
 }
