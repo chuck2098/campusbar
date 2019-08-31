@@ -145,9 +145,10 @@ body{
 }
 
 .card > .img-container > .card-img-top{
-    max-width: 270px;
+    max-width: 100%;
     max-height:99%;
     margin:auto;
+    width:auto;
 }
 
 .card > .card-body{
@@ -303,7 +304,7 @@ body{
     top: 45%;
     left: 50%;
     width: 550px;
-    height: 220px;
+    height: 250px;
     margin-left: -275px;
     margin-top: -60px;
     background-color: #808768;
