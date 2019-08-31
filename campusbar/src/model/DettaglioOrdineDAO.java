@@ -9,17 +9,12 @@ public class DettaglioOrdineDAO {
 		
 		try(Connection con = ConnectionPool.getConnection()) {
 			
+			//se la quantita non e' disponibilie in nessun bar,esco
+			if(!new DisponibilitaDAO().doCheckByQuantityAndProduct(d.getProdotto(),d.getQuantita()))
+				return false;
 			
-			PreparedStatement ps0 = con.prepareStatement("SELECT id_bar "
-														+ "FROM disponibilita "
-														+ "WHERE id_prod=? AND quantita>=?");
-			ps0.setInt(1,d.getProdotto().getId());
-			ps0.setInt(2,d.getQuantita());
-			ResultSet rs = ps0.executeQuery();
-			rs.last();
-			if(rs.getRow()<=0) return false; //quantita non disponibile in nessun bar
-			
-		    ps0 = con.prepareStatement("SELECT id_dettaglio_ordine "
+			ResultSet rs;
+		    PreparedStatement ps0 = con.prepareStatement("SELECT id_dettaglio_ordine "
 								     + "FROM dettaglio_ordini "
 									 + "WHERE id_prodotto=? AND prodotto_ordinato=0 AND id_utente=?");
 		    

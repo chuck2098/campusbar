@@ -36,6 +36,25 @@ public class DisponibilitaDAO  {
 		}
 	}
 	
+	public boolean doCheckByQuantityAndProduct(Prodotto p,int quant) {
+		
+		try(Connection con = ConnectionPool.getConnection()){
+			
+			PreparedStatement ps0 = con.prepareStatement("SELECT id_bar "
+					+ "FROM disponibilita "
+					+ "WHERE id_prod=? AND quantita>=?");
+			ps0.setInt(1,p.getId());
+			ps0.setInt(2,quant);
+			ResultSet rs = ps0.executeQuery();
+			rs.last();
+			if(rs.getRow()<=0) return false; //quantita non disponibile in nessun bar
+			else return true;
+			
+		} catch (SQLException e1) {
+			throw new RuntimeException(e1);
+		}
+	}
+	
 	public boolean doUpdateByEdificio(Disponibilita d) {
 		
 		try(Connection con = ConnectionPool.getConnection()) {

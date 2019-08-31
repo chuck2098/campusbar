@@ -58,19 +58,24 @@ public class AddToCart extends HttpServlet {
 			
 			HttpSession session = request.getSession(true);
 			
-			if(session.getAttribute("dettaglio") == null) {
+			if(session.getAttribute("dettaglio") == null)
 				dettagli = new  ArrayList<DettaglioOrdine>();
-				dettagli.add(d);
-			}else {
+			else 
 				dettagli = (ArrayList<DettaglioOrdine>) session.getAttribute("dettaglio");
+			
+			
+			PrintWriter out=response.getWriter();
+			
+			//se e' disponibile in qualche bar,allora lo aggiunto
+			if(new DisponibilitaDAO().doCheckByQuantityAndProduct(d.getProdotto(), d.getQuantita())) {
+				out.println("Prodotto aggiunto al carrello.");
 				dettagli.add(d);
 			}
+			else
+				out.println("Nessun bar ha questa quantita'");
 			
 			
 			session.setAttribute("dettaglio", dettagli);
-			PrintWriter out=response.getWriter();
-			out.println("Prodotto aggiunto al carrello");
-				
 		}
 		
 	}
