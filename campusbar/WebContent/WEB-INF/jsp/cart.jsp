@@ -69,7 +69,7 @@
 					</div>
 					<div class="chooseBar" id="chooseBars">
 						<h3>Scegli dove ritirare i prodotti</h3><br>
-						Prodotti disponibili nei seguenti bar: <select id="bars"></select><br><br>
+						Prodotti disponibili nei seguenti bar: <select id="bars" class="browser-default custom-select"></select><br><br>
 						<button id="submitOrder" onclick="confirm()">Conferma</button>
 						<button id="closePoupup" onclick="nascondiDiv()">Chiudi</button>
 					</div>
