@@ -163,5 +163,24 @@ public List<Prodotto> doRetrieveByIdCategoria(int id) {
 		throw new RuntimeException(e);
 	}
 }
+public boolean doDeletebyId(int id) {
+
+	try(Connection con = ConnectionPool.getConnection()) {
+
+
+		PreparedStatement ps0 = con.prepareStatement("DELETE FROM prodotti "
+													+"WHERE id_prodotto=? ");
+		ps0.setInt(1,id);
+
+		if(ps0.executeUpdate()==0)
+			return false;
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+		return false;
+	}
+
+	return true;
+}
 }
 

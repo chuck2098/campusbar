@@ -187,7 +187,7 @@
 									<li class="nav-item">
 								</c:otherwise>
 							</c:choose>
-							<a class="nav-link" href="GestioneProdotti">Gestisci Prodotti</a>
+							<a class="nav-link" href="GestioneProdottiAdmin">Gestisci Prodotti</a>
 							</li>
 							
 							<!-- pulsante gestione categorie -->
