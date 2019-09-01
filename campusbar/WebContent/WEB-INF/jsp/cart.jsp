@@ -90,6 +90,8 @@
 		
 		var not=$.trim($("#messaget").val());
 		var id=$('#bars').find(":selected").val();
+		
+		//lo prende dal campo nascosto che contiene l edificio di default
 		if(id===undefined)
 			id=$('#ed').val();
 		

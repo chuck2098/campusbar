@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import model.DettaglioOrdine;
 import model.DettaglioOrdineDAO;
+import model.DisponibilitaDAO;
 import model.EdificioDAO;
 import model.Utente;
 
@@ -35,7 +36,7 @@ public class Carrello extends HttpServlet {
 			if(cart.size()>0) {
 				request.getSession().setAttribute("cart", cart);
 				//se e' disponibile nell'edificio di default
-				if(new EdificioDAO().doCheckAvailabilityByEdifcioAndCart(u.getEdificio(),cart))
+				if(new DisponibilitaDAO().doCheckAvailabilityByEdifcioAndCart(u.getEdificio(),cart))
 					request.setAttribute("edificioDefault",u.getEdificio());
 			}
 			else

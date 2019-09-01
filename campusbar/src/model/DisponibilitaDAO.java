@@ -78,5 +78,36 @@ public class DisponibilitaDAO  {
 			return true;
 		}
 	
+	//dato un carrello di un utente verifica se l'edificio ha le quantita richieste
+	public boolean doCheckAvailabilityByEdifcioAndCart(Edificio ed, ArrayList<DettaglioOrdine> cart) {
+		PreparedStatement ps;
+		
+		try(Connection con = ConnectionPool.getConnection()){
+			
+			for(DettaglioOrdine d:cart) {
+				//per ogni prodotto
+				Prodotto p=d.getProdotto();
+				
+				ps= con.prepareStatement("SELECT * "
+						  + "FROM disponibilita "
+						  + "WHERE id_bar=? AND id_prod=? AND quantita>=?");
+				
+				ps.setInt(1,ed.getId_edificio());
+				ps.setInt(2,p.getId());
+				ps.setInt(3,d.getQuantita());
+				
+				ResultSet rs = ps.executeQuery();
+				rs.last();
+				//se non c'e' disponibilita',allora ritorna false e desce dalla funzione.
+				if(rs.getRow()<=0) return false; 
+			}
+			
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}	
+		//se arriva qui allora tutti i prodotti del carrello sono disponibili per l'edificio passato come parametro.
+		return true;
+	}
+	
 	
 }

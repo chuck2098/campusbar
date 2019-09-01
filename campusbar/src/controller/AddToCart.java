@@ -74,7 +74,6 @@ public class AddToCart extends HttpServlet {
 			else
 				out.println("Nessun bar ha questa quantita'");
 			
-			
 			session.setAttribute("dettaglio", dettagli);
 		}
 		
