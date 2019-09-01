@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,11 +31,13 @@ public class VisualizzaBar extends HttpServlet {
 		ed=new EdificioDAO().doRetrieveById(id);
 		
 		JSONObject obj=new JSONObject();
-		obj.put("edificio",ed);
+		ArrayList<Edificio> eds=new ArrayList<>();
+		eds.add(ed);
+		obj.put("edificio",eds);
+		
 		
 		response.setContentType("application/json");
 		response.getWriter().println(obj.toString());
-		
 		
 	}
 
