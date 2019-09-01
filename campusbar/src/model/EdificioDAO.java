@@ -28,6 +28,7 @@ public class EdificioDAO {
 				Edificio e = new Edificio();
 				e.setId_edificio(rs.getInt(1));
 				e.setNome(rs.getString(2));
+				e.setOrario_chiusura(rs.getInt(3));
 				
 				//query per prelevare disponibilita prodotti del bar
 				/*ps_dispo = con.prepareStatement("SELECT * "
@@ -63,4 +64,57 @@ public class EdificioDAO {
 			throw new RuntimeException(e);
 		}
 	}
+	
+public Edificio doRetrieveById(int id) {
+		
+		try(Connection con = ConnectionPool.getConnection()){
+			
+			
+			
+			PreparedStatement ps = con.prepareStatement("SELECT * "
+													  + "FROM macro_edifici "
+													  + "where id_edificio=?  ");
+			
+			
+			
+			ps.setInt(1,id);
+			ResultSet rs = ps.executeQuery();
+			Edificio e = new Edificio();
+			
+			while (rs.next()) {
+				
+				e.setId_edificio(rs.getInt(1));
+				e.setNome(rs.getString(2));
+				e.setOrario_chiusura(rs.getInt(3));
+				
+				
+			}
+			rs.close();
+			
+			return e;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+public boolean doDeletebyId(int id) {
+
+	try(Connection con = ConnectionPool.getConnection()) {
+
+
+		PreparedStatement ps0 = con.prepareStatement("DELETE FROM macro_edifici "
+														+"WHERE id_edificio=? ");
+		ps0.setInt(1,id);
+
+		if(ps0.executeUpdate()==0)
+			return false;
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+		return false;
+	}
+
+	return true;
+}
+
+
 }
