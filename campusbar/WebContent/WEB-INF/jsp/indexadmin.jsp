@@ -32,7 +32,8 @@
                </section>
         </section>
 <jsp:include page="footer.html"/>
-<script> 
+<script>
+	
 </script>
 </body>
 </html>

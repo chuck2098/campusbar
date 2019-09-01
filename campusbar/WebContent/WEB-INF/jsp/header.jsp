@@ -4,16 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>CampusBar-Home</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-	crossorigin="anonymous">
-<link rel="shortcut icon" href="images/favicon.ico" />
+	<meta charset="utf-8">
+	<title>CampusBar-Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<link rel="shortcut icon" href="images/favicon.ico" />
 </head>
 <body>
 	<header>
@@ -40,20 +37,31 @@
 						<c:when test="${logUtente.getRuolo().getId_ruolo()==1 }">
 							<c:set value="SearchAdmin" var="action" scope="page"/>
 							<c:set value="Cerca prodotto o id ordine" var="placeholder" scope="page"/>
+							<c:set value="admin" var="admin" scope="page"/>
 						</c:when>
 				</c:choose>
 				<div class="form-search">
 					<!--mt=margin top    mr=margin-right-->
-					<form class="form-inline mt-2" action="<c:out value="${action}"/>" name="formRicerca" method="get">
-						<input class="form-control  mr-2" type="text" placeholder="<c:out value="${placeholder}"/>" name="ricerca">
-						<button class="btn" type="submit">Search</button>
+					<form class="form-inline <c:out value="${admin}"/> mt-2" action="<c:out value="${action}"/>" name="formRicerca" method="get">
+						<input class="form-control <c:out value="${admin}"/>" placeholder="<c:out value="${placeholder}"/>" name="ricerca"><br>
+							<c:choose>
+								<c:when test="${admin!=null}">
+									<div style="margin:auto; margin-left:auto">
+										<button class="btn" type="submit">Cerca id</button>&nbsp;&nbsp;
+										<button class="btn" type="submit">Cerca prodotto</button>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<button class="btn" type="submit">Cerca</button>&nbsp;&nbsp;
+								</c:otherwise>
+							</c:choose>
 					</form>
 				</div>
 
 				<div class="head-span">
 					<c:choose>
 						<c:when test="${logUtente!=null}">
-							<span class="head-sign"><i class="fas fa-user">&nbsp;&nbsp;<a
+							<span class="head-sign admin"><i class="fas fa-user">&nbsp;&nbsp;<a
 									href="Logout"><c:out value="Ciao ${logUtente.nome},"></c:out>Logout</a></i></span>
 						</c:when>
 						<c:otherwise>
@@ -151,6 +159,47 @@
 								</c:otherwise>
 							</c:choose>
 							<a class="nav-link" href="MyOrders">Miei Ordini</a>
+							</li>
+						</c:when>
+					</c:choose>
+					
+				<!-- pulsanti per gestione (admin) -->
+					<c:choose>
+						<c:when test="${logUtente!=null && logUtente.getRuolo().getId_ruolo()==1}">
+							<!-- pulsante gestion bar -->
+							<c:choose>
+								<c:when test="${param.active_menu eq 'gestione_bar'}">
+									<li class="nav-item active">
+								</c:when>
+								<c:otherwise>
+									<li class="nav-item">
+								</c:otherwise>
+							</c:choose>
+							<a class="nav-link" href="GestioneBar">Gestisci Bar</a>
+							</li>
+							
+							<!-- pulsante gestione utenti -->
+							<c:choose>
+								<c:when test="${param.active_menu eq 'gestione_prod'}">
+									<li class="nav-item active">
+								</c:when>
+								<c:otherwise>
+									<li class="nav-item">
+								</c:otherwise>
+							</c:choose>
+							<a class="nav-link" href="GestioneProdotti">Gestisci Prodotti</a>
+							</li>
+							
+							<!-- pulsante gestione categorie -->
+							<c:choose>
+								<c:when test="${param.active_menu eq 'gestione_categ'}">
+									<li class="nav-item active">
+								</c:when>
+								<c:otherwise>
+									<li class="nav-item">
+								</c:otherwise>
+							</c:choose>
+							<a class="nav-link" href="GestioneCategorie">Gestisci Categorie</a>
 							</li>
 						</c:when>
 					</c:choose>
