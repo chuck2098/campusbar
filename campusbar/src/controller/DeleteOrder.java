@@ -25,7 +25,7 @@ public class DeleteOrder extends HttpServlet {
 		Utente u=(Utente)request.getSession().getAttribute("logUtente");
 		
 		//se e' loggato ed e' un bar
-		if(u!=null && u.getRuolo().getId_ruolo()==2) {
+		if(u!=null && (u.getRuolo().getId_ruolo()==2 || u.getRuolo().getId_ruolo()==3)) {
 			OrdineDAO ord=new OrdineDAO();
 			PrintWriter out=response.getWriter();
 			if(ord.doDeleteById(Integer.parseInt(id_order)))

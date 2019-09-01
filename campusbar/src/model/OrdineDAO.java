@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+
 public class OrdineDAO {
 	
 	public synchronized void doSaveByUser(Ordine o,Utente u) {
@@ -103,6 +104,47 @@ public class OrdineDAO {
 		}
 	}
 	
+public ArrayList<Ordine> doRetrieveOrderConfirmedByUser(Utente u) {
+		
+		try(Connection con = ConnectionPool.getConnection()){
+			
+			EdificioDAO ed = new EdificioDAO();
+			DettaglioOrdineDAO d=new DettaglioOrdineDAO();
+			ArrayList<DettaglioOrdine> dett;
+			ArrayList<Ordine> ordini=new ArrayList<>();
+			Ordine o=null;
+			
+			PreparedStatement ps = con.prepareStatement("SELECT ordini.id_ordine, nota_ordine, data_ordine, consegnato, id_edificio " + 
+														"FROM ordini JOIN dettaglio_ordini ON (ordini.id_ordine=dettaglio_ordini.id_ordine) " + 
+														"WHERE id_utente=? ");
+			
+			
+			ps.setString(1,u.getMatricola());
+			
+			ResultSet rs =ps.executeQuery();
+			
+			while(rs.next()) {
+				o=new Ordine();
+				
+				
+				o.setNota_ordine(rs.getString(2));
+				o.setData_ordine(rs.getString(3));
+				o.setConsegnato(rs.getBoolean(4));
+				o.setEdificio(ed.doRetrieveById(rs.getInt(5)));
+				o.setId_ordine(rs.getInt(1));
+				dett=d.doRetrieveConfirmedByOrderId(rs.getInt(1));
+				if(dett.size()==0) continue;
+				o.setDettaglio(dett);
+				
+				ordini.add(o);
+			}
+			
+			return ordini;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 	public boolean doDeleteById(int id) {
 		
 		try(Connection con = ConnectionPool.getConnection()) {
