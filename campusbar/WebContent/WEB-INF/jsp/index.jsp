@@ -7,7 +7,7 @@
 </jsp:include>
 
 			<section class="content">
-		
+		<!-- if per verificare il titolo da mettere  -->
 		<c:choose>      
 			 <c:when test="${categoria != null }">
 			 		<br><h1 class="text-center"><c:out value="${categoria.getNomeCategoria()}"/></h1>

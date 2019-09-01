@@ -61,12 +61,18 @@ public class Login extends HttpServlet {
 			}
 		}
 		else if(c.getRuolo().getId_ruolo()==2) {
+			
 			sess.setMaxInactiveInterval(1800); //dopo 30 min scade la sessione
 			sess.setAttribute("logUtente",c);
+			
 			response.sendRedirect("IndexBar");
 		}
-		else
-			request.getRequestDispatcher("WEB-INF/jsp/indexadmin.jsp").forward(request,response);
+		else {
+			sess.setMaxInactiveInterval(1800); //dopo 30 min scade la sessione
+			sess.setAttribute("logUtente",c);
+			
+			response.sendRedirect("IndexAdmin");
+		}
 	}
 
 	/**
