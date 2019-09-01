@@ -117,5 +117,28 @@ public class EdificioDAO {
 		return true;
 	}
 
+	public boolean doUpdate(Edificio ed) {
+		
+		try(Connection con = ConnectionPool.getConnection()) {
+
+
+			PreparedStatement ps0 = con.prepareStatement("UPDATE macro_edifici "
+														+"SET nome=?,orario_chiusura=? "
+														+"WHERE id_edificio=? ");
+			ps0.setString(1,ed.getNome());
+			ps0.setInt(2, ed.getOrario_chiusura());
+			ps0.setInt(3,ed.getId_edificio());
+
+			if(ps0.executeUpdate()==0)
+				return false;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
+	}
+
 
 }
