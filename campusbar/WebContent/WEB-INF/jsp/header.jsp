@@ -46,9 +46,10 @@
 						<input class="form-control <c:out value="${admin}"/>" placeholder="<c:out value="${placeholder}"/>" name="ricerca"><br>
 							<c:choose>
 								<c:when test="${admin!=null}">
-									<div style="margin:auto; margin-left:auto">
-										<button class="btn" type="submit">Cerca id</button>&nbsp;&nbsp;
-										<button class="btn" type="submit">Cerca prodotto</button>
+									<div style="margin:auto; margin-left:auto; ">
+										<button class="btn" type="submit">Bar</button>&nbsp;&nbsp;
+										<button class="btn" type="submit" >Prodotto</button>&nbsp;&nbsp;
+										<button class="btn" type="submit">Categoria</button>
 									</div>
 								</c:when>
 								<c:otherwise>
