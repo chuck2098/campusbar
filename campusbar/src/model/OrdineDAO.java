@@ -187,4 +187,46 @@ public boolean doDeliveryOrderById(int id) {
 		
 		return true;
 	}
+
+public ArrayList<Ordine> doRetrieveOrderById(int id) {
+	
+	try(Connection con = ConnectionPool.getConnection()){
+		
+		EdificioDAO ed = new EdificioDAO();
+		DettaglioOrdineDAO d=new DettaglioOrdineDAO();
+		ArrayList<DettaglioOrdine> dett;
+		ArrayList<Ordine> ordini=new ArrayList<>();
+		Ordine o=null;
+		
+		PreparedStatement ps = con.prepareStatement("SELECT id_ordine, nota_ordine, data_ordine, consegnato, id_edificio " + 
+													"FROM ordini " + 
+													"WHERE id_ordine=? ");
+		
+		
+		ps.setInt(1,id);
+		
+		ResultSet rs =ps.executeQuery();
+		
+		while(rs.next()) {
+			o=new Ordine();
+			
+			
+			o.setNota_ordine(rs.getString(2));
+			o.setData_ordine(rs.getString(3));
+			o.setConsegnato(rs.getBoolean(4));
+			o.setEdificio(ed.doRetrieveById(rs.getInt(5)));
+			o.setId_ordine(rs.getInt(1));
+			dett=d.doRetrieveConfirmedByOrderId(rs.getInt(1));
+			if(dett.size()==0) continue;
+			o.setDettaglio(dett);
+			
+			ordini.add(o);
+		}
+		
+		return ordini;
+		
+	} catch (SQLException e) {
+		throw new RuntimeException(e);
+	}
+}
 }
