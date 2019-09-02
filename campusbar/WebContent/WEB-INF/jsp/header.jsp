@@ -11,6 +11,8 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 	<link rel="shortcut icon" href="images/favicon.ico" />
+	
+	
 </head>
 <body>
 	<header>
@@ -35,8 +37,8 @@
 				</c:choose>
 				<c:choose>
 						<c:when test="${logUtente.getRuolo().getId_ruolo()==1 }">
-							<c:set value="SearchAdmin" var="action" scope="page"/>
-							<c:set value="Cerca prodotto o id ordine" var="placeholder" scope="page"/>
+							
+							<c:set value="Cerca un bar, un prodotto o una categoria" var="placeholder" scope="page"/>
 							<c:set value="admin" var="admin" scope="page"/>
 						</c:when>
 				</c:choose>
@@ -47,7 +49,7 @@
 							<c:choose>
 								<c:when test="${admin!=null}">
 									<div style="margin:auto; margin-left:auto; ">
-										<button class="btn" type="submit">Bar</button>&nbsp;&nbsp;
+										<button class="btn" type="submit" onclick="ricercaBar()">Bar</button>&nbsp;&nbsp;
 										<button class="btn" type="submit" >Prodotto</button>&nbsp;&nbsp;
 										<button class="btn" type="submit">Categoria</button>
 									</div>
@@ -210,4 +212,13 @@
 		</nav>
 
 	</header>
+	<script>
+	function ricercaBar(patt){
+		 $.get("SearchAdminBar?ricerca=" + document.formRicerca.ricerca.value , 
+					function(data){
+							alert(data);
+				});
+	}
+	</script>
+	
 </body>

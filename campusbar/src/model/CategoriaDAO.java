@@ -53,6 +53,29 @@ public Categoria doRetrieveById(int id) {
 		throw new RuntimeException(e);
 	}
 }
-
+public ArrayList<Categoria> doRetrieveByName(String patt) {
+	
+	try(Connection con = ConnectionPool.getConnection()){
+		
+		PreparedStatement ps = con
+				.prepareStatement("SELECT id_categoria,nome_categoria " + 
+								"FROM categorie " + 
+								"WHERE nome_categoria LIKE '"+patt+"%'");
+				
+		ArrayList<Categoria> categorie = new ArrayList<>();
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			Categoria cat = new Categoria();
+			cat.setId_categoria(rs.getInt(1));
+			cat.setNomeCategoria(rs.getString(2));
+			categorie.add(cat);
+			
+			
+		}
+		return categorie;
+	} catch (SQLException e) {
+		throw new RuntimeException(e);
+	}
+}
 
 }

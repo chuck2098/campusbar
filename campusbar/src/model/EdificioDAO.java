@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EdificioDAO {
 
@@ -159,6 +160,32 @@ public class EdificioDAO {
 			
 			return true;
 			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	public ArrayList<Edificio> doRetrieveByName(String patt) {
+		
+		try(Connection con = ConnectionPool.getConnection()){
+			
+			PreparedStatement ps = con
+					.prepareStatement("SELECT id_edificio,nome,orario_chiusura " + 
+									"FROM macro_edifici " + 
+									"WHERE nome LIKE '"+patt+"%'");
+			
+			
+			
+			ArrayList<Edificio> edifici = new ArrayList<>();
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Edificio ed = new Edificio();
+				ed.setId_edificio(rs.getInt(1));
+				ed.setNome(rs.getString(2));
+				ed.setOrario_chiusura(rs.getInt(3));
+				edifici.add(ed);
+				
+			}
+			return edifici;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
