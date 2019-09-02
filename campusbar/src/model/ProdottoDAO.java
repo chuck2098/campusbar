@@ -115,7 +115,7 @@ public class ProdottoDAO {
 				PreparedStatement ps = con
 						.prepareStatement("SELECT id_prodotto,nome,descrizione,prezzo,id_categoria " + 
 										"FROM prodotti " + 
-										"WHERE nome LIKE '"+patt+"%'");
+										"WHERE nome LIKE '%"+patt+"%'");
 				
 				//ps.setString(1,patt);
 				

@@ -85,10 +85,10 @@ body{
 }
 
 .form-search .form-inline .form-control.admin{
-	width:92%;
+	width:98%;
 	border:none;
 	margin:0;
-	margin-bottom:6px;
+	margin-bottom:8px;
 }
 
 .form-inline .btn{

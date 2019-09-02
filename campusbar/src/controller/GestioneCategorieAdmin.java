@@ -32,9 +32,8 @@ public class GestioneCategorieAdmin extends HttpServlet {
 			ArrayList<Categoria> categorie=null;
 
 	
-				categorie=(ArrayList<Categoria>) new CategoriaDAO().doRetrieveAll();
+			categorie=(ArrayList<Categoria>) new CategoriaDAO().doRetrieveAll();
 			
-
 			request.setAttribute("categorie",categorie);
 			RequestDispatcher req= request.getRequestDispatcher("WEB-INF/jsp/gestione_categorie.jsp");
 			req.forward(request, response); 

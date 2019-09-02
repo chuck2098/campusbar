@@ -36,6 +36,8 @@ public class SearchAdminCategories extends HttpServlet {
 
 			ArrayList<Categoria> cat=new CategoriaDAO().doRetrieveByName(patt);
 			request.setAttribute("categorie",cat);
+			
+			request.setAttribute("pattern", patt);
 			RequestDispatcher req= request.getRequestDispatcher("WEB-INF/jsp/gestione_categorie.jsp");
 			req.forward(request, response); 
 

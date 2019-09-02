@@ -8,8 +8,14 @@
 
         <div class="container" id="prodotti">
 				<h2 style="text-align:center; cursor:pointer;" onclick="reload()">Gestione Prodotti</h2><br><br>
+				<c:if test="${pattern!=null}">
+					<h4 class="text-center">Risultati per la ricerca '<c:out value="${pattern}"/>' </h4><br>
+				</c:if>
+
+				<!-- se non c'e nessuna cate selezionata,le carico,cate non e' null poiche la servlet me le passa-->
 				<c:choose>					
 					<c:when test="${categorie!=null}">
+					<!-- stiamo nella pagina principale -->
 						<h3 style="text-align:center;">Categoria Alimento:
 							<select id="categorie" onchange="uploadProdotti()" style="width:200px; height:40px;" class="browser-default custom-select">
 								<option></option>
@@ -20,7 +26,10 @@
 						</h3><br>
 					</c:when>
 					<c:otherwise>
-						<h3 style="text-align:center;">Categoria Alimento: <c:out value="${prodotti.get(0).getCategoria().getNomeCategoria() }"></c:out></h3><br>
+					<!-- stiamo nella categoria -->
+						<c:if test="${prodotti!=null}">
+							<h3 style="text-align:center;">Categoria Alimento: <c:out value="${prodotti.get(0).getCategoria().getNomeCategoria() }"></c:out></h3><br>
+						</c:if>
 					</c:otherwise>
 				</c:choose>
 				<div class="row">
@@ -166,7 +175,7 @@
 	function inserisci(){
 		
 		if($("#nome_prod").val().trim().length==0 || $("#descrizione_prod").val().trim()==0 || $("#prezzo_prod").val().trim()==0 ){
-			alert("Compila tutti i campi");
+			alert("Compila tutti i campi");							
 			return;
 		}	
 		
@@ -174,7 +183,10 @@
 		
 		if(cat.trim().length==0) cat=$("#cat_attuale").val().trim();
 		
-		if(cat.length==0) return;
+		if(cat.length==0){
+			alert("inserisci categoria");
+			return;
+		}
 		
 		$.post("InsertProduct",{
 			nome:$("#nome_prod").val(),

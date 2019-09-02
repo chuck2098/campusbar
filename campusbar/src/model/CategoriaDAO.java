@@ -60,7 +60,7 @@ public ArrayList<Categoria> doRetrieveByName(String patt) {
 		PreparedStatement ps = con
 				.prepareStatement("SELECT id_categoria,nome_categoria " + 
 								"FROM categorie " + 
-								"WHERE nome_categoria LIKE '"+patt+"%'");
+								"WHERE nome_categoria LIKE '%"+patt+"%'");
 				
 		ArrayList<Categoria> categorie = new ArrayList<>();
 		ResultSet rs = ps.executeQuery();

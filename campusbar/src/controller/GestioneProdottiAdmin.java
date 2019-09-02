@@ -36,6 +36,7 @@ public class GestioneProdottiAdmin extends HttpServlet {
 			
 			String cate=request.getParameter("id");
 			
+			//se c'e' una categoria allore restituisco i prodotti di quella categoria
 			if(cate!=null && cate!="") {
 				int id=Integer.parseInt(cate);
 				pro=(ArrayList<Prodotto>) new ProdottoDAO().doRetrieveByIdCategoria(id);

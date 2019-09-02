@@ -33,17 +33,16 @@ public class SearchAdminProduct extends HttpServlet {
 			
 			String patt=request.getParameter("ricerca");
 			
-			if(patt!=null && patt!="") {
-				
-				pro=(ArrayList<Prodotto>) new ProdottoDAO().doRetrieveByName(patt);
-				
-			}else {//se non c'e' nessuna categoria selezionata,le restituisco
-				categories=(ArrayList<Categoria>) new CategoriaDAO().doRetrieveAll();
-				request.setAttribute("categorie", categories);
-				pro=(ArrayList<Prodotto>) new ProdottoDAO().doRetrieveAll();
-			}
+
+			pro=(ArrayList<Prodotto>) new ProdottoDAO().doRetrieveByName(patt);
+			
+			categories=(ArrayList<Categoria>) new CategoriaDAO().doRetrieveAll();
+			request.setAttribute("categorie", categories);
+			
+			request.setAttribute("pattern", patt);
 			
 			request.setAttribute("prodotti",pro);
+			
 			RequestDispatcher req= request.getRequestDispatcher("WEB-INF/jsp/gestione_prodotti.jsp");
 			req.forward(request, response); 
 			

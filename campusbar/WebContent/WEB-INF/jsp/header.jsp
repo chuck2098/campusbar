@@ -12,7 +12,6 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 	<link rel="shortcut icon" href="images/favicon.ico" />
 	
-	
 </head>
 <body>
 	<header>
@@ -37,7 +36,6 @@
 				</c:choose>
 				<c:choose>
 						<c:when test="${logUtente.getRuolo().getId_ruolo()==1 }">
-							
 							<c:set value="Cerca un bar, un prodotto o una categoria" var="placeholder" scope="page"/>
 							<c:set value="admin" var="admin" scope="page"/>
 						</c:when>
@@ -195,7 +193,7 @@
 							
 							<!-- pulsante gestione categorie -->
 							<c:choose>
-								<c:when test="${param.active_menu eq 'gestione_categ'}">
+								<c:when test="${param.active_menu eq 'gestione_categorie'}">
 									<li class="nav-item active">
 								</c:when>
 								<c:otherwise>
@@ -220,7 +218,7 @@
 			document.formRicerca.submit();
 		}
 	function ricercaProdotto(){
-		 
+		//if(document.formRicerca.ricerca.value.trim()=="") return;
 		document.formRicerca.method = "get";
 		document.formRicerca.action =  "SearchAdminProduct";
 		document.formRicerca.submit();

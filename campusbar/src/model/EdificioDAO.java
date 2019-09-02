@@ -171,7 +171,7 @@ public class EdificioDAO {
 			PreparedStatement ps = con
 					.prepareStatement("SELECT id_edificio,nome,orario_chiusura " + 
 									"FROM macro_edifici " + 
-									"WHERE nome LIKE '"+patt+"%'");
+									"WHERE nome LIKE '%"+patt+"%'");
 			
 			
 			

@@ -3,11 +3,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="header.jsp">
-	<jsp:param value="gestione_bar" name="active_menu"/>
+	<jsp:param value="gestione_categorie" name="active_menu"/>
 </jsp:include>
 
         <div class="container" id="bars">
-				<h2 style="text-align:center;">Gestione Categorie </h2><br><br>
+				<h2 style="text-align:center; cursor:pointer;" onclick="location.reload()">Gestione Categorie </h2><br><br>
+				<c:if test="${pattern!=null}">
+					<h4 class="text-center">Risultati per la ricerca '<c:out value="${pattern}"/>'</h4><br>
+				</c:if>
 				<div class="row">
 					<c:forEach items="${categorie}" var="categoria">
 						<div class="col-lg-3 col-sm-6">

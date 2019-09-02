@@ -32,6 +32,8 @@ public class SearchAdminBar extends HttpServlet {
 
 			ArrayList<Edificio> ed=new EdificioDAO().doRetrieveByName(patt);
 			request.setAttribute("edifici",ed);
+			
+			request.setAttribute("pattern", patt);
 			RequestDispatcher req= request.getRequestDispatcher("WEB-INF/jsp/gestione_bars.jsp");
 			req.forward(request, response); 
 

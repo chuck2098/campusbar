@@ -7,7 +7,10 @@
 </jsp:include>
 
         <div class="container" id="bars">
-				<h2 style="text-align:center;">Gestione Bar </h2><br><br>
+				<h2 style="text-align:center; cursor:pointer;" onclick="location.reload()" >Gestione Bar </h2><br><br>
+				<c:if test="${pattern!=null}">
+					<h4 class="text-center">Risultati per la ricerca '<c:out value="${pattern}"/>'</h4><br>
+				</c:if>
 				<div class="row">
 					<c:forEach items="${edifici}" var="edificio">
 						<div class="col-lg-3 col-sm-6">
@@ -15,7 +18,7 @@
 								<div class="img-container">
 									<img class="card-img-top"
 										src="images/ed<c:out value="${edificio.getId_edificio()}"/>.png"
-										alt="Card image" onerror="src='images/logo.png'" onerror="src='images/logo.png'">
+										alt="Card image" onerror="src='images/logo.png'">
 								</div>
 								<div class="card-body">
 									<h4 class="card-title" style="height:60px; font-size:21px;" >
