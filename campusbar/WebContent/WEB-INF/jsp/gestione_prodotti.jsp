@@ -30,7 +30,7 @@
 								<div class="img-container">
 									<img class="card-img-top"
 										src="images/<c:out value="${prodotto.getId()}"/>.png"
-										alt="Card image">
+										alt="Card image" onerror="src='images/logo.png'">
 								</div>
 								<div class="card-body">
 									<h4 class="card-title" style="height:35px; font-size:22px;" > <c:out value="${prodotto.getNome()}" /> </h4>

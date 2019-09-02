@@ -15,7 +15,7 @@
 											<div class="col-lg-3 col-sm-6" >
 												<div class="card">
 	                          <div class="img-container">
-	                              <img class="card-img-top" src="images/<c:out value="${prodotto.id}"/>.png" alt="Card image" >
+	                              <img class="card-img-top" src="images/<c:out value="${prodotto.id}"/>.png" alt="Card image" onerror="src='images/logo.png'" >
 	                          </div>
 														<div class="card-body">
 															<h4 class="card-title"><c:out value="${prodotto.nome}" /></h4>
