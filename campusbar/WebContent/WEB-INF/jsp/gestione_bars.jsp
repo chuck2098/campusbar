@@ -32,6 +32,7 @@
 						</div>
 					</c:forEach>
 					<a style="cursor:pointer;"  onclick="chiudi_modifiche()"><img src="images/add.png" onclick="apri_inserimento()" style="width:256px;" title="Inserisci nuovo bar"></a>
+					
 					<div class="chooseBar" id="viewbar" style="padding:5px;">
 					<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_modifiche()">Chiudi</a></h5><br>
 						<div class='table-responsive' id="disponibilitaCategoria" style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
@@ -42,15 +43,18 @@
 						</div><br><br>
 						<div id='btn_modifica' style='margin-top:-25px; margin-left:10px;'></div>
 					</div>
-					
+					<!-- div nascosto per inserimento -->
 					<div class="chooseBar" id="insertbar" style="padding:5px;">
-						<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_modifiche()">Chiudi</a></h5><br>
-							<div class='table-responsive' id="disponibilitaCategoria" style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
-								<input type=text id='nome' placeholder="Nome bar" style='width:90%; height:40px;'>
-								<input type=text id='orario' placeholder="Orario chiusura" style='width:70px; height:50px;'>
-								"<button id='submitOrder' style='width:auto; margin:auto;' onclick='inserisciBar()'>Inserisci</button>"
-							</div>
+					<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_inserimento()">Chiudi</a></h5><br>
+						<div class='table-responsive' id="disponibilitaCategoria" style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
+							<input type=text id='nome_bar' placeholder="Nome del bar" style='width:90%; height:40px;'>
+							<br><br> 
+							<span>Orario chiusura </span>
+							<input type=number id='orario_bar' placeholder="00" style='width:70px; height:50px;'>
+						</div><br>
+						<button id='submitOrder' style='width:auto; margin:auto; margin-left:15px;' onclick='inserisci()'>Inserisci</button>
 					</div>
+				
 				</div>
 </div>
 <jsp:include page="footer.html"/>
@@ -93,7 +97,6 @@
 			return;
 		}
 
-		
 				$.post("Editbar",{
 					id:cod,
 					nome:$("#nome").val(),
@@ -106,9 +109,25 @@
 				});
 	}
 	
+	function inserisci(){
+		
+		$.post("Insertbar",{
+			nome:$("#nome_bar").val(),
+			orario:$("#orario_bar").val()
+		},
+		function(data){
+			alert(data);
+			chiudi_inserimento();
+			$('#bars').load(document.URL +  ' #bars');
+		});
+	}
+	
 	function apri_inserimento(){
-		alert();
 		$("#insertbar").fadeIn();
+	}
+	
+	function chiudi_inserimento(){
+		$("#insertbar").fadeOut();
 	}
 </script>
 </body>

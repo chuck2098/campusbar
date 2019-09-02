@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class EdificioDAO {
@@ -138,6 +139,29 @@ public class EdificioDAO {
 		}
 
 		return true;
+	}
+
+	public boolean doSave(Edificio ed) {
+		
+		try(Connection con = ConnectionPool.getConnection()){
+			
+			PreparedStatement ps = con.prepareStatement(
+					"INSERT INTO macro_edifici (nome,orario_chiusura) "
+				   +"VALUES(?,?)",
+					Statement.RETURN_GENERATED_KEYS);
+			
+			ps.setString(1,ed.getNome());
+			ps.setInt(2,ed.getOrario_chiusura());
+			
+			if (ps.executeUpdate() != 1) {
+				throw new RuntimeException("INSERT error.");
+			}
+			
+			return true;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 
