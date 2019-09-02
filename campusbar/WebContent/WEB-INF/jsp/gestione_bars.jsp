@@ -15,7 +15,7 @@
 								<div class="img-container">
 									<img class="card-img-top"
 										src="images/ed<c:out value="${edificio.getId_edificio()}"/>.png"
-										alt="Card image" onerror="src='images/logo.png'">
+										alt="Card image" onerror="src='images/logo.png'" onerror="src='images/logo.png'">
 								</div>
 								<div class="card-body">
 									<h4 class="card-title" style="height:60px; font-size:21px;" >
