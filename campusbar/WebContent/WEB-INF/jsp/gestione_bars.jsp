@@ -15,7 +15,7 @@
 								<div class="img-container">
 									<img class="card-img-top"
 										src="images/ed<c:out value="${edificio.getId_edificio()}"/>.png"
-										alt="Card image">
+										alt="Card image" onerror="src='images/logo.png'">
 								</div>
 								<div class="card-body">
 									<h4 class="card-title" style="height:60px; font-size:21px;" >
@@ -67,6 +67,10 @@
 </div>
 <jsp:include page="footer.html"/>
 <script>
+	
+	function loadLogo(img){
+		img.src="images/logo.png";
+	}
 	function eliminaBar(cod){
 		 $.get("DeleteBar?id=" + cod, 
 					function(data){
@@ -120,14 +124,14 @@
 	
 	function uploadImg(){
        
-			var filen=$("#filename").val();
-			
-        var sampleFile = document.getElementById("sampleFile").files[0];
+				var filen=$("#filename").val();
+			  var sampleFile = document.getElementById("sampleFile").files[0];
 
         var formdata = new FormData();
-
+        
         formdata.append("filename", filen);
         formdata.append("sampleFile", sampleFile);
+        
         var xhr = new XMLHttpRequest();       
 
         xhr.open("POST","Upload", true);
