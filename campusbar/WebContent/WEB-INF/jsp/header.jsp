@@ -202,7 +202,7 @@
 									<li class="nav-item">
 								</c:otherwise>
 							</c:choose>
-							<a class="nav-link" href="GestioneCategorie">Gestisci Categorie</a>
+							<a class="nav-link" href="GestioneCategorieAdmin">Gestisci Categorie</a>
 							</li>
 						</c:when>
 					</c:choose>

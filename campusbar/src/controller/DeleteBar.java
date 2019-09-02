@@ -24,9 +24,9 @@ public class DeleteBar extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		
 		if(new EdificioDAO().doDeletebyId(id)) {
-			out.println("Edificio eliminato!");
+			out.println("Bar eliminato!");
 		}else
-			out.println("Edificio non eliminato");
+			out.println("Bar non eliminato");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -12,30 +12,30 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Categoria;
 import model.CategoriaDAO;
-import model.Edificio;
-import model.EdificioDAO;
 import model.Prodotto;
 import model.ProdottoDAO;
 import model.Utente;
 
 /**
- * Servlet implementation class SearchAdminCategories
+ * Servlet implementation class GestioneCategorieAdmin
  */
-@WebServlet("/SearchAdminCategories")
-public class SearchAdminCategories extends HttpServlet {
+@WebServlet("/GestioneCategorieAdmin")
+public class GestioneCategorieAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String patt = request.getParameter("ricerca");
-
 		Utente u=(Utente)request.getSession().getAttribute("logUtente");
 
 		if(u!=null && u.getRuolo().getId_ruolo()==1) {
 
-			ArrayList<Categoria> cat=new CategoriaDAO().doRetrieveByName(patt);
-			request.setAttribute("categorie",cat);
+			ArrayList<Categoria> categorie=null;
+
+	
+				categorie=(ArrayList<Categoria>) new CategoriaDAO().doRetrieveAll();
+			
+
+			request.setAttribute("categorie",categorie);
 			RequestDispatcher req= request.getRequestDispatcher("WEB-INF/jsp/gestione_categorie.jsp");
 			req.forward(request, response); 
 
@@ -43,6 +43,7 @@ public class SearchAdminCategories extends HttpServlet {
 			response.sendRedirect("login.html");
 		}
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
