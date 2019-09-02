@@ -31,16 +31,22 @@
 							</div>
 						</div>
 					</c:forEach>
-					<a style="cursor:pointer;"  onclick="chiudi_modifiche()"><img src="images/add.png" onclick="apri_inserimento()" style="width:256px;" title="Inserisci nuovo bar"></a>
+					<a style="cursor:pointer;"><img src="images/add.png" onclick="apri_inserimento()" style="width:256px;" title="Inserisci nuovo bar"></a>
 					
-					<!-- div nascosto per inserimento -->	
-					<div class="chooseBar" id="viewbar" style="padding:5px;">
+					<!-- div nascosto per modifica -->	
+					<div class="chooseBar" id="viewbar" style="padding:5px; height:auto;">
 					<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_modifiche()">Chiudi</a></h5><br>
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
 							<input type=text id='nome' style='width:90%; height:40px;'>
 							<br><br> 
 							<span>Orario chiusura </span>
 							<input type=number id='orario' style='width:70px; height:50px;'>
+							<br><br>
+							<form id="uploadForm" enctype='multipart/form-data'>
+	                <input type="file" name="file" id="sampleFile" form="uploadForm"/>
+	                <input type="hidden" id="filename">
+	                <input type="button" onclick="uploadImg()" value="Carica" />
+	            </form>
 						</div><br><br>
 						<div id='btn_modifica' style='margin-top:-25px; margin-left:10px;'></div>
 					</div>
@@ -87,6 +93,7 @@
 		for(i=0;i<disponib.length;i++){
 			$("#nome").val(disponib[i]["nome"]);
 			$("#orario").val(disponib[i]["orario_chiusura"]);
+			$("#filename").val("ed"+disponib[i]["id_edificio"]+".png");
 			$("#btn_modifica").html("<button id='submitOrder' style='width:auto; margin:auto;' onclick='update("+disponib[i]["id_edificio"]+")'>Aggiorna</button>");
 		}
 	}
@@ -109,6 +116,29 @@
 					chiudi_modifiche();
 					$('#bars').load(document.URL +  ' #bars');
 				});
+	}
+	
+	function uploadImg(){
+       
+			var filen=$("#filename").val();
+			
+        var sampleFile = document.getElementById("sampleFile").files[0];
+
+        var formdata = new FormData();
+
+        formdata.append("filename", filen);
+        formdata.append("sampleFile", sampleFile);
+        var xhr = new XMLHttpRequest();       
+
+        xhr.open("POST","Upload", true);
+
+        xhr.send(formdata);
+
+        xhr.onload = function(e) {
+            if (this.status == 200) {
+               alert(this.responseText);
+            }
+        };                    
 	}
 	
 	function inserisci(){

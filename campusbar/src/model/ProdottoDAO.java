@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -206,6 +207,32 @@ public class ProdottoDAO {
 		}
 
 		return true;
+	}
+
+	public boolean doSave(Prodotto p) {
+		
+		try(Connection con = ConnectionPool.getConnection()){
+			
+			PreparedStatement ps = con.prepareStatement(
+					"INSERT INTO prodotti (nome,descrizione,prezzo,id_categoria) "
+				   +"VALUES(?,?,?,?)",
+					Statement.RETURN_GENERATED_KEYS);
+			
+			ps.setString(1,p.getNome());
+			ps.setString(2,p.getDescrizione());
+			ps.setFloat(3,p.getPrezzo());
+			ps.setInt(4,p.getCategoria().getId_categoria());
+			
+			if (ps.executeUpdate() != 1) {
+				throw new RuntimeException("INSERT error.");
+			}
+			
+			return true;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
 	}
 
 }

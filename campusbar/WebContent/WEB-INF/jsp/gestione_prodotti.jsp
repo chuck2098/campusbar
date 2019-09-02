@@ -7,7 +7,7 @@
 </jsp:include>
 
         <div class="container" id="prodotti">
-				<h2 style="text-align:center;" onclick="reload()">Gestione Prodotti</h2><br><br>
+				<h2 style="text-align:center; cursor:pointer;" onclick="reload()">Gestione Prodotti</h2><br><br>
 				<c:choose>					
 					<c:when test="${categorie!=null}">
 						<h3 style="text-align:center;">Categoria Alimento:
@@ -44,6 +44,7 @@
 							</div>
 						</div>
 					</c:forEach>
+					<a style="cursor:pointer;"><img src="images/add.png" onclick="apri_inserimento()" style="width:256px;" title="Inserisci nuovo bar"></a>
 					
 				<!-- div nascosto per modifica -->	
 					<div class="chooseBar" id="viewproduct" style="padding:5px; height:auto; top:15%;">
@@ -51,27 +52,42 @@
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
 							<input type=text id='nome' style='width:90%; height:40px;'><br><br>
 							<input type=text id='descrizione' style='width:90%; height:40px;'><br><br>
-							Prezzo<input type=number id='prezzo' style='width:70px; height:50px; padding-left:2px;'><br><br>
-							<span id="cat_attuale" style="font-size:19px;"></span><br>
-							Cambia categoria:
-							<select id="categoria_prodotto" style="width:200px; height:40px;" class="browser-default custom-select">
-								<option></option>
-								<c:forEach items="${categorie}" var="categoria">
-								 	<option  value="<c:out value="${categoria.getId_categoria()}"/>"> <c:out value="${categoria.getNomeCategoria()}"/> </option>
-								</c:forEach>
-							</select>
+							Prezzo <input type=number id='prezzo' style='width:70px; height:50px; padding-left:2px;'><br><br>
+							<span id="cat_attuale" style="font-size:19px;"></span><br><!-- categoria attuale la setto sempre quando mi carico il dettasglio prodotto -->
+							<c:if test="${categorie!=null }"> <!-- se non sto nella categoria specifica,le carico tutte -->
+								Cambia categoria:
+								<select id="categoria_prodotto" style="width:200px; height:40px;" class="browser-default custom-select">
+									<option></option>
+									<c:forEach items="${categorie}" var="categoria">
+									 	<option  value="<c:out value="${categoria.getId_categoria()}"/>"> <c:out value="${categoria.getNomeCategoria()}"/> </option>
+									</c:forEach>
+								</select>
+							</c:if>
 						</div><br>
 						<div id='btn_modifica' style=''></div>
 					</div>
 					
-					<!-- div nascosto per inserimento -->
-					<div class="chooseBar" id="insertbar" style="padding:5px;">
-					<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_inserimento()">Chiudi</a></h5><br>
+					<!-- DIV NASCOSTO PER L'INSERIMENTO -->
+					<div class="chooseBar" id="insertproduct" style="padding:5px; height:auto; top:15%;">
+						<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_inserimento()">Chiudi</a></h5><br>
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
-							<input type=text id='nome_bar' placeholder="Nome del bar" style='width:90%; height:40px;'>
-							<br><br> 
-							<span>Orario chiusura </span>
-							<input type=number id='orario_bar' placeholder="00" style='width:70px; height:50px;'>
+							<input type=text id='nome_prod' placeholder="Nome" style='width:90%; height:40px;'><br><br>
+							<input type=text id='descrizione_prod' placeholder="Descrizione" style='width:90%; height:40px;'><br><br>
+							Prezzo <input type=number id='prezzo_prod' style='width:70px; height:50px; padding-left:2px;'><br><br>
+							Categoria:
+							<select id="categoria_prodotto_insert" style="width:200px; height:40px;" class="browser-default custom-select">
+								<c:choose>
+									<c:when test="${categorie!=null }">
+										<option></option>
+										<c:forEach items="${categorie}" var="categoria">
+										 	<option  value="<c:out value="${categoria.getId_categoria()}"/>"> <c:out value="${categoria.getNomeCategoria()}"/> </option>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<option selected="selected" value="<c:out value="${prodotti.get(0).getCategoria().getId_categoria()}"/>"> <c:out value="${prodotti.get(0).getCategoria().getNomeCategoria()}"/> </option>	
+									</c:otherwise>
+								</c:choose>
+							</select>
 						</div><br>
 						<button id='submitOrder' style='width:auto; margin:auto; margin-left:15px;' onclick='inserisci()'>Inserisci</button>
 					</div>
@@ -89,7 +105,6 @@
 	function eliminaProdotto(cod){
 		 $.get("DeleteProdotto?id=" + cod, 
 					function(data){
-							alert(data);
 							$('#prodotti').load(document.URL +  ' #prodotti');
 				});
 	}
@@ -102,7 +117,7 @@
 					uploadProdotto(res);
 					$("#viewproduct").fadeIn();		
 				});
-	}unexpected
+	}
 	
 	function uploadProdotto(disponib){
 		
@@ -124,8 +139,8 @@
 		}	
 		var cat=$('#categoria_prodotto').find(":selected").val();
 		
-		if(cat.trim().length==0) cat=$("#cat_attuale").val();
-			
+		if(cat===undefined || cat.trim().length==0) cat=$("#cat_attuale").val().trim();
+		
 				$.post("EditProduct",{
 					id:cod,
 					nome:$("#nome").val(),
@@ -136,12 +151,47 @@
 				function(data){
 					alert(data);
 					chiudi_modifiche();
-					window.location.href="GestioneProdottiAdmin";
+					window.location.href="GestioneProdottiAdmin?id="+cat;
 				});
 	}
 	
 	function chiudi_modifiche(){
 		$("#viewproduct").fadeOut();	
+	}
+	
+	function apri_inserimento(){
+		$("#insertproduct").fadeIn();
+	}
+	
+	function inserisci(){
+		
+		if($("#nome_prod").val().trim().length==0 || $("#descrizione_prod").val().trim()==0 || $("#prezzo_prod").val().trim()==0 ){
+			alert("Compila tutti i campi");
+			return;
+		}	
+		
+		var cat=$('#categoria_prodotto_insert').find(":selected").val();
+		
+		if(cat.trim().length==0) cat=$("#cat_attuale").val().trim();
+		
+		if(cat.length==0) return;
+		
+		$.post("InsertProduct",{
+			nome:$("#nome_prod").val(),
+			descr:$("#descrizione_prod").val(),
+			prezzo:$("#prezzo_prod").val(),
+			cate:cat
+		},
+		function(data){
+			alert(data);
+			chiudi_inserimento();
+			window.location.href="GestioneProdottiAdmin?id="+cat
+		});
+		
+	}
+	
+	function chiudi_inserimento(){
+		$("#insertproduct").fadeOut();
 	}
 	
 	function reload(){
