@@ -50,8 +50,8 @@
 								<c:when test="${admin!=null}">
 									<div style="margin:auto; margin-left:auto; ">
 										<button class="btn" type="submit" onclick="ricercaBar()">Bar</button>&nbsp;&nbsp;
-										<button class="btn" type="submit" >Prodotto</button>&nbsp;&nbsp;
-										<button class="btn" type="submit">Categoria</button>
+										<button class="btn" type="submit" onclick="ricercaProdotto()" >Prodotto</button>&nbsp;&nbsp;
+										<button class="btn" type="submit" onclick="ricercaCategoria()">Categoria</button>
 									</div>
 								</c:when>
 								<c:otherwise>
@@ -213,11 +213,23 @@
 
 	</header>
 	<script>
-	function ricercaBar(patt){
-		 $.get("SearchAdminBar?ricerca=" + document.formRicerca.ricerca.value , 
-					function(data){
-							alert(data);
-				});
+	function ricercaBar(){
+		 
+			document.formRicerca.method = "get";
+			document.formRicerca.action =  "SearchAdminBar";
+			document.formRicerca.submit();
+		}
+	function ricercaProdotto(){
+		 
+		document.formRicerca.method = "get";
+		document.formRicerca.action =  "SearchAdminProduct";
+		document.formRicerca.submit();
+		
+	}function ricercaCategoria(){
+		 
+		document.formRicerca.method = "get";
+		document.formRicerca.action =  "SearchAdminCategories";
+		document.formRicerca.submit();
 	}
 	</script>
 	
