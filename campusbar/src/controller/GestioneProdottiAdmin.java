@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Categoria;
+import model.CategoriaDAO;
 import model.Prodotto;
 import model.ProdottoDAO;
 import model.Utente;
@@ -29,7 +31,21 @@ public class GestioneProdottiAdmin extends HttpServlet {
 		
 		if(u!=null && u.getRuolo().getId_ruolo()==1) {
 			
-			ArrayList<Prodotto> pro=(ArrayList<Prodotto>) new ProdottoDAO().doRetrieveAll();
+			ArrayList<Prodotto> pro=null;
+			ArrayList<Categoria> categories;
+			
+			String cate=request.getParameter("id");
+			
+			if(cate!=null && cate!="") {
+				int id=Integer.parseInt(cate);
+				pro=(ArrayList<Prodotto>) new ProdottoDAO().doRetrieveByIdCategoria(id);
+				
+			}else {//se non c'e' nessuna categoria selezionata,le restituisco
+				categories=(ArrayList<Categoria>) new CategoriaDAO().doRetrieveAll();
+				request.setAttribute("categorie", categories);
+				pro=(ArrayList<Prodotto>) new ProdottoDAO().doRetrieveAll();
+			}
+			
 			request.setAttribute("prodotti",pro);
 			RequestDispatcher req= request.getRequestDispatcher("WEB-INF/jsp/gestione_prodotti.jsp");
 			req.forward(request, response); 

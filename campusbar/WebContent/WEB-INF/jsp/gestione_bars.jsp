@@ -33,9 +33,10 @@
 					</c:forEach>
 					<a style="cursor:pointer;"  onclick="chiudi_modifiche()"><img src="images/add.png" onclick="apri_inserimento()" style="width:256px;" title="Inserisci nuovo bar"></a>
 					
+					<!-- div nascosto per inserimento -->	
 					<div class="chooseBar" id="viewbar" style="padding:5px;">
 					<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_modifiche()">Chiudi</a></h5><br>
-						<div class='table-responsive' id="disponibilitaCategoria" style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
+						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
 							<input type=text id='nome' style='width:90%; height:40px;'>
 							<br><br> 
 							<span>Orario chiusura </span>
@@ -43,10 +44,11 @@
 						</div><br><br>
 						<div id='btn_modifica' style='margin-top:-25px; margin-left:10px;'></div>
 					</div>
+					
 					<!-- div nascosto per inserimento -->
 					<div class="chooseBar" id="insertbar" style="padding:5px;">
 					<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_inserimento()">Chiudi</a></h5><br>
-						<div class='table-responsive' id="disponibilitaCategoria" style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
+						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
 							<input type=text id='nome_bar' placeholder="Nome del bar" style='width:90%; height:40px;'>
 							<br><br> 
 							<span>Orario chiusura </span>
@@ -92,7 +94,7 @@
 	//chiama la servlet che si occupa di aggiornare il bar
 	function update(cod){
 			
-		if($("#nome").val()=="" || $("#orario").val()==""){
+		if($("#nome").val().trim().length==0 || $("#orario").val().trim().length==0){
 			alert("Compila tutti i campi");
 			return;
 		}
