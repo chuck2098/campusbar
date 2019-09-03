@@ -109,6 +109,7 @@ public class DisponibilitaDAO  {
 		return true;
 	}
 
+	//setta la disponibilita a 0
 	public boolean doUploadAvailabilityGiveProduct(Edificio edificio, Prodotto p) {
 		
 		try(Connection con = ConnectionPool.getConnection()) {

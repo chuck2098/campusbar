@@ -16,6 +16,8 @@ import model.Categoria;
 import model.CategoriaDAO;
 import model.Edificio;
 import model.EdificioDAO;
+import model.Utente;
+import model.UtenteDAO;
 
 /**
  * Servlet implementation class VisualizzaBar
@@ -34,9 +36,12 @@ public class VisualizzaBarAdmin extends HttpServlet {
 
 		JSONObject obj=new JSONObject();
 		ArrayList<Edificio> eds=new ArrayList<>();
+		ArrayList<Utente> utente=new ArrayList<>();
+		
 		eds.add(ed);
+		utente.add(new UtenteDAO().doRetrieveUserBarByEdificio(ed));
 		obj.put("edificio",eds);
-
+		obj.put("utenteEdificio",utente);
 
 		response.setContentType("application/json");
 		response.getWriter().println(obj.toString());

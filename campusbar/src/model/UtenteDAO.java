@@ -57,6 +57,7 @@ public class UtenteDAO {
 			ps.setString(5, utente.getPassword());
 			ps.setInt(6, utente.getEdificio().getId_edificio());
 			ps.setInt(7, utente.getRuolo().getId_ruolo());
+			
 			if (ps.executeUpdate() != 1) {
 				throw new RuntimeException("INSERT error.");
 			}
@@ -135,10 +136,10 @@ public Utente doRetrieveByMail(String email) {
 		}
 		
 	}
+
 public Utente doRetrieveByMatricola(String matricola) {
 	
 	try(Connection con = ConnectionPool.getConnection()){
-		
 		
 		PreparedStatement ps = con.prepareStatement(
 				"SELECT matricola,nome,cognome,email,password,id_ruolo,id_edificio "
@@ -166,5 +167,88 @@ public Utente doRetrieveByMatricola(String matricola) {
 	}
 	
 }
+
+	public Utente doRetrieveUserBarByEdificio(Edificio ed) {
+try(Connection con = ConnectionPool.getConnection()){
+			
+			
+			PreparedStatement ps = con.prepareStatement(
+					"SELECT matricola,nome,cognome,email,password,id_ruolo,id_edificio "
+				  + "FROM utenti "
+				  + "WHERE id_edificio=? AND id_ruolo=?");
+			
+			ps.setInt(1,ed.getId_edificio());
+			//setto che l'utente deve essere un bar(id=2-->bar)
+			ps.setInt(2,2);
+			
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				Utente u = new Utente();
+				u.setMatricola(rs.getString(1));
+				u.setNome(rs.getString(2));
+				u.setCognome(rs.getString(3));
+				u.setEmail(rs.getString(4));
+				u.setPassword(rs.getString(5));
+				u.setRuolo(getRuolo(con,rs.getInt(6)));
+				u.setEdificio(getEdificio(con,rs.getInt(7)));
+				return u;
+			}
+			return null;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public boolean doUpdate(Utente u) {
+		
+		try(Connection con = ConnectionPool.getConnection()) {
+
+
+			PreparedStatement ps0 = con.prepareStatement("UPDATE utenti "
+														+"SET nome=?,cognome=?,email=?,password=?,id_ruolo=?,id_edificio=? "
+														+"WHERE matricola=? ");
+			ps0.setString(1, u.getNome());
+			ps0.setString(2,u.getCognome());
+			ps0.setString(3,u.getEmail());
+			ps0.setString(4,u.getPassword());
+			ps0.setInt(5,u.getRuolo().getId_ruolo());
+			ps0.setInt(6,u.getEdificio().getId_edificio());
+			ps0.setString(7,u.getMatricola());
+			
+			if(ps0.executeUpdate()==0)
+				return false;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
+	}
+	
+	//elimina l utente del bar
+	public boolean doDeleteBar(Edificio ed) {
+
+		try(Connection con = ConnectionPool.getConnection()) {
+
+
+			PreparedStatement ps0 = con.prepareStatement("DELETE FROM utenti "
+														+"WHERE id_edificio=? AND id_ruolo=? ");
+			ps0.setInt(1,ed.getId_edificio());
+			//elimino l'unico utente che ha ruolo 'bar' e id_edificio uguale a quello passato
+			ps0.setInt(2,2);
+
+			if(ps0.executeUpdate()==0)
+				return false;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
+	}
 }
 

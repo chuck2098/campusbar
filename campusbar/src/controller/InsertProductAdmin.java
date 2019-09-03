@@ -43,6 +43,7 @@ public class InsertProductAdmin extends HttpServlet {
 		if(id_prod!=0) {
 			//setto al prodotto l'id appena inserito
 			p.setId(id_prod);
+			
 			//bisogna inserire la disponibilita impostata a 0 per ogni edificio.
 			ArrayList<Edificio> edifici=new EdificioDAO().doRetrieveAll();
 			for(Edificio ed:edifici) {

@@ -38,12 +38,20 @@
 					
 					<!-- div nascosto per modifica -->	
 					<div class="chooseBar" id="viewbar" style="padding:5px; height:auto;">
-					<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_modifiche()">Chiudi</a></h5><br>
+						<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_modifiche()">Chiudi</a></h5><br>
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
-							<input type=text id='nome' style='width:90%; height:40px;'>
+							<span>Nome bar </span>
+							<input type=text id='nome' style='width:80%; height:40px;'>
 							<br><br> 
 							<span>Orario chiusura </span>
-							<input type=number id='orario' style='width:70px; height:50px;'>
+							<input type=number id='orario' style='width:70px; height:50px;'>&nbsp;&nbsp;&nbsp;
+							<span id="matr_attuale" style="font-size:19px;"></span>
+							<br><br>
+							<span>Email </span>
+							<input type=email id='email' style='width:80%; height:50px;'>
+							<br><br>
+							<span>Password </span>
+							<input type=password id='pass' style='width:50%; height:50px;'>
 							<br><br>
 							<form id="uploadForm" enctype='multipart/form-data'>
 	                <input type="file" name="file" id="sampleFile" form="uploadForm"/>
@@ -55,13 +63,21 @@
 					</div>
 					
 					<!-- div nascosto per inserimento -->
-					<div class="chooseBar" id="insertbar" style="padding:5px;">
-					<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_inserimento()">Chiudi</a></h5><br>
+					<div class="chooseBar" id="insertbar" style="padding:5px; height:auto;">
+						<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_inserimento()">Chiudi</a></h5><br>
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
-							<input type=text id='nome_bar' placeholder="Nome del bar" style='width:90%; height:40px;'>
+							<span>Nome bar </span>
+							<input type=text id='nome_bar' style='width:80%; height:40px;'>
 							<br><br> 
 							<span>Orario chiusura </span>
-							<input type=number id='orario_bar' placeholder="00" style='width:70px; height:50px;'>
+							<input type=number id='orario_bar' placeholder="00" style='width:70px; height:50px;'>&nbsp;
+							Matricola <input type=text id='matricola_bar' style='width:30%; height:50px;'><br><br>
+							<span>Email</span>
+							<input type=email id='email_bar' style='width:80%; height:50px;'>
+							<br><br>
+							<span>Password</span>
+							<input type=password id='password_bar' style='width:60%; height:50px;'>
+							<br><br>
 						</div><br>
 						<button id='submitOrder' style='width:auto; margin:auto; margin-left:15px;' onclick='inserisci()'>Inserisci</button>
 					</div>
@@ -83,7 +99,9 @@
 		 $.get("VisualizzaBar?id=" + cod, 
 					function(data){
 						var res=data["edificio"];
+						var res1=data["utenteEdificio"];
 						uploadEdificio(res);
+						uploadUtenteEdificio(res1);
 						$("#viewbar").fadeIn();
 				});
 	}
@@ -102,6 +120,16 @@
 		}
 	}
 	
+	function uploadUtenteEdificio(disponib){
+		
+		for(i=0;i<disponib.length;i++){
+			$("#pass").val(disponib[i]["password"]);
+			$("#email").val(disponib[i]["email"]);
+			$("#matr_attuale").text(" Matricola:"+disponib[i]["matricola"]);
+			$("#matr_attuale").val(disponib[i]["matricola"]);
+		}
+	}
+	
 	//chiama la servlet che si occupa di aggiornare il bar
 	function update(cod){
 			
@@ -113,7 +141,10 @@
 				$.post("Editbar",{
 					id:cod,
 					nome:$("#nome").val(),
-					orario:$("#orario").val()
+					orario:$("#orario").val(),
+					email:$("#email").val(),
+					pass:$("#pass").val(),
+					matr:$("#matr_attuale").val()
 				},
 				function(data){
 					alert(data);
@@ -147,9 +178,12 @@
 	
 	function inserisci(){
 		
-		$.post("Insertbar",{
+		$.post("InsertBar",{
 			nome:$("#nome_bar").val(),
-			orario:$("#orario_bar").val()
+			orario:$("#orario_bar").val(),
+			email:$("#email_bar").val(),
+			pass:$("#password_bar").val(),
+			matr:$("#matricola_bar").val()
 		},
 		function(data){
 			alert(data);

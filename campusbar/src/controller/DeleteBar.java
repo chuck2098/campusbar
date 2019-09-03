@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Edificio;
 import model.EdificioDAO;
+import model.UtenteDAO;
 
 /**
  * Servlet implementation class DeleteBar
@@ -23,7 +25,11 @@ public class DeleteBar extends HttpServlet {
 		int id=Integer.parseInt(request.getParameter("id"));
 		PrintWriter out=response.getWriter();
 		
-		if(new EdificioDAO().doDeletebyId(id)) {
+		Edificio ed=new Edificio();
+		ed.setId_edificio(id);
+		
+		//per una question di foreign key,devo eliminare prima l utente
+		if(new UtenteDAO().doDeleteBar(ed) && new EdificioDAO().doDeletebyId(id)) {
 			out.println("Bar eliminato!");
 		}else
 			out.println("Bar non eliminato");

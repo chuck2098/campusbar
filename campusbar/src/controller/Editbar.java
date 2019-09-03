@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Edificio;
 import model.EdificioDAO;
+import model.Ruolo;
+import model.Utente;
+import model.UtenteDAO;
 
 /**
  * Servlet implementation class Editbar
@@ -25,16 +28,31 @@ public class Editbar extends HttpServlet {
 		String nome=request.getParameter("nome");
 		int orario=Integer.parseInt(request.getParameter("orario"));
 		
+		String email=request.getParameter("email");
+		String pass=request.getParameter("pass");
+		String matr=request.getParameter("matr");
+		
 		Edificio ed=new Edificio();
 		ed.setId_edificio(id);
 		ed.setNome(nome);
 		ed.setOrario_chiusura(orario);
 		
+		Utente u=new Utente();
+		u.setEdificio(ed);
+		u.setMatricola(matr);
+		u.setEmail(email);
+		u.setPassword(pass);
+		u.setNome(matr);
+		u.setCognome(matr);
+		Ruolo bar=new Ruolo();
+		bar.setId_ruolo(2);
+		u.setRuolo(bar);
+		
 		PrintWriter out=response.getWriter();
 		
-		if(new EdificioDAO().doUpdate(ed)) {
+		if(new EdificioDAO().doUpdate(ed) && new UtenteDAO().doUpdate(u))
 			out.println("Edificio modificato!");
-		}else
+		else
 			out.println("Edificio non modificato!");
 	}
 

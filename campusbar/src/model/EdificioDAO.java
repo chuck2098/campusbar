@@ -142,9 +142,11 @@ public class EdificioDAO {
 		return true;
 	}
 
-	public boolean doSave(Edificio ed) {
+	public int doSave(Edificio ed) {
 		
 		try(Connection con = ConnectionPool.getConnection()){
+			
+			int id_ord=0;
 			
 			PreparedStatement ps = con.prepareStatement(
 					"INSERT INTO macro_edifici (nome,orario_chiusura) "
@@ -158,7 +160,12 @@ public class EdificioDAO {
 				throw new RuntimeException("INSERT error.");
 			}
 			
-			return true;
+			ResultSet rs = ps.getGeneratedKeys();
+			if(rs.next())
+				//prelevo l ultimo id inserito
+				id_ord=rs.getInt(1);
+			
+			return id_ord;
 			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

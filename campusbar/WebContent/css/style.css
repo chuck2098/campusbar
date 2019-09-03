@@ -313,12 +313,14 @@ body{
     position: fixed;
     display: none;
     padding: 18px 10px;
-    top: 45%;
+    top: 40%;
     left: 50%;
     width: 550px;
     height: 250px;
+    max-height:90%;
     margin-left: -275px;
     margin-top: -60px;
+    margin-bottom:10px;
     background-color: #808768;
     -webkit-box-shadow: 2px 2px 12px 3px rgba(64,63,64,1);
 }
