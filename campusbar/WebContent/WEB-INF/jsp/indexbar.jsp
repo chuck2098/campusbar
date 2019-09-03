@@ -41,7 +41,7 @@
 					</div>
 					<c:forEach items="${ordini}" var="ordine">
 						<div class="detailsOrder" id="details<c:out value="${ordine.getId_ordine()}"/>" >
-							<h5 style="float:right; position:relative; bottom:5px; right:5px;"><a href="#" onclick="CloseDetails(<c:out value="${ordine.getId_ordine()}"/>)">Chiudi</a></h5><br>
+							<h5 style="float:right; position:relative; bottom:5px; right:5px; display:inline;"><a href="#" onclick="CloseDetails(<c:out value="${ordine.getId_ordine()}"/>)">Chiudi</a></h5><br><br>
 							<h2 style="text-align:center;">Dettaglio Ordine <c:out value="${ordine.getId_ordine()}"/></h2><br>
 							<div class='table-responsive' style='border: 2px solid #f1f8f8; border-radius: 5px; overflow: auto; white-space: nowrap; text-align: center; max-height:100%;'>
 								<table style='width: 95%;'>

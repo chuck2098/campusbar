@@ -31,6 +31,7 @@ public class Registrazione extends HttpServlet {
 		String email=request.getParameter("email");
 		String password=request.getParameter("password");
 		edificio.setId_edificio(Integer.parseInt(request.getParameter("bar")));
+		//setto ruolo come cliente
 		ruolo.setId_ruolo(3);
 		
 		

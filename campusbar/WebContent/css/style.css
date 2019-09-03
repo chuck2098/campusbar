@@ -330,7 +330,7 @@ body{
     position: fixed;
     display: none;
     padding: 18px 10px;
-    top: 45%;
+    top: 55%;
     left: 50%;
     width: 1000px;
     height: auto;
@@ -338,7 +338,7 @@ body{
     overflow-y:auto;
     padding-bottom:auto;
     margin-left: -500px;
-    margin-top: -330px;
+    margin-top: -340px;
     background-color: #808768;
     -webkit-box-shadow: 2px 2px 12px 3px rgba(64,63,64,1);
 }
@@ -346,6 +346,7 @@ body{
 /* width */
 ::-webkit-scrollbar {
   width: 3px;
+  height:3px;
 }
  
 /* Handle */
