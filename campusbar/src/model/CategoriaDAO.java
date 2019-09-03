@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriaDAO {
+public class CategoriaDAO { 
 
 public List<Categoria> doRetrieveAll() {
 		

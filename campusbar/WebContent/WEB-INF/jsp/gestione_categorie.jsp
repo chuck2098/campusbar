@@ -74,7 +74,7 @@
 							alert(data);
 							$('#bars').load(document.URL +  ' #bars');
 				});
-	}
+	} 
 	function apri_modifiche(cod){
 		alert();
 		 $.get("VisualizzaCategorieAdmin?id=" + cod, 

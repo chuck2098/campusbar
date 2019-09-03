@@ -97,7 +97,7 @@ public class OrdineDAO {
 				ordini.add(o);
 			}
 			
-			return ordini;
+			return ordini; 
 			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
