@@ -76,10 +76,9 @@
 				});
 	} 
 	function apri_modifiche(cod){
-		alert();
+		
 		 $.get("VisualizzaCategorieAdmin?id=" + cod, 
 					function(data){
-			 			alert(data);
 						var res=data["categoria"];
 						uploadCategoria(res);
 						$("#viewcate").fadeIn();
@@ -87,22 +86,22 @@
 	}
 	
 	function chiudi_modifiche(){
-		$("#viewbar").fadeOut();
+		$("#viewcate").fadeOut();
 	}
 	function apri_inserimento(){
-		$("#insertbar").fadeIn();
+		$("#insertcate").fadeIn();
 	}
 	
 	function chiudi_inserimento(){
-		$("#insertbar").fadeOut();
+		$("#insertcate").fadeOut();
 	}
 	
-	function uploadCatgoria(disponib){
+	function uploadCategoria(disponib){
 		
 		for(i=0;i<disponib.length;i++){
 			$("#nome_cat").val(disponib[i]["nome_cat"]);
-			$("#filename").val("cat"+disponib[i]["id_edificio"]+".png");
-			$("#btn_modifica").html("<button id='submitOrder' style='width:auto; margin:auto;' onclick='update("+disponib[i]["id_edificio"]+")'>Aggiorna</button>");
+			$("#filename").val("cat"+disponib[i]["id_categoria"]+".png");
+			$("#btn_modifica").html("<button id='submitOrder' style='width:auto; margin:auto;' onclick='update("+disponib[i]["id_categoria"]+")'>Aggiorna</button>");
 		}
 	}
 	
@@ -116,7 +115,7 @@
 
 				$.post("EditCategory",{
 					id:cod,
-					nome:$("#nome_cat").val(),
+					nome_cat:$("#nome_cat").val(),
 					
 				},
 				function(data){

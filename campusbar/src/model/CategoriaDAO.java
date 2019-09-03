@@ -119,5 +119,27 @@ public boolean doSave(Categoria cat) {
 	}
 	
 }
+public boolean doUpdate(Categoria cat) {
+	
+	try(Connection con = ConnectionPool.getConnection()) {
+
+
+		PreparedStatement ps0 = con.prepareStatement("UPDATE categorie "
+													+"SET nome_categoria=? "
+													+"WHERE id_categoria=? ");
+		System.out.println("------->"+cat.getNomeCategoria());
+		ps0.setString(1,cat.getNomeCategoria());
+		ps0.setInt(2, cat.getId_categoria());
+		
+		if(ps0.executeUpdate()==0)
+			return false;
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+		return false;
+	}
+
+	return true;
+}
 
 }
