@@ -115,7 +115,7 @@
 
 				$.post("EditCategory",{
 					id:cod,
-					nome_cat:$("#nome_cat").val(),
+					nome_cat:$("#nome_cat").val(), 
 					
 				},
 				function(data){
