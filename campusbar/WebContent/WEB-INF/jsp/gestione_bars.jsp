@@ -28,7 +28,7 @@
 									<h5 style="font-weight:bold;">Chiude alle ore <c:out value="${edificio.getOrario_chiusura()}" /></h5>
 								</div>
 								<br>
-						<button type="button" class="btn" style="float:left; width:auto; padding-left:13px; padding-right:13px;" onclick="if(confirm('Sei sicuro di voler eliinare?')) eliminaBar(<c:out value="${edificio.getId_edificio()}"/>)">Elimina</button>
+									<button type="button" class="btn" style="float:left; width:auto; padding-left:13px; padding-right:13px;" onclick="if(confirm('Sei sicuro di voler eliinare?')) eliminaBar(<c:out value="${edificio.getId_edificio()}"/>)">Elimina</button>
 									<button type="button" class="btn" style="float:right; width:auto; padding-left:13px; padding-right:13px;" onclick="apri_modifiche(<c:out value="${edificio.getId_edificio()}"/>)">Modifica</button>
 								</div>
 							</div>
@@ -71,9 +71,6 @@
 <jsp:include page="footer.html"/>
 <script>
 	
-	function loadLogo(img){
-		img.src="images/logo.png";
-	}
 	function eliminaBar(cod){
 		 $.get("DeleteBar?id=" + cod, 
 					function(data){

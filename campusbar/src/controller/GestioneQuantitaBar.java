@@ -30,7 +30,7 @@ public class GestioneQuantitaBar extends HttpServlet {
 			if(u!=null && u.getRuolo().getId_ruolo()==2) {
 				String id_cat=request.getParameter("id");
 				//se passo l'id della categoria allora restituisco la disponibilita dei prodotti di quella categoria
-				if(id_cat!=null) {
+				if(id_cat!=null && id_cat.trim()!="") {
 					Categoria c=new Categoria();
 					c.setId_categoria(Integer.parseInt(id_cat));
 					

@@ -62,8 +62,14 @@
 				<div class="head-span">
 					<c:choose>
 						<c:when test="${logUtente!=null}">
-							<span class="head-sign admin"><i class="fas fa-user">&nbsp;&nbsp;<a
-									href="Logout"><c:out value="Ciao ${logUtente.nome},"></c:out>Logout</a></i></span>
+							<c:if test="${logUtente.getRuolo().getId_ruolo()==2 || logUtente.getRuolo().getId_ruolo()==1}">
+								<span class="head-sign admin">
+							</c:if>
+							<c:if test="${logUtente.getRuolo().getId_ruolo()!=2}">
+								<span class="head-sign">
+							</c:if>
+								<i class="fas fa-user">&nbsp;&nbsp;
+							<a href="Logout"><c:out value="Ciao ${logUtente.nome},"></c:out>Logout</a></i></span>
 						</c:when>
 						<c:otherwise>
 							<span class="head-sign"><i class="fas fa-user">&nbsp;&nbsp;<a
@@ -71,8 +77,7 @@
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
-						<c:when
-							test="${logUtente.getRuolo().getId_ruolo()==3 || logUtente==null}">
+						<c:when test="${logUtente.getRuolo().getId_ruolo()==3 || logUtente==null}">
 							<span class="head-cart"><i class="fas fa-shopping-cart">&nbsp;&nbsp;<a
 									href="Carrello">Carrello</a></i></span>
 						</c:when>

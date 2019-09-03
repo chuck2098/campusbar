@@ -108,6 +108,28 @@ public class DisponibilitaDAO  {
 		//se arriva qui allora tutti i prodotti del carrello sono disponibili per l'edificio passato come parametro.
 		return true;
 	}
+
+	public boolean doUploadAvailabilityGiveProduct(Edificio edificio, Prodotto p) {
+		
+		try(Connection con = ConnectionPool.getConnection()) {
+			
+			PreparedStatement ps0 = con.prepareStatement("INSERT INTO disponibilita "
+														+"VALUES (?,?,?)");
+			ps0.setInt(1,edificio.getId_edificio());
+			ps0.setInt(2,p.getId());
+			ps0.setInt(3,0);
+			
+			if(ps0.executeUpdate()==0)
+				return false;
+			
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
 	
 	
 }
