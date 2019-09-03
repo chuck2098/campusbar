@@ -23,6 +23,7 @@ public class ImageUploadHandler extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	private static final int LIMIT_SIZE=400000;
+	private static final String PATH= "/home/vincenzo/git/campusbar/campusbar/WebContent/images";
 	
 	protected void doPost(HttpServletRequest request,
 						  HttpServletResponse response) 
@@ -39,7 +40,7 @@ public class ImageUploadHandler extends HttpServlet {
 					//leggo il nome del file dal campo nascosto del form
 					filename=item.getString();
 				} else {
-					File fi=new File("/home/vincenzo/git/campusbar/campusbar/WebContent/images" + File.separator + filename);
+					File fi=new File(PATH+ File.separator + filename);
 					
 					if(item.getSize()>LIMIT_SIZE) {
 						ajaxUpdateResult="Immagine troppo grande.(Max"+LIMIT_SIZE/1000+"Kb)";
@@ -48,12 +49,14 @@ public class ImageUploadHandler extends HttpServlet {
 					if(fi.exists())
 						fi.delete();
 					
-					item.write(new File("/home/vincenzo/git/campusbar/campusbar/WebContent/images" + File.separator + filename));
+					item.write(new File(PATH + File.separator + filename));
 
 					response.setContentType("text/plain");
 					response.setCharacterEncoding("UTF-8");
-
-					ajaxUpdateResult += "Immagine caricata!";
+					if(new File(PATH + File.separator + filename).exists())
+						ajaxUpdateResult += "Immagine caricata!";
+					else
+						ajaxUpdateResult += "Percorso immagine non trovato!";
 				}
 			}
 		} catch (FileUploadException e) {
