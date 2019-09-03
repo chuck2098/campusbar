@@ -209,9 +209,11 @@ public class ProdottoDAO {
 		return true;
 	}
 
-	public boolean doSave(Prodotto p) {
+	//ritorna 0 se qualcosa e' andata storta
+	public int doSave(Prodotto p) {
 		
 		try(Connection con = ConnectionPool.getConnection()){
+			int id_prodotto=0;
 			
 			PreparedStatement ps = con.prepareStatement(
 					"INSERT INTO prodotti (nome,descrizione,prezzo,id_categoria) "
@@ -223,11 +225,17 @@ public class ProdottoDAO {
 			ps.setFloat(3,p.getPrezzo());
 			ps.setInt(4,p.getCategoria().getId_categoria());
 			
+			//eseguo inserimento
 			if (ps.executeUpdate() != 1) {
 				throw new RuntimeException("INSERT error.");
 			}
 			
-			return true;
+			ResultSet rs = ps.getGeneratedKeys();
+			if(rs.next())
+				//prelevo l ultimo id inserito
+				id_prodotto=rs.getInt(1);
+			
+			return id_prodotto;
 			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

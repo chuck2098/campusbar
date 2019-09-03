@@ -334,11 +334,29 @@ body{
     left: 50%;
     width: 1000px;
     height: auto;
+    max-height:80%;
+    overflow-y:auto;
     padding-bottom:auto;
     margin-left: -500px;
     margin-top: -330px;
     background-color: #808768;
     -webkit-box-shadow: 2px 2px 12px 3px rgba(64,63,64,1);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #eee; 
+  border-radius: 7px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #eeeeaa; 
 }
 
 /*FOOTER*/
