@@ -72,6 +72,13 @@
 									</c:forEach>
 								</select>
 							</c:if>
+							<br><br>
+							<!-- form per upload dell'immagine -->
+							<form id="uploadForm" enctype='multipart/form-data'>
+	                <input type="file" name="file" id="sampleFile" form="uploadForm"/>
+	                <input type="hidden" id="filename">
+	                <input type="button" onclick="uploadImg()" value="Carica" />
+	            </form>
 						</div><br>
 						<div id='btn_modifica' style=''></div>
 					</div>
@@ -128,9 +135,12 @@
 				});
 	}
 	
+	//funzione che carica il dettaglio del prodotto nel div della modifica
 	function uploadProdotto(disponib){
 		
 		for(i=0;i<disponib.length;i++){
+			//mi serve per salvare il filename della foto da caricare(id.png)
+			$("#filename").val(disponib[i]["id"]+".png");
 			$("#nome").val(disponib[i]["nome"]);
 			$("#descrizione").val(disponib[i]["descrizione"]);
 			$("#prezzo").val(disponib[i]["prezzo"]);
@@ -162,6 +172,29 @@
 					chiudi_modifiche();
 					window.location.href="GestioneProdottiAdmin?id="+cat;
 				});
+	}
+	
+	function uploadImg(){
+	       
+		var filen=$("#filename").val();
+	  var sampleFile = document.getElementById("sampleFile").files[0];
+
+		var formdata = new FormData();
+		
+		formdata.append("filename", filen);
+		formdata.append("sampleFile", sampleFile);
+		
+		var xhr = new XMLHttpRequest();       
+		
+		xhr.open("POST","Upload", true);
+		
+		xhr.send(formdata);
+		
+		xhr.onload = function(e) {
+		    if (this.status == 200) {
+		       alert(this.responseText);
+		    }
+		};                    
 	}
 	
 	function chiudi_modifiche(){
