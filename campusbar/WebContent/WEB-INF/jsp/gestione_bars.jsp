@@ -11,7 +11,7 @@
 				<c:if test="${pattern!=null}">
 					<h4 class="text-center">Risultati per la ricerca '<c:out value="${pattern}"/>'</h4><br>
 				</c:if>
-				<div class="row">
+				<div class="row"> 
 					<c:forEach items="${edifici}" var="edificio">
 						<div class="col-lg-3 col-sm-6">
 							<div class="card">
