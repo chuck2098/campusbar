@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,6 +96,28 @@ public boolean doDeletebyId(int id) {
 	}
 
 	return true;
+}
+public boolean doSave(Categoria cat) {
+	
+	try(Connection con = ConnectionPool.getConnection()){
+		
+		PreparedStatement ps = con.prepareStatement(
+				"INSERT INTO categorie (nome_categoria) "
+			   +"VALUES(?)",
+				Statement.RETURN_GENERATED_KEYS);
+		
+		ps.setString(1,cat.getNomeCategoria());
+		
+		if (ps.executeUpdate() != 1) {
+			throw new RuntimeException("INSERT error.");
+		}
+		
+		return true;
+		
+	} catch (SQLException e) {
+		throw new RuntimeException(e);
+	}
+	
 }
 
 }

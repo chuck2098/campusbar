@@ -114,7 +114,7 @@ public ArrayList<Ordine> doRetrieveOrderConfirmedByUser(Utente u) {
 			ArrayList<Ordine> ordini=new ArrayList<>();
 			Ordine o=null;
 			
-			PreparedStatement ps = con.prepareStatement("SELECT ordini.id_ordine, nota_ordine, data_ordine, consegnato, id_edificio " + 
+			PreparedStatement ps = con.prepareStatement("SELECT  distinct ordini.id_ordine, nota_ordine, data_ordine, consegnato, id_edificio " + 
 														"FROM ordini JOIN dettaglio_ordini ON (ordini.id_ordine=dettaglio_ordini.id_ordine) " + 
 														"WHERE id_utente=? ");
 			

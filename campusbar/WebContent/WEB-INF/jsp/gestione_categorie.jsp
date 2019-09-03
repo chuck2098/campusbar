@@ -37,13 +37,12 @@
 					<a style="cursor:pointer;"><img src="images/add.png" onclick="apri_inserimento()" style="width:256px;" title="inserisci una nuova categoria"></a>
 					
 					<!-- div nascosto per modifica -->	
-					<div class="chooseBar" id="viewbar" style="padding:5px; height:auto;">
+					<div class="chooseBar" id="viewcate" style="padding:5px; height:auto;">
 					<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_modifiche()">Chiudi</a></h5><br>
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
-							<input type=text id='nome' style='width:90%; height:40px;'>
+							<input type=text id='nome_cat' style='width:90%; height:40px;'>
 							<br><br> 
-							<span>Orario chiusura </span>
-							<input type=number id='idCat' style='width:70px; height:50px;'>
+							
 							<br><br>
 							<form id="uploadForm" enctype='multipart/form-data'>
 	                <input type="file" name="file" id="sampleFile" form="uploadForm"/>
@@ -55,13 +54,12 @@
 					</div>
 					
 					<!-- div nascosto per inserimento -->
-					<div class="chooseBar" id="insertbar" style="padding:5px;">
+					<div class="chooseBar" id="insertcate" style="padding:5px;">
 					<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_inserimento()">Chiudi</a></h5><br>
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
 							<input type=text id='nome_cat' placeholder="nome Categoria" style='width:90%; height:40px;'>
 							<br><br> 
-							<span>id </span>
-							<input type=number id='id categoria' placeholder="00" style='width:70px; height:50px;'>
+							
 						</div><br>
 						<button id='submitOrder' style='width:auto; margin:auto; margin-left:15px;' onclick='inserisci()'>Inserisci</button>
 					</div>
@@ -78,12 +76,13 @@
 				});
 	}
 	function apri_modifiche(cod){
-		
-		 $.get("VisualizzaBar?id=" + cod, 
+		alert();
+		 $.get("VisualizzaCategorieAdmin?id=" + cod, 
 					function(data){
-						var res=data["edificio"];
-						uploadEdificio(res);
-						$("#viewbar").fadeIn();
+			 			alert(data);
+						var res=data["categoria"];
+						uploadCategoria(res);
+						$("#viewcate").fadeIn();
 				});
 	}
 	
@@ -98,12 +97,11 @@
 		$("#insertbar").fadeOut();
 	}
 	
-	function uploadEdificio(disponib){
+	function uploadCatgoria(disponib){
 		
 		for(i=0;i<disponib.length;i++){
-			$("#nome").val(disponib[i]["nome"]);
-			$("#orario").val(disponib[i]["orario_chiusura"]);
-			$("#filename").val("ed"+disponib[i]["id_edificio"]+".png");
+			$("#nome_cat").val(disponib[i]["nome_cat"]);
+			$("#filename").val("cat"+disponib[i]["id_edificio"]+".png");
 			$("#btn_modifica").html("<button id='submitOrder' style='width:auto; margin:auto;' onclick='update("+disponib[i]["id_edificio"]+")'>Aggiorna</button>");
 		}
 	}
@@ -111,15 +109,15 @@
 	//chiama la servlet che si occupa di aggiornare il bar
 	function update(cod){
 			
-		if($("#nome").val().trim().length==0 || $("#orario").val().trim().length==0){
+		if($("#nome_cat").val().trim().length==0 ){
 			alert("Compila tutti i campi");
 			return;
 		}
 
-				$.post("Editbar",{
+				$.post("EditCategory",{
 					id:cod,
-					nome:$("#nome").val(),
-					orario:$("#orario").val()
+					nome:$("#nome_cat").val(),
+					
 				},
 				function(data){
 					alert(data);
@@ -153,9 +151,9 @@
 	
 	function inserisci(){
 		
-		$.post("Insertbar",{
-			nome:$("#nome_bar").val(),
-			orario:$("#orario_bar").val()
+		$.post("InsertCategoriaAdmin",{
+			nome:$("#nome_cat").val(),
+			
 		},
 		function(data){
 			alert(data);
