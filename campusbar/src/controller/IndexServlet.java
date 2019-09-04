@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.DettaglioOrdineDAO;
 import model.Prodotto;
 import model.ProdottoDAO;
 
@@ -25,7 +26,7 @@ public class IndexServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Prodotto> prod=(ArrayList<Prodotto>) new ProdottoDAO().doRetrieveByProductMostSold();
+		ArrayList<Prodotto> prod=(ArrayList<Prodotto>) new DettaglioOrdineDAO().doRetrieveProductMostSold();
 		request.setAttribute("prodotti", prod);
 		RequestDispatcher req= request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
 		req.forward(request, response);

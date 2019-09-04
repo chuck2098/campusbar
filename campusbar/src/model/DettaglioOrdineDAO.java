@@ -2,6 +2,7 @@ package model;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DettaglioOrdineDAO {
 
@@ -161,5 +162,30 @@ public class DettaglioOrdineDAO {
 		return true;
 		
 	}
+	//30 prodotti piu venduti
+		public List<Prodotto> doRetrieveProductMostSold() {	
+			try(Connection con = ConnectionPool.getConnection()){
+				
+				PreparedStatement ps = con
+						.prepareStatement("SELECT sum(quantita) AS quantita, id_prodotto " + 
+											"FROM dettaglio_ordini " + 
+											"WHERE prodotto_ordinato =1 AND id_prodotto IS NOT NULL " + 
+											"GROUP BY id_prodotto " + 
+											"ORDER BY quantita DESC " + 
+											"LIMIT 30 ");
+				
+				ArrayList<Prodotto> prodotti = new ArrayList<>();
+				ResultSet rs = ps.executeQuery();
+				
+				while (rs.next()) {
+					int id = rs.getInt(2);	
+					prodotti.add(new ProdottoDAO().doRetrieveById(id));
+				}
+				return prodotti;
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+			
 	
 }

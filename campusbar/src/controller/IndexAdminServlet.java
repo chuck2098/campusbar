@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.DettaglioOrdineDAO;
 import model.Prodotto;
 import model.ProdottoDAO;
 import model.Utente;
@@ -28,7 +29,7 @@ public class IndexAdminServlet extends HttpServlet {
 		
 		if(u!=null && u.getRuolo().getId_ruolo()==1) {
 			
-			ArrayList<Prodotto> prod=(ArrayList<Prodotto>) new ProdottoDAO().doRetrieveByProductMostSold();
+			ArrayList<Prodotto> prod=(ArrayList<Prodotto>) new DettaglioOrdineDAO().doRetrieveProductMostSold();
 			request.setAttribute("prodotti", prod);
 			RequestDispatcher req= request.getRequestDispatcher("WEB-INF/jsp/indexadmin.jsp");
 			req.forward(request, response); 

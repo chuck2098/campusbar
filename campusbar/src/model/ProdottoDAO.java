@@ -37,30 +37,7 @@ public class ProdottoDAO {
 		}
 	}
 	
-	//30 prodotti piu venduti
-	public List<Prodotto> doRetrieveByProductMostSold() {	
-		try(Connection con = ConnectionPool.getConnection()){
-			
-			PreparedStatement ps = con
-					.prepareStatement("SELECT sum(quantita) AS quantita, id_prodotto " + 
-										"FROM dettaglio_ordini " + 
-										"WHERE prodotto_ordinato =1 " + 
-										"GROUP BY id_prodotto " + 
-										"ORDER BY quantita DESC " + 
-										"LIMIT 30 ");
-			
-			ArrayList<Prodotto> prodotti = new ArrayList<>();
-			ResultSet rs = ps.executeQuery();
-			
-			while (rs.next()) {
-				int id = rs.getInt(2);	
-				prodotti.add(doRetrieveById(id));
-			}
-			return prodotti;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
+	
 		
 	public Prodotto doRetrieveById(int id) {
 			Prodotto p=null;

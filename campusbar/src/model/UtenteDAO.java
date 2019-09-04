@@ -31,7 +31,7 @@ public class UtenteDAO {
 				u.setEmail(rs.getString(4));
 				u.setPassword(rs.getString(5));
 				u.setRuolo(getRuolo(con,rs.getInt(6)));
-				u.setEdificio(getEdificio(con,rs.getInt(7)));
+				u.setEdificio(new EdificioDAO().doRetrieveById(rs.getInt(7)));
 				return u;
 			}
 			return null;
@@ -84,24 +84,6 @@ public class UtenteDAO {
 		}
 		return c;
 	}
-	private static Edificio getEdificio(Connection con, int idEdificio) throws SQLException {
-		PreparedStatement ps = con.prepareStatement(
-				"SELECT nome,id_edificio,orario_chiusura " + 
-				"FROM macro_edifici  " + 
-				"WHERE id_edificio=?");
-
-		ps.setInt(1, idEdificio);
-		
-		ResultSet rs = ps.executeQuery();
-		Edificio c=null;
-		while (rs.next()) {
-		    c = new Edificio();
-			c.setId_edificio(rs.getInt(2));
-			c.setOrario_chiusura(rs.getInt(3));
-			c.setNome(rs.getString(1));
-		}
-		return c;
-	}
 	
 public Utente doRetrieveByMail(String email) {
 
@@ -127,7 +109,7 @@ public Utente doRetrieveByMail(String email) {
 				u.setEmail(rs.getString(4));
 				u.setPassword(rs.getString(5));
 				u.setRuolo(getRuolo(con,rs.getInt(6)));
-				u.setEdificio(getEdificio(con,rs.getInt(7)));
+				u.setEdificio(new EdificioDAO().doRetrieveById(rs.getInt(7)));
 				return u;
 			}
 			return null;
@@ -158,7 +140,7 @@ public Utente doRetrieveByMatricola(String matricola) {
 			u.setEmail(rs.getString(4));
 			u.setPassword(rs.getString(5));
 			u.setRuolo(getRuolo(con,rs.getInt(6)));
-			u.setEdificio(getEdificio(con,rs.getInt(7)));
+			u.setEdificio(new EdificioDAO().doRetrieveById(rs.getInt(7)));
 			return u;
 		}
 		return null;
@@ -192,7 +174,7 @@ try(Connection con = ConnectionPool.getConnection()){
 				u.setEmail(rs.getString(4));
 				u.setPassword(rs.getString(5));
 				u.setRuolo(getRuolo(con,rs.getInt(6)));
-				u.setEdificio(getEdificio(con,rs.getInt(7)));
+				u.setEdificio(new EdificioDAO().doRetrieveById(rs.getInt(7)));
 				return u;
 			}
 			return null;
