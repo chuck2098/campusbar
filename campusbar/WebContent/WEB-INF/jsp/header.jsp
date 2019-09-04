@@ -168,6 +168,22 @@
 							</li>
 						</c:when>
 					</c:choose>
+					<!-- pulsante cambia password(cliente) -->
+					<c:choose>
+						<c:when
+							test="${logUtente!=null && logUtente.getRuolo().getId_ruolo()==3}">
+							<c:choose>
+								<c:when test="${param.active_menu eq 'pass'}">
+									<li class="nav-item active">
+								</c:when>
+								<c:otherwise>
+									<li class="nav-item">
+								</c:otherwise>
+							</c:choose>
+							<a class="nav-link" href="VisualizzaUpdatePassword">Cambio Password</a>
+							</li>
+						</c:when>
+					</c:choose>
 					
 				<!-- pulsanti per gestione (admin) -->
 					<c:choose>

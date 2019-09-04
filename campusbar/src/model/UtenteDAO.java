@@ -227,6 +227,28 @@ try(Connection con = ConnectionPool.getConnection()){
 
 		return true;
 	}
+public boolean doUpdatePassword(String pass,String mat) {
+		
+		try(Connection con = ConnectionPool.getConnection()) {
+
+
+			PreparedStatement ps0 = con.prepareStatement("UPDATE utenti "
+														+"SET password=? "
+														+"WHERE matricola=? ");
+			ps0.setString(1, pass);
+			ps0.setString(2, mat);
+			
+			
+			if(ps0.executeUpdate()==0)
+				return false;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
+	}
 	
 	//elimina l utente del bar
 	public boolean doDeleteBar(Edificio ed) {
