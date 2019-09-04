@@ -35,7 +35,6 @@ public class VisualizzaCategorieAdmin extends HttpServlet {
 		cats.add(cat);
 		obj.put("categoria",cats);
 
-		System.out.println(obj.toString());
 		response.setContentType("application/json");
 		response.getWriter().println(obj.toString());
 

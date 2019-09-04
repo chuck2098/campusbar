@@ -127,7 +127,7 @@ public boolean doUpdate(Categoria cat) {
 		PreparedStatement ps0 = con.prepareStatement("UPDATE categorie "
 													+"SET nome_categoria=? "
 													+"WHERE id_categoria=? ");
-		System.out.println("------->"+cat.getNomeCategoria());
+
 		ps0.setString(1,cat.getNomeCategoria());
 		ps0.setInt(2, cat.getId_categoria());
 		

@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="header.jsp">
 	<jsp:param value="gestione_categorie" name="active_menu"/>
-</jsp:include> 
+</jsp:include>
 
         <div class="container" id="bars">
 				<h2 style="text-align:center; cursor:pointer;" onclick="location.reload()">Gestione Categorie </h2><br><br>
@@ -99,7 +99,7 @@
 	function uploadCategoria(disponib){
 		
 		for(i=0;i<disponib.length;i++){
-			$("#nome_cat").val(disponib[i]["nome_cat"]);
+			$("#nome_cat").val(disponib[i]["nomeCategoria"]);
 			$("#filename").val("cat"+disponib[i]["id_categoria"]+".png");
 			$("#btn_modifica").html("<button id='submitOrder' style='width:auto; margin:auto;' onclick='update("+disponib[i]["id_categoria"]+")'>Aggiorna</button>");
 		}
