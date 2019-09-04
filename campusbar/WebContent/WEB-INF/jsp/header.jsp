@@ -56,6 +56,9 @@
 									<button class="btn" type="submit">Cerca</button>&nbsp;&nbsp;
 								</c:otherwise>
 							</c:choose>
+						<c:if test="${logUtente.getRuolo().getId_ruolo()==3}">
+							<h5 style=' background-color:#96a398; margin:auto; margin-top:12px; border:2px solid #96a398;'>Bar di default:<b><c:out value="${logUtente.getEdificio().getNome()}"/></b></h5>
+						</c:if>
 					</form>
 				</div>
 
