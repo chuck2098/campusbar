@@ -145,14 +145,18 @@ public ArrayList<Ordine> doRetrieveOrderConfirmedByUser(Utente u) {
 			throw new RuntimeException(e);
 		}
 	}
+
+	//non consente di eliminare ordini conseganti.
 	public boolean doDeleteById(int id) {
 		
 		try(Connection con = ConnectionPool.getConnection()) {
 			
 			
 			PreparedStatement ps0 = con.prepareStatement("DELETE FROM ordini "
-														+"WHERE id_ordine=?");
+														+"WHERE id_ordine=? AND consegnato=?");
 			ps0.setInt(1,id);
+			ps0.setBoolean(2,false);
+			
 			if(ps0.executeUpdate()==0)
 				return false;
 			

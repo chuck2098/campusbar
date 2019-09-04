@@ -306,33 +306,14 @@ body{
 	float:right;
 }
 
-.chooseBar{
-
-    z-index: 10;
-    border-radius: 3px;
-    position: fixed;
-    display: none;
-    padding: 18px 10px;
-    top: 40%;
-    left: 50%;
-    width: 550px;
-    height: 250px;
-    max-height:90%;
-    margin-left: -275px;
-    margin-top: -60px;
-    margin-bottom:10px;
-    background-color: #808768;
-    -webkit-box-shadow: 2px 2px 12px 3px rgba(64,63,64,1);
-}
-
-.detailsOrder{
+.detailsOrder,.chooseBar{
 		text-align:center;
 	  z-index: 10;
     border-radius: 3px;
     position: fixed;
     display: none;
     padding: 18px 10px;
-    top: 55%;
+    top: 20%;
     left: 50%;
     width: 1000px;
     height: auto;
@@ -340,9 +321,14 @@ body{
     overflow-y:auto;
     padding-bottom:auto;
     margin-left: -500px;
-    margin-top: -340px;
     background-color: #808768;
     -webkit-box-shadow: 2px 2px 12px 3px rgba(64,63,64,1);
+}
+
+.chooseBar{
+    left: 50%;
+    width: 550px;
+    margin-left: -275px;
 }
 
 /* width */
@@ -461,7 +447,6 @@ footer > .container-fluid{
 		.detailsOrder{
     	width:95%;
     	left:2%;
-    	margin-top:-200px;
     	margin-left:1px;
     }
 }

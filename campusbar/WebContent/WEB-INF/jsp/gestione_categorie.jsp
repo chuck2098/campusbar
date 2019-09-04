@@ -38,7 +38,7 @@
 					
 					<!-- div nascosto per modifica -->	
 					<div class="chooseBar" id="viewcate" style="padding:5px; height:auto;">
-					<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_modifiche()">Chiudi</a></h5><br>
+					<h5 style="float:right; position:relative; right:5px; display:inline;"><a href="#" onclick="chiudi_modifiche()">X</a></h5><br>
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
 							<input type=text id='nome_cat' style='width:90%; height:40px;'>
 							<br><br> 
@@ -55,7 +55,7 @@
 					
 					<!-- div nascosto per inserimento -->
 					<div class="chooseBar" id="insertcate" style="padding:5px;">
-					<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_inserimento()">Chiudi</a></h5><br>
+					<h5 style="float:right; position:relative; right:5px; display:inline;"><a href="#" onclick="chiudi_inserimento()">X</a></h5><br>
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
 							<input type=text id='nome_cat' placeholder="nome Categoria" style='width:90%; height:40px;'>
 							<br><br> 
@@ -72,7 +72,8 @@
 		 $.get("DeleteCategoria?id=" + cod, 
 					function(data){
 							alert(data);
-							$('#bars').load(document.URL +  ' #bars');
+							location.reload(true);
+							//$('#bars').load(document.URL +  ' #bars');
 				});
 	} 
 	function apri_modifiche(cod){
@@ -105,6 +106,18 @@
 		}
 	}
 	
+	function reloadPage(){
+		resp="";
+		jQuery.ajaxSetup({async:false});
+		
+		$.get(document.URL,
+				function(data){
+					resp=data;
+				});
+		jQuery.ajaxSetup({async:true});
+		return resp;
+	}
+	
 	//chiama la servlet che si occupa di aggiornare il bar
 	function update(cod){
 			
@@ -112,6 +125,7 @@
 			alert("Compila tutti i campi");
 			return;
 		}
+
 
 				$.post("EditCategory",{
 					id:cod,
@@ -121,7 +135,8 @@
 				function(data){
 					alert(data);
 					chiudi_modifiche();
-					$('#bars').load(document.URL +  ' #bars');
+					$('body').html(reloadPage());
+					//$('body').text(reloadPage());
 				});
 	}
 	

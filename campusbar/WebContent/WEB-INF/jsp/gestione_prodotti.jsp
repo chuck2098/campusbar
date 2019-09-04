@@ -57,7 +57,7 @@
 					
 				<!-- div nascosto per modifica -->	
 					<div class="chooseBar" id="viewproduct" style="padding:5px; height:auto; top:15%;">
-						<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_modifiche()">Chiudi</a></h5><br>
+						<h5 style="float:right; position:relative; right:5px; display:inline;"><a href="#" onclick="chiudi_modifiche()">Chiudi</a></h5><br>
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
 							<input type=text id='nome' style='width:90%; height:40px;'><br><br>
 							<input type=text id='descrizione' style='width:90%; height:40px;'><br><br>
@@ -85,7 +85,7 @@
 					
 					<!-- DIV NASCOSTO PER L'INSERIMENTO -->
 					<div class="chooseBar" id="insertproduct" style="padding:5px; height:auto; top:15%;">
-						<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_inserimento()">Chiudi</a></h5><br>
+						<h5 style="float:right; position:relative; right:5px; display:inline;"><a href="#" onclick="chiudi_inserimento()">Chiudi</a></h5><br>
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
 							<input type=text id='nome_prod' placeholder="Nome" style='width:90%; height:40px;'><br><br>
 							<input type=text id='descrizione_prod' placeholder="Descrizione" style='width:90%; height:40px;'><br><br>

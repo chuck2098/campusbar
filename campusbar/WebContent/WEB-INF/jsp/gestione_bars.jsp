@@ -38,7 +38,7 @@
 					
 					<!-- div nascosto per modifica -->	
 					<div class="chooseBar" id="viewbar" style="padding:5px; height:auto;">
-						<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_modifiche()">Chiudi</a></h5><br>
+						<h5 style="float:right; position:relative; right:5px; display:inline;"><a href="#" onclick="chiudi_modifiche()">Chiudi</a></h5><br>
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
 							<span>Nome bar </span>
 							<input type=text id='nome' style='width:80%; height:40px;'>
@@ -64,7 +64,7 @@
 					
 					<!-- div nascosto per inserimento -->
 					<div class="chooseBar" id="insertbar" style="padding:5px; height:auto;">
-						<h5 style="float:right; position:absolute; bottom:5px; right:6px;"><a href="#" onclick="chiudi_inserimento()">Chiudi</a></h5><br>
+						<h5 style="float:right; position:relative; right:5px; display:inline;"><a href="#" onclick="chiudi_inserimento()">Chiudi</a></h5><br>
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
 							<span>Nome bar </span>
 							<input type=text id='nome_bar' style='width:80%; height:40px;'>
