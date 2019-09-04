@@ -187,6 +187,22 @@
 							</li>
 						</c:when>
 					</c:choose>
+					<!-- pulsante elimina account(cliente) -->
+					<c:choose>
+						<c:when
+							test="${logUtente!=null && logUtente.getRuolo().getId_ruolo()==3}">
+							<c:choose>
+								<c:when test="${param.active_menu eq 'delAccount'}">
+									<li class="nav-item active">
+								</c:when>
+								<c:otherwise>
+									<li class="nav-item">
+								</c:otherwise>
+							</c:choose>
+							<a class="nav-link" onclick="if(confirm('Sei sicuro di voler eliinare?')) eliminaAccount()">Elimina Account</a>
+							</li>
+						</c:when>
+					</c:choose>
 					
 				<!-- pulsanti per gestione (admin) -->
 					<c:choose>
@@ -235,6 +251,26 @@
 
 	</header>
 	<script>
+	function reloadPage(){
+		resp="";
+		jQuery.ajaxSetup({async:false});
+		
+		$.get(document.URL,
+				function(data){
+					resp=data;
+				});
+		jQuery.ajaxSetup({async:true});
+		return resp;
+	}
+	
+	function eliminaAccount(){
+		 $.get("EliminaAccount", 
+					function(data){
+						$('body').html(reloadPage());
+				});
+	}
+	
+	
 	function ricercaBar(){
 		 
 			document.formRicerca.method = "get";
