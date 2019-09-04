@@ -16,6 +16,7 @@ import model.Edificio;
 import model.EdificioDAO;
 import model.Prodotto;
 import model.ProdottoDAO;
+import model.Utente;
 
 /**
  * Servlet implementation class InsertProductAdmin
@@ -25,6 +26,14 @@ public class InsertProductAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Utente u=(Utente)request.getSession().getAttribute("logUtente");
+		
+		//se l'utente e' loggato oppure non e' un admin
+		if(!(u!=null && u.getRuolo().getId_ruolo()==1)) {
+			response.sendRedirect("login.html");
+			return;
+		}
 		
 		String nome=request.getParameter("nome");
 		String descr=request.getParameter("descr");

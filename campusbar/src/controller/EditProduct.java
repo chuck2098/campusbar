@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.CategoriaDAO;
 import model.Prodotto;
 import model.ProdottoDAO;
+import model.Utente;
 
 /**
  * Servlet implementation class EditProduct
@@ -21,6 +22,15 @@ public class EditProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Utente u=(Utente)request.getSession().getAttribute("logUtente");
+		
+		//se l'utente e' loggato oppure non e' un admin
+		if(!(u!=null && u.getRuolo().getId_ruolo()==1)) {
+			response.sendRedirect("login.html");
+			return;
+		}
+		
 		int id=Integer.parseInt(request.getParameter("id"));
 		String nome=request.getParameter("nome");
 		String descr=request.getParameter("descr");

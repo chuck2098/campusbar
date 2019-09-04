@@ -15,6 +15,7 @@ import model.Categoria;
 import model.CategoriaDAO;
 import model.Edificio;
 import model.EdificioDAO;
+import model.Utente;
 
 /**
  * Servlet implementation class VisualizzaCategorieAdmin
@@ -25,6 +26,15 @@ public class VisualizzaCategorieAdmin extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Utente u=(Utente)request.getSession().getAttribute("logUtente");
+		
+		//se l'utente e' loggato oppure non e' un admin
+		if(!(u!=null && u.getRuolo().getId_ruolo()==1)) {
+			response.sendRedirect("login.html");
+			return;
+		}
+		
 		int id=Integer.parseInt(request.getParameter("id"));
 
 		Categoria cat;

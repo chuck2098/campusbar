@@ -51,7 +51,7 @@
 			response+="<tr>";
 			response+="<td>"+disponib[i]["prodotto"]["nome"]+"</td>";
 			response+="<td>"+"<input type=number id='q"+disponib[i]["prodotto"]["id"]+"' style='width:70px; height:40px; padding-right:2px; border: 3px solid #f1f8f8;' value="+disponib[i]["quantita"]+"></td>";
-			response+="<td>"+"<button id='submitOrder' style='width:auto;' onclick='updateQuantity("+disponib[i]["prodotto"]["id"]+")'>Aggiorna</button></td>";
+			response+="<td>"+"<button id='submitOrder' style='width:auto; padding:12px;' onclick='updateQuantity("+disponib[i]["prodotto"]["id"]+")'>Aggiorna</button></td>";
 			response+="</tr>";
 		}
 		$("#giacenze").html(response);

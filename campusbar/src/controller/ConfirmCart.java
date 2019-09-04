@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
@@ -28,8 +27,8 @@ public class ConfirmCart extends HttpServlet {
 
 		Utente u=(Utente)request.getSession().getAttribute("logUtente");
 		
-		//se l'utente e' loggato     
-		if(u!=null) {
+		//se l'utente e' loggato
+		if(u!=null && u.getRuolo().getId_ruolo()==3) {
 			Ordine ord=new Ordine();
 			OrdineDAO o=new OrdineDAO();
 			DettaglioOrdineDAO det=new DettaglioOrdineDAO();

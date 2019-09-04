@@ -321,6 +321,7 @@ body{
     overflow-y:auto;
     padding-bottom:auto;
     margin-left: -500px;
+    padding-bottom:15px;
     background-color: #808768;
     -webkit-box-shadow: 2px 2px 12px 3px rgba(64,63,64,1);
 }
@@ -508,7 +509,6 @@ footer > .container-fluid{
     	width:95%;
     	left:2%;
     	margin-left:1px;
-    	height:270px;
     }
     
     .form-search .form-inline .form-control{

@@ -41,8 +41,9 @@ public class UpdateQuantity extends HttpServlet {
 			else
 				out.println("Impossibile aggiornare quantità");
 				
-		}
-		
+		}else {
+				response.sendRedirect("login.html");
+			}
 		
 	}
 

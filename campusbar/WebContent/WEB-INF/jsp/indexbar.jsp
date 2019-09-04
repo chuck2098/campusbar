@@ -41,7 +41,7 @@
 					</div>
 					<c:forEach items="${ordini}" var="ordine">
 						<div class="detailsOrder" id="details<c:out value="${ordine.getId_ordine()}"/>" >
-							<h5 style="float:right; position:relative; bottom:5px; right:5px; display:inline;"><a href="#" onclick="CloseDetails(<c:out value="${ordine.getId_ordine()}"/>)">Chiudi</a></h5><br><br>
+						<h5 style="float:right; width:24px; position:relative; right:5px; border:2px solid #eee; cursor:pointer;" onclick="CloseDetails(<c:out value="${ordine.getId_ordine()}"/>)"><a style="text-decoration:none;color:#eee;">x</a></h5><br><br>
 							<h2 style="text-align:center;">Dettaglio Ordine <c:out value="${ordine.getId_ordine()}"/></h2><br>
 							<div class='table-responsive' style='border: 2px solid #f1f8f8; border-radius: 5px; overflow: auto; white-space: nowrap; text-align: center; max-height:100%;'>
 								<table style='width: 95%;'>
@@ -74,7 +74,15 @@
 <jsp:include page="footer.html"/>
 <script>
 
-	var t=setInterval(updateOrders, 5000);
+	var t;
+	startTimer();
+	
+	function stopTimer(){
+		clearTimeout(t);
+	}
+	function startTimer(){
+		t=setInterval(updateOrders, 5000);
+	}
 
  function DelOrder(ord){
 	 $.get("DeleteOrder?id=" +ord, 
@@ -90,13 +98,14 @@
 			});
  }
  function OpenDetails(ord){
-	 clearInterval(t);
+	 stopTimer();
 	 $("#details"+ord).fadeToggle();
 	 $("#details"+ord).visible();
 		//document.getElementById("chooseBars").style.display = "block";
  }
  function CloseDetails(ord){
 	 $("#details"+ord).fadeToggle();
+	 startTimer();
 		//document.getElementById("chooseBars").style.display = "block";
  }
  
@@ -105,10 +114,8 @@
 	 $.get("DeliveryOrder?id=" +ord, 
 				function(data){
 						alert(data);
-						//riavvio il timer
-						t=setInterval(updateOrders, 5000);
 						CloseDetails(ord);
-						updateOrders();
+						startTimer();
 			}); 
  }
  

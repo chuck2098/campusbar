@@ -34,16 +34,17 @@
 							</div>
 						</div>
 					</c:forEach>
-					<a style="cursor:pointer;"><img src="images/add.png" onclick="apri_inserimento()" style="width:256px;" title="inserisci una nuova categoria"></a>
+					<div class="col-lg-3 col-sm-6" style="text-align:center;">
+						<a style="cursor:pointer; margin:auto;"><img src="images/add.png" onclick="apri_inserimento()" style="width:256px;" title="Inserisci nuova categoria"></a>
+					</div>
 					
 					<!-- div nascosto per modifica -->	
-					<div class="chooseBar" id="viewcate" style="padding:5px; height:auto;">
-					<h5 style="float:right; position:relative; right:5px; display:inline;"><a href="#" onclick="chiudi_modifiche()">X</a></h5><br>
+					<div class="chooseBar" id="viewcate">
+					  <h5 style="float:right; width:24px; position:relative; right:5px; border:2px solid #eee; cursor:pointer;" onclick="chiudi_modifiche()"><a style="text-decoration:none;color:#eee;">x</a></h5><br>
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
-							<input type=text id='nome_cat' style='width:90%; height:40px;'>
+							<input type=text id='nome_cat' style='width:85%; height:40px; margin:auto;' class="form-control">
 							<br><br> 
 							
-							<br><br>
 							<form id="uploadForm" enctype='multipart/form-data'>
 	                <input type="file" name="file" id="sampleFile" form="uploadForm"/>
 	                <input type="hidden" id="filename">
@@ -54,13 +55,12 @@
 					</div>
 					
 					<!-- div nascosto per inserimento -->
-					<div class="chooseBar" id="insertcate" style="padding:5px;">
-					<h5 style="float:right; position:relative; right:5px; display:inline;"><a href="#" onclick="chiudi_inserimento()">X</a></h5><br>
+					<div class="chooseBar" id="insertcate">
+						<h5 style="float:right; width:24px; position:relative; right:5px; border:2px solid #eee; cursor:pointer;" onclick="chiudi_inserimento()"><a style="text-decoration:none;color:#eee;">x</a></h5><br>
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
-							<input type=text id='nome_cat' placeholder="nome Categoria" style='width:90%; height:40px;'>
-							<br><br> 
-							
-						</div><br>
+							<input type=text id='nome_categoria' placeholder="Nome categoria" style='width:85%; height:40px; margin:auto;' class="form-control">
+							<br>
+						</div>
 						<button id='submitOrder' style='width:auto; margin:auto; margin-left:15px;' onclick='inserisci()'>Inserisci</button>
 					</div>
 				
@@ -68,12 +68,24 @@
 </div>
 <jsp:include page="footer.html"/>
 <script>
+
+	function reloadPage(){
+		resp="";
+		jQuery.ajaxSetup({async:false});
+		
+		$.get(document.URL,
+				function(data){
+					resp=data;
+				});
+		jQuery.ajaxSetup({async:true});
+		return resp;
+	}
+
 	function eliminaCategoria(cod){
 		 $.get("DeleteCategoria?id=" + cod, 
 					function(data){
-							alert(data);
-							location.reload(true);
-							//$('#bars').load(document.URL +  ' #bars');
+						//alert(data);
+						$('body').html(reloadPage());
 				});
 	} 
 	function apri_modifiche(cod){
@@ -106,18 +118,6 @@
 		}
 	}
 	
-	function reloadPage(){
-		resp="";
-		jQuery.ajaxSetup({async:false});
-		
-		$.get(document.URL,
-				function(data){
-					resp=data;
-				});
-		jQuery.ajaxSetup({async:true});
-		return resp;
-	}
-	
 	//chiama la servlet che si occupa di aggiornare il bar
 	function update(cod){
 			
@@ -136,7 +136,6 @@
 					alert(data);
 					chiudi_modifiche();
 					$('body').html(reloadPage());
-					//$('body').text(reloadPage());
 				});
 	}
 	
@@ -164,15 +163,20 @@
 	}
 	
 	function inserisci(){
+
+		if($("#nome_categoria").val().trim().length==0 ){
+			alert("Compila tutti i campi");
+			return;
+		}
 		
 		$.post("InsertCategoriaAdmin",{
-			nome:$("#nome_cat").val(),
-			
+			nome:$("#nome_categoria").val(),
 		},
 		function(data){
 			alert(data);
 			chiudi_inserimento();
-			$('#bars').load(document.URL +  ' #bars');
+			$('body').html(reloadPage());
+			//$('#bars').load(document.URL +  ' #bars');
 		});
 	}
 	

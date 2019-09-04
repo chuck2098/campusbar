@@ -26,6 +26,14 @@ public class UpdatePassword extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Utente u=(Utente)request.getSession().getAttribute("logUtente");
+		
+		//se l'utente e' loggato oppure non e' un cliente
+		if(!(u!=null && u.getRuolo().getId_ruolo()==3)) {
+			response.sendRedirect("login.html");
+			return;
+		}
+		
+		
 		String pass1= request.getParameter("pass1");
 		String pass2= request.getParameter("pass2");
 		String nuova= request.getParameter("pass3");
@@ -37,7 +45,8 @@ public class UpdatePassword extends HttpServlet {
 			out.println("la nuova password deve essere diversa dalla precedente");
 			
 		}else 
-			if(u!=null && u.getRuolo().getId_ruolo()==3 && (nuova != null && nuova.trim().length() >= 6 && nuova.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9_]{6,25})$"))) {
+			//se la nuova password rispetta il formato,allora la confronto per vedere se e' uguale a quella reinserita 
+			if((nuova != null && nuova.trim().length() >= 6 && nuova.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9_]{6,25})$"))) {
 			
 			if(pass1.equals(pass2)) {
 				if(new UtenteDAO().doUpdatePassword(nuova,u.getMatricola())) {

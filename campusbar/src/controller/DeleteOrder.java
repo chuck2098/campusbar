@@ -32,6 +32,8 @@ public class DeleteOrder extends HttpServlet {
 				out.println("Ordine Eliminato!");
 			else
 				out.println("Impossibile eliminare l'ordine");
+		}else {
+			response.sendRedirect("login.html");
 		}
 	}
 

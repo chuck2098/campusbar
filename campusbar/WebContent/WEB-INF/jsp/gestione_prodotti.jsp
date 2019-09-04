@@ -5,9 +5,79 @@
 <jsp:include page="header.jsp">
 	<jsp:param value="gestione_prod" name="active_menu"/>
 </jsp:include>
+<style>
+.card-title {
+	height: 35px;
+	font-size: 22px;
+}
 
+h5 {
+	float: right;
+	width: 24px;
+	position: relative;
+	right: 5px;
+	border: 2px solid #eee;
+	cursor: pointer;
+}
+
+table-responsive {
+	overflow-x: auto;
+	text-align: center;
+	width: 100%;
+	margin-top: 2px;
+}
+
+#nome{
+width:30%; 
+ display:inline;
+ float:left; 
+ height:40px;'
+}
+#descrizione{
+width:67%; 
+display:inline; 
+float:right;
+height:40px;
+}
+#prezzo{
+	display:inline;
+	float:left; 
+	width:70px; 
+	height:50px; 
+	padding-left:2px; 
+	margin-top:2%;
+}
+#cat_attuale{
+font-size:19px; 
+font-weight:400;
+}
+#categoria_prodotto{
+width:200px; 
+height:40px;
+}
+#nome_prod{
+	width:90%; 
+	height:40px;
+}
+#descrizione_prod{
+	width:90%; 
+	height:40px;
+}
+#prezzo_prod{
+	width:92px; 
+	height:50px; 
+	margin-bottom:20px; 
+	margin-top:15px; 
+	display:inline; 
+	float:left;
+}
+#categoria_prodotto_insert{
+	width:53%; 
+	height:40px;
+}
+</style>
         <div class="container" id="prodotti">
-				<h2 style="text-align:center; cursor:pointer;" onclick="reload()">Gestione Prodotti</h2><br><br>
+				<h2 style="text-align:center; cursor:pointer;" onclick="location.href='GestioneProdottiAdmin'">Gestione Prodotti</h2><br><br>
 				<c:if test="${pattern!=null}">
 					<h4 class="text-center">Risultati per la ricerca '<c:out value="${pattern}"/>' </h4><br>
 				</c:if>
@@ -42,7 +112,7 @@
 										alt="Card image" onerror="src='images/logo.png'">
 								</div>
 								<div class="card-body">
-									<h4 class="card-title" style="height:35px; font-size:22px;" > <c:out value="${prodotto.getNome()}" /> </h4>
+									<h4 class="card-title" > <c:out value="${prodotto.getNome()}" /> </h4>
 			          		<div style="overflow-y: auto; height:35px; margin-bottom:10px;"><p class="card-text"><c:out value="${prodotto.descrizione}" /></p></div>
                        <div class="card-info">
                            <span class="card-price"><c:out value="${prodotto.prezzo}" /></span>
@@ -53,19 +123,22 @@
 							</div>
 						</div>
 					</c:forEach>
-					<a style="cursor:pointer;"><img src="images/add.png" onclick="apri_inserimento()" style="width:256px;" title="Inserisci nuovo bar"></a>
+					<div class="col-lg-3 col-sm-6" style="text-align:center;">
+						<a style="cursor:pointer; margin:auto;"><img src="images/add.png" onclick="apri_inserimento()" style="width:256px;" title="Inserisci nuovo prodotto"></a>
+					</div>
 					
 				<!-- div nascosto per modifica -->	
-					<div class="chooseBar" id="viewproduct" style="padding:5px; height:auto; top:15%;">
-						<h5 style="float:right; position:relative; right:5px; display:inline;"><a href="#" onclick="chiudi_modifiche()">Chiudi</a></h5><br>
-						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
-							<input type=text id='nome' style='width:90%; height:40px;'><br><br>
-							<input type=text id='descrizione' style='width:90%; height:40px;'><br><br>
-							Prezzo <input type=number id='prezzo' style='width:70px; height:50px; padding-left:2px;'><br><br>
-							<span id="cat_attuale" style="font-size:19px;"></span><br><!-- categoria attuale la setto sempre quando mi carico il dettasglio prodotto -->
+					<div class="chooseBar" id="viewproduct">
+						<h5 onclick="chiudi_modifiche()"><a style="text-decoration:none;color:#eee;">x</a></h5><br>
+						<br>
+						<div class='table-responsive'>
+							<input type=text id='nome' class="form-control">
+							<input type=text id='descrizione' class="form-control"><br><br><br>
+							<input type=number id='prezzo' min=0 step=0.01 placeholder="Prezzo" class="form-control"><br>
+							<span id="cat_attuale"></span><br><br><!-- categoria attuale la setto sempre quando mi carico il dettasglio prodotto -->
 							<c:if test="${categorie!=null }"> <!-- se non sto nella categoria specifica,le carico tutte -->
 								Cambia categoria:
-								<select id="categoria_prodotto" style="width:200px; height:40px;" class="browser-default custom-select">
+								<select id="categoria_prodotto" class="browser-default custom-select">
 									<option></option>
 									<c:forEach items="${categorie}" var="categoria">
 									 	<option  value="<c:out value="${categoria.getId_categoria()}"/>"> <c:out value="${categoria.getNomeCategoria()}"/> </option>
@@ -84,14 +157,14 @@
 					</div>
 					
 					<!-- DIV NASCOSTO PER L'INSERIMENTO -->
-					<div class="chooseBar" id="insertproduct" style="padding:5px; height:auto; top:15%;">
-						<h5 style="float:right; position:relative; right:5px; display:inline;"><a href="#" onclick="chiudi_inserimento()">Chiudi</a></h5><br>
-						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
-							<input type=text id='nome_prod' placeholder="Nome" style='width:90%; height:40px;'><br><br>
-							<input type=text id='descrizione_prod' placeholder="Descrizione" style='width:90%; height:40px;'><br><br>
-							Prezzo <input type=number id='prezzo_prod' style='width:70px; height:50px; padding-left:2px;'><br><br>
-							Categoria:
-							<select id="categoria_prodotto_insert" style="width:200px; height:40px;" class="browser-default custom-select">
+					<div class="chooseBar" id="insertproduct" >
+					 <h5 onclick="chiudi_inserimento()"><a style="text-decoration:none;color:#eee;">x</a></h5><br>
+						<div class='table-responsive'>
+							<input type=text id='nome_prod' placeholder="Nome" class="form-control"><br><br>
+							<input type=text id='descrizione_prod' placeholder="Descrizione" class="form-control"><br>
+							<input type=number id='prezzo_prod' min=0 step=0.01 placeholder="Prezzo" class="form-control">
+							<h6>Categoria</h6>
+							<select id="categoria_prodotto_insert" class="browser-default custom-select">
 								<c:choose>
 									<c:when test="${categorie!=null }">
 										<option></option>
@@ -112,7 +185,20 @@
 			</div>
 <jsp:include page="footer.html"/>
 <script>
-//ritorna i prodotti dell acategoria selezionata
+
+	function reloadPage(){
+		resp="";
+		jQuery.ajaxSetup({async:false});
+		
+		$.get(document.URL,
+				function(data){
+					resp=data;
+				});
+		jQuery.ajaxSetup({async:true});
+		return resp;
+	}
+
+	//ritorna i prodotti della categoria selezionata
 	function uploadProdotti(){
 		var cat=$('#categorie').find(":selected").val();
 		window.location.href="GestioneProdottiAdmin?id=" + cat;	
@@ -121,7 +207,8 @@
 	function eliminaProdotto(cod){
 		 $.get("DeleteProdotto?id=" + cod, 
 					function(data){
-							$('#prodotti').load(document.URL +  ' #prodotti');
+							//$('#prodotti').load(document.URL +  ' #prodotti');
+						$('body').html(reloadPage());
 				});
 	}
 	
@@ -150,6 +237,7 @@
 		}
 	}
 	
+	//funzione che chiama la servlet di modifica
 	function update(cod){
 		
 		if($("#nome").val().trim().length==0 || $("#descrizione").val().trim()==0 || $("#prezzo").val().trim()==0 ){
@@ -170,7 +258,7 @@
 				function(data){
 					alert(data);
 					chiudi_modifiche();
-					window.location.href="GestioneProdottiAdmin?id="+cat;
+					$('body').html(reloadPage());
 				});
 	}
 	
@@ -237,10 +325,6 @@
 	
 	function chiudi_inserimento(){
 		$("#insertproduct").fadeOut();
-	}
-	
-	function reload(){
-		location.href="GestioneProdottiAdmin";
 	}
 </script>
 </body>

@@ -33,8 +33,8 @@ public class DelToCart extends HttpServlet {
 		
 		Utente u=(Utente)request.getSession().getAttribute("logUtente");
 		
-		//se l'utente e' loggato
-		if(u!=null) {
+		//se l'utente e' loggato ed e' un cliente
+		if(u!=null && u.getRuolo().getId_ruolo()==3) {
 			
 			DettaglioOrdineDAO d=new DettaglioOrdineDAO();
 			boolean r=d.doDeleteById(Integer.parseInt(id_prod));

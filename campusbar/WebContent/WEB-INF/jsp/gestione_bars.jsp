@@ -34,27 +34,27 @@
 							</div>
 						</div>
 					</c:forEach>
-					<a style="cursor:pointer;"><img src="images/add.png" onclick="apri_inserimento()" style="width:256px;" title="Inserisci nuovo bar"></a>
+					<div class="col-lg-3 col-sm-6" style="text-align:center;">
+						<a style="cursor:pointer; margin:auto;"><img src="images/add.png" onclick="apri_inserimento()" style="width:256px;" title="Inserisci nuovo bar"></a>
+					</div>
 					
 					<!-- div nascosto per modifica -->	
-					<div class="chooseBar" id="viewbar" style="padding:5px; height:auto;">
-						<h5 style="float:right; position:relative; right:5px; display:inline;"><a href="#" onclick="chiudi_modifiche()">Chiudi</a></h5><br>
+					<div class="chooseBar" id="viewbar">
+						<h5 style="float:right; width:24px; position:relative; right:5px; border:2px solid #eee; cursor:pointer;" onclick="chiudi_modifiche()"><a style="text-decoration:none;color:#eee;" >x</a></h5><br>
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
-							<span>Nome bar </span>
-							<input type=text id='nome' style='width:80%; height:40px;'>
+							<input type=text id='nome' placeholder="Nome bar" style='width:80%; height:40px; display:inline;' class="form-control">
 							<br><br> 
-							<span>Orario chiusura </span>
-							<input type=number id='orario' style='width:70px; height:50px;'>&nbsp;&nbsp;&nbsp;
+							<span>Chiude alle</span>
+							<input type=number id='orario' min="0" style='width:70px; height:40px; display:inline; margin-bottom:15px;' class="form-control">&nbsp;&nbsp;&nbsp;
 							<span id="matr_attuale" style="font-size:19px;"></span>
 							<br><br>
-							<span>Email </span>
-							<input type=email id='email' style='width:80%; height:50px;'>
+							<input type=email id='email' style='width:80%; height:40px; display:inline;' class="form-control">
 							<br><br>
 							<span>Password </span>
-							<input type=password id='pass' style='width:50%; height:50px;'>
+							<input type=password id='pass' style='width:50%; height:40px; display:inline;' class="form-control">
 							<br><br>
 							<form id="uploadForm" enctype='multipart/form-data'>
-	                <input type="file" name="file" id="sampleFile" form="uploadForm"/>
+	                <input type="file" name="file" id="sampleFile" form="uploadForm" />
 	                <input type="hidden" id="filename">
 	                <input type="button" onclick="uploadImg()" value="Carica" />
 	            </form>
@@ -63,20 +63,18 @@
 					</div>
 					
 					<!-- div nascosto per inserimento -->
-					<div class="chooseBar" id="insertbar" style="padding:5px; height:auto;">
-						<h5 style="float:right; position:relative; right:5px; display:inline;"><a href="#" onclick="chiudi_inserimento()">Chiudi</a></h5><br>
+					<div class="chooseBar" id="insertbar">
+						<h5 style="float:right; width:24px; position:relative; right:5px; border:2px solid #eee; cursor:pointer;" onclick="chiudi_inserimento()"><a style="text-decoration:none;color:#eee;" >x</a></h5><br>
 						<div class='table-responsive' style='overflow-x: auto; text-align: center; width:100%; margin-top:2px;'>
-							<span>Nome bar </span>
-							<input type=text id='nome_bar' style='width:80%; height:40px;'>
+							<input type=text id='nome_bar' placeholder="Nome bar" style='width:90%; height:40px; display:inline;' class="form-control">
 							<br><br> 
-							<span>Orario chiusura </span>
-							<input type=number id='orario_bar' placeholder="00" style='width:70px; height:50px;'>&nbsp;
-							Matricola <input type=text id='matricola_bar' style='width:30%; height:50px;'><br><br>
-							<span>Email</span>
-							<input type=email id='email_bar' style='width:80%; height:50px;'>
+							<span>Chiude alle</span>
+							<input type=number id='orario_bar' min="0" placeholder="00" style='width:70px; height:50px; display:inline; margin-right:3%;' class="form-control">
+							<input type=text id='matricola_bar' placeholder="Matricola" style='width:40%; height:50px; display:inline; padding-left:5px;' class="form-control"><br><br>
+							<input type=email id='email_bar' placeholder="Email" style='width:90%; height:40px; display:inline;' class="form-control">
 							<br><br>
 							<span>Password</span>
-							<input type=password id='password_bar' style='width:60%; height:50px;'>
+							<input type=password id='password_bar' style='width:67%; height:40px; display:inline;' class="form-control">
 							<br><br>
 						</div><br>
 						<button id='submitOrder' style='width:auto; margin:auto; margin-left:15px;' onclick='inserisci()'>Inserisci</button>
@@ -86,12 +84,24 @@
 </div>
 <jsp:include page="footer.html"/>
 <script>
+
+	function reloadPage(){
+		resp="";
+		jQuery.ajaxSetup({async:false});
+		
+		$.get(document.URL,
+				function(data){
+					resp=data;
+				});
+		jQuery.ajaxSetup({async:true});
+		return resp;
+	}
 	
 	function eliminaBar(cod){
 		 $.get("DeleteBar?id=" + cod, 
 					function(data){
-							alert(data);
-							$('#bars').load(document.URL +  ' #bars');
+							//$('#bars').load(document.URL +  ' #bars');
+							$('body').html(reloadPage());
 				});
 	}
 	function apri_modifiche(cod){
@@ -133,10 +143,13 @@
 	//chiama la servlet che si occupa di aggiornare il bar
 	function update(cod){
 			
-		if($("#nome").val().trim().length==0 || $("#orario").val().trim().length==0){
-			alert("Compila tutti i campi");
-			return;
-		}
+		if($("#nome").val().trim().length==0 || $("#orario").val().trim().length==0 || 
+				 $("#email").val().trim().length==0 || $("#pass").val().trim().length==0 || 
+				 $("#matr_attuale").val().trim().length==0){
+				
+					alert("Compila tutti i campi");
+					return;
+			}
 
 				$.post("Editbar",{
 					id:cod,
@@ -149,7 +162,7 @@
 				function(data){
 					alert(data);
 					chiudi_modifiche();
-					$('#bars').load(document.URL +  ' #bars');
+					$('body').html(reloadPage());
 				});
 	}
 	
@@ -178,6 +191,14 @@
 	
 	function inserisci(){
 		
+		if($("#nome_bar").val().trim().length==0 || $("#orario_bar").val().trim().length==0 || 
+			 $("#email_bar").val().trim().length==0 || $("#password_bar").val().trim().length==0 || 
+			 $("#matricola_bar").val().trim().length==0){
+			
+				alert("Compila tutti i campi");
+				return;
+		}
+		
 		$.post("InsertBar",{
 			nome:$("#nome_bar").val(),
 			orario:$("#orario_bar").val(),
@@ -188,7 +209,7 @@
 		function(data){
 			alert(data);
 			chiudi_inserimento();
-			$('#bars').load(document.URL +  ' #bars');
+			$('body').html(reloadPage());
 		});
 	}
 	
