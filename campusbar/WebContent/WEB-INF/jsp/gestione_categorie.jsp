@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="header.jsp">
 	<jsp:param value="gestione_categorie" name="active_menu"/>
-</jsp:include>
+</jsp:include> 
 
         <div class="container" id="bars">
 				<h2 style="text-align:center; cursor:pointer;" onclick="location.reload()">Gestione Categorie </h2><br><br>
