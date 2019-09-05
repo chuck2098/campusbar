@@ -19,7 +19,7 @@
 			<div class="row text-center">
 				<div class="logo">
 					<a class="navbar-brand" href="#"> <img src="images/logo.png"
-						style="width: 150px" alt="Logo">
+						style="width: 200px" alt="Logo">
 					</a>
 				</div>
 				<c:choose>
