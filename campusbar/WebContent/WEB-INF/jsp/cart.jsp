@@ -86,7 +86,7 @@
 			});
 	}
 	
-	function conferma(){
+	function conferma(){ 
 		
 		var not=$.trim($("#messaget").val());
 		var id=$('#bars').find(":selected").val();
