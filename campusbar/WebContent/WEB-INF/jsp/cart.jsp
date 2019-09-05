@@ -48,14 +48,14 @@
            		</c:if>
          		<c:choose> 
            			<c:when test="${logUtente==null}">
-           				<button id="submitOrder" onclick="confirm()">Prosegui</button>
+           				<button id="submitOrder" onclick="conferma()">Prosegui</button>
            			</c:when>
            			<c:otherwise>
 	           			<c:choose>
 	          		 		<c:when test="${edificioDefault!=null}">
 	         						<h2>Tutti i prodotti sono disponibili nel tuo bar!</h2>
 	         						<input type="hidden" id="ed" value="${cart.get(0).getCliente().getEdificio().getId_edificio()}">
-	         						<button id="submitOrder" onclick="confirm()">Conferma Ordine</button><br>oppure <br> 
+	         						<button id="submitOrder" onclick="conferma()">Conferma Ordine</button><br>oppure <br> 
 	         					</c:when>
 	         					<c:otherwise>
 	         						<h2>I prodotti non sono disponibili nel tuo bar!</h2> Scegli un altro bar:
@@ -70,7 +70,7 @@
 					<div class="chooseBar" id="chooseBars">
 						<h3>Scegli dove ritirare i prodotti</h3><br>
 						Prodotti disponibili nei seguenti bar: <select id="bars" class="browser-default custom-select"></select><br><br>
-						<button id="submitOrder" onclick="confirm()">Conferma</button>
+						<button id="submitOrder" onclick="conferma()">Conferma</button>
 						<button id="closePoupup" onclick="nascondiDiv()">Chiudi</button>
 					</div>
 				</div>
@@ -86,7 +86,7 @@
 			});
 	}
 	
-	function confirm(){
+	function conferma(){
 		
 		var not=$.trim($("#messaget").val());
 		var id=$('#bars').find(":selected").val();
