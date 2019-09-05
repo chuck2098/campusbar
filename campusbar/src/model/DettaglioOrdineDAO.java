@@ -191,7 +191,7 @@ public class DettaglioOrdineDAO {
 	}
 
 	//potrebbe restituire prodotti con id null,qauesto eprche' sono stati eliminati.
-	public ArrayList<Totale> doRetrieveAmountByEdificio(Edificio ed) {	
+	public ArrayList<Totale> doRetrieveAmountByEdificioAndByDateStartDateEnd(Edificio ed,String dateStart,String dateEnd) {	
 		
 		ArrayList<Totale> totali= new ArrayList<>();
 		Totale t;
@@ -200,12 +200,14 @@ public class DettaglioOrdineDAO {
 			PreparedStatement ps = con
 					.prepareStatement("SELECT id_prodotto,quantita,prezzo_acquisto" + 
 										"FROM dettaglio_ordini d,ordini o " + 
-										"WHERE d.id_ordine=o.id_ordine AND consegnato=? AND id_edificio=? " + 
+										"WHERE d.id_ordine=o.id_ordine AND consegnato=? AND id_edificio=? AND data_ordine BETWEEN ? AND ?" + 
 										"GROUP BY id_prodotto " + 
 										"ORDER BY totale DESC ");
 
 			ps.setBoolean(1, true); //gli ordini consegnati
 			ps.setInt(2,ed.getId_edificio());
+			ps.setString(3,dateStart);
+			ps.setString(4,dateEnd);
 			
 			ResultSet rs = ps.executeQuery();
 
