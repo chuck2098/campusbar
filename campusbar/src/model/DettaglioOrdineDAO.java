@@ -200,7 +200,7 @@ public class DettaglioOrdineDAO {
 			PreparedStatement ps = con
 					.prepareStatement("SELECT id_prodotto,quantita,prezzo_acquisto" + 
 										"FROM dettaglio_ordini d,ordini o " + 
-										"WHERE d.id_ordine=o.id_ordine AND consegnato=? AND id_edificio=? AND data_ordine BETWEEN ? AND ?" + 
+										"WHERE d.id_ordine=o.id_ordine AND consegnato=? AND id_edificio=? AND data_ordine BETWEEN ? AND ? " + 
 										"GROUP BY id_prodotto " + 
 										"ORDER BY totale DESC ");
 
