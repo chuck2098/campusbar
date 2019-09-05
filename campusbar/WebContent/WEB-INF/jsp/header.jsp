@@ -215,7 +215,7 @@
 									<li class="nav-item">
 								</c:otherwise>
 							</c:choose>
-							<a class="nav-link" onclick="if(confirm('Sei sicuro di voler eliinare?')) eliminaAccount()">Elimina Account</a>
+							<a class="nav-link" onclick="if(confirm('Sei sicuro di voler eliminare?')) eliminaAccount()">Elimina Account</a>
 							</li>
 						</c:when>
 					</c:choose>
