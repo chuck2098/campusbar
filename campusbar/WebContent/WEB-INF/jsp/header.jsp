@@ -267,23 +267,9 @@
 
 	</header>
 	<script>
-	function reloadPage(){
-		resp="";
-		jQuery.ajaxSetup({async:false});
-		
-		$.get(document.URL,
-				function(data){
-					resp=data;
-				});
-		jQuery.ajaxSetup({async:true});
-		return resp;
-	}
 	
 	function eliminaAccount(){
-		 $.get("EliminaAccount", 
-					function(data){
-						$('body').html(reloadPage());
-				});
+			location.href="EliminaAccount";
 	}
 	
 	
