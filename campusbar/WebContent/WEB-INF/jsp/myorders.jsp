@@ -47,7 +47,7 @@
 								onclick="OpenDetails(<c:out value="${ordine.getId_ordine()}"/>)">Dettagli</a></td>
 							<c:choose>
 								<c:when test="${ordine.getConsegnato()==true}">
-									<td>si</td>
+									<td>-</td>
 								</c:when>
 								<c:otherwise>
 									<td><a href=#

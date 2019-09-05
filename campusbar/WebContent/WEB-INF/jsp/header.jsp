@@ -81,8 +81,11 @@
 					</c:choose>
 					<c:choose>
 						<c:when test="${logUtente.getRuolo().getId_ruolo()==3 || logUtente==null}">
-							<span class="head-cart"><i class="fas fa-shopping-cart">&nbsp;&nbsp;<a
-									href="Carrello">Carrello</a></i></span>
+							<span class="head-cart"><i class="fas fa-shopping-cart">&nbsp;&nbsp;
+							<c:if test="${cart!=null}">
+								<c:set value="${cart.size()}" var="num_elem" scope="page"/>
+							</c:if>
+							<a href="Carrello">Carrello(<c:out value="${num_elem }"/>)</a></i></span>
 						</c:when>
 					</c:choose>
 				</div>
@@ -125,11 +128,11 @@
 					<a class="nav-link" href="Categorie">Categorie</a>
 					</li>
 
-					<!-- pulsante ordini -->
+					
 					<c:choose>
-						<c:when
-							test="${logUtente!=null && logUtente.getRuolo().getId_ruolo()==2}">
-
+						<c:when test="${logUtente!=null && logUtente.getRuolo().getId_ruolo()==2}">
+							
+							<!-- pulsante ordini -->
 							<c:choose>
 								<c:when test="${param.active_menu eq 'lista_ordini'}">
 									<li class="nav-item active">
@@ -152,8 +155,21 @@
 							</c:choose>
 							<a class="nav-link" href="GestioneQuantita">Gestione Quantità</a>
 							</li>
+							
+						<!-- pulsante totali per prodotto(bar) -->
+							<c:choose>
+								<c:when test="${param.active_menu eq 'totali_per_prodotto'}">
+									<li class="nav-item active">
+								</c:when>
+								<c:otherwise>
+									<li class="nav-item">
+								</c:otherwise>
+							</c:choose>
+							<a class="nav-link" href="VisualizzaTotaliBar">Totali</a>
+							</li>
 						</c:when>
 					</c:choose>
+				
 
 					<!-- pulsante miei ordini(cliente) -->
 					<c:choose>
@@ -251,23 +267,9 @@
 
 	</header>
 	<script>
-	function reloadPage(){
-		resp="";
-		jQuery.ajaxSetup({async:false});
-		
-		$.get(document.URL,
-				function(data){
-					resp=data;
-				});
-		jQuery.ajaxSetup({async:true});
-		return resp;
-	}
 	
 	function eliminaAccount(){
-		 $.get("EliminaAccount", 
-					function(data){
-						$('body').html(reloadPage());
-				});
+			location.href="EliminaAccount";
 	}
 	
 	

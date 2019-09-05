@@ -163,29 +163,65 @@ public class DettaglioOrdineDAO {
 		
 	}
 	//30 prodotti piu venduti
-		public List<Prodotto> doRetrieveProductMostSold() {	
-			try(Connection con = ConnectionPool.getConnection()){
-				
-				PreparedStatement ps = con
-						.prepareStatement("SELECT sum(quantita) AS quantita, id_prodotto " + 
-											"FROM dettaglio_ordini " + 
-											"WHERE prodotto_ordinato =1 AND id_prodotto IS NOT NULL " + 
-											"GROUP BY id_prodotto " + 
-											"ORDER BY quantita DESC " + 
-											"LIMIT 30 ");
-				
-				ArrayList<Prodotto> prodotti = new ArrayList<>();
-				ResultSet rs = ps.executeQuery();
-				
-				while (rs.next()) {
-					int id = rs.getInt(2);	
-					prodotti.add(new ProdottoDAO().doRetrieveById(id));
-				}
-				return prodotti;
-			} catch (SQLException e) {
-				throw new RuntimeException(e);
+	//id_prodotto is not null poiche' quando si elimina un prodotto 
+	//le righe relative ai dettagli_ordine con quel prodotto, rimangono(per poter fare i totali) 
+	//ma l'id_prodotto viene settato a NULL
+	public List<Prodotto> doRetrieveProductMostSold() {	
+		try(Connection con = ConnectionPool.getConnection()){
+
+			PreparedStatement ps = con
+					.prepareStatement("SELECT sum(quantita) AS quantita, id_prodotto " + 
+										"FROM dettaglio_ordini " + 
+										"WHERE prodotto_ordinato =1 AND id_prodotto IS NOT NULL " + 
+										"GROUP BY id_prodotto " + 
+										"ORDER BY quantita DESC " + 
+										"LIMIT 30 ");
+
+			ArrayList<Prodotto> prodotti = new ArrayList<>();
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt(2);	
+				prodotti.add(new ProdottoDAO().doRetrieveById(id));
 			}
+			return prodotti;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
+	}
+
+	//potrebbe restituire prodotti con id null,qauesto eprche' sono stati eliminati.
+	public ArrayList<Totale> doRetrieveAmountByEdificio(Edificio ed) {	
+		
+		ArrayList<Totale> totali= new ArrayList<>();
+		Totale t;
+		try(Connection con = ConnectionPool.getConnection()){
+
+			PreparedStatement ps = con
+					.prepareStatement("SELECT id_prodotto,quantita,prezzo_acquisto" + 
+										"FROM dettaglio_ordini d,ordini o " + 
+										"WHERE d.id_ordine=o.id_ordine AND consegnato=? AND id_edificio=? " + 
+										"GROUP BY id_prodotto " + 
+										"ORDER BY totale DESC ");
+
+			ps.setBoolean(1, true); //gli ordini consegnati
+			ps.setInt(2,ed.getId_edificio());
 			
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				t=new Totale();
+				t.setProdotto(new ProdottoDAO().doRetrieveById(rs.getInt(1)));
+				t.setQuantita(rs.getInt(2));
+				t.setPrezzo_acquisto(rs.getFloat(3));
+				totali.add(t);
+			}
+			return totali;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}	
+
 	
 }
