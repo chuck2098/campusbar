@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp">
 	<jsp:param value="categorie" name="active_menu" />
+	<jsp:param value="Categorie" name="title"/>
 </jsp:include>
 
 <section class="content">

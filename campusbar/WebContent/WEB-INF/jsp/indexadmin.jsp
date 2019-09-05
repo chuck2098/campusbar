@@ -4,6 +4,7 @@
 	uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp">
 	<jsp:param value="home" name="active_menu"/>
+	<jsp:param value="Home" name="title"/>
 </jsp:include>
 
 			<section class="content">

@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="header.jsp">
 	<jsp:param value="gestione_quantita" name="active_menu"/>
+	<jsp:param value="Gestione Quantita'" name="title"/>
 </jsp:include>
 
         <div class="container" id="orders">

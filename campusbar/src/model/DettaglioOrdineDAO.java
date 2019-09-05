@@ -114,7 +114,7 @@ public class DettaglioOrdineDAO {
 			
 			PreparedStatement ps = con.prepareStatement("SELECT id_dettaglio_ordine,nota_prodotto,quantita,prezzo_acquisto,id_prodotto,id_utente " + 
 														"FROM dettaglio_ordini " + 
-														"WHERE id_ordine=?");
+														"WHERE id_ordine=? AND id_utente IS NOT NULL");//metto il not null perche se un utente elimina il suo account il bar non deve vedere i suoi ordini
 			
 			ps.setInt(1,id_order);
 			

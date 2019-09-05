@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="header.jsp">
 	<jsp:param value="gestione_prod" name="active_menu"/>
+	<jsp:param value="Gestione Prodotti" name="title"/>
 </jsp:include>
 <style>
 .card-title {
