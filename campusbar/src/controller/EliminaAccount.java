@@ -26,7 +26,7 @@ public class EliminaAccount extends HttpServlet {
 		
 		if(u!=null && u.getRuolo().getId_ruolo() == 3 ) {
 			if(new UtenteDAO().doDeleteUser(u)) {
-				request.getSession().invalidate();
+				request.getSession().invalidate(); 
 				response.sendRedirect(".");
 				out.println("account eliminato");
 			}else
