@@ -200,14 +200,13 @@ public class DettaglioOrdineDAO {
 			PreparedStatement ps = con
 					.prepareStatement("SELECT id_prodotto,quantita,prezzo_acquisto " + 
 										"FROM dettaglio_ordini d,ordini o " + 
-										"WHERE d.id_ordine=o.id_ordine AND consegnato=? AND id_edificio=? AND data_ordine BETWEEN ? AND ? " + 
-										"GROUP BY id_prodotto " + 
-										"ORDER BY totale DESC ");
+										"WHERE d.id_ordine=o.id_ordine AND consegnato=? AND id_edificio=? AND data_ordine >=? AND data_ordine<=?"
+									 );
 
 			ps.setBoolean(1, true); //gli ordini consegnati
 			ps.setInt(2,ed.getId_edificio());
-			ps.setString(3,dateStart);
-			ps.setString(4,dateEnd);
+			ps.setString(3,dateStart+ " 00:00:00");
+			ps.setString(4,dateEnd+" 23:59:59");
 			
 			ResultSet rs = ps.executeQuery();
 
@@ -223,7 +222,7 @@ public class DettaglioOrdineDAO {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-	}	
+	}		
 
 	
 }

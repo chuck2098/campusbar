@@ -26,13 +26,10 @@
 											<td ><input type="password" class="form-control" minlength="6" id="3" name="pass3" placeholder="nuova Password" onchange=" return ValidatePassword(password)" required="required"></td>
 										</tr>
 										<tr>
-											<td><button type="submit" onclick="Update(); ValidatePassword()" class="btn">Cambia</button></td>
+											<td><br><button type="submit" onclick="Update(); ValidatePassword()" id="submitOrder" style="padding:8px;">Cambia</button></td>
 										</tr>
 									</thead>
-								
-								
-								
-								
+
 							</table>
 						</div>
 					</div>
