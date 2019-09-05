@@ -17,9 +17,9 @@
 	<header>
 		<nav class="container-fluid ">
 			<div class="row text-center">
-				<div class="logo">
-					<a class="navbar-brand" href="#"> <img src="images/logo.png"
-						style="width: 200px" alt="Logo">
+				<div class="logo" style="margin-top:-20px; margin-bottom:5px;">
+					<a class="navbar-brand" href="#" style="border-bottom:4px solid #5A565E; border-radius:170px; padding:26px; margin:auto;"> <img src="images/logo.png"
+						style=" margin-top:10px;width: 150px" alt="Logo">
 					</a>
 				</div>
 				<c:choose>
@@ -42,7 +42,7 @@
 				</c:choose>
 				<div class="form-search">
 					<!--mt=margin top    mr=margin-right-->
-					<form class="form-inline <c:out value="${admin}"/> mt-2" action="<c:out value="${action}"/>" name="formRicerca" method="get">
+					<form class="form-inline <c:out value="${admin}"/> mt-2" action="<c:out value="${action}"/>" name="formRicerca" method="get" >
 						<input class="form-control <c:out value="${admin}"/>" placeholder="<c:out value="${placeholder}"/>" name="ricerca"><br>
 							<c:choose>
 								<c:when test="${admin!=null}">
