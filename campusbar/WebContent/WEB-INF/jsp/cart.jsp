@@ -78,11 +78,26 @@
 <jsp:include page="footer.html"/>
 <script>
 
+
+	function reloadPage(){
+		resp="";
+		jQuery.ajaxSetup({async:false});
+		
+		$.get("Carrello");
+		
+		$.get(document.URL,
+				function(data){
+					resp=data;
+				});
+		jQuery.ajaxSetup({async:true});
+		return resp;
+	}
+
 	function del(cod){
 		$.get("DelToCart?id=" + cod,
 				function(data){
 						alert(data);
-						$('#cart').load(document.URL +  ' #cart');
+						$('body').html(reloadPage());
 			});
 	}
 	

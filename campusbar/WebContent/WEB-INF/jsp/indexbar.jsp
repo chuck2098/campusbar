@@ -55,7 +55,10 @@
                      </tr>
 										</thead>
 									<tbody>
+									<c:set var="tot" value="0" scope="page"/>
 									 <c:forEach items="${ordine.getDettaglio()}" var="dettaglio">
+					      	   <c:set var="t" value="${dettaglio.getPrezzo_acquisto()*dettaglio.getQuantita()}" scope="page"/>
+					      	   <c:set var="tot" value="${(tot + t)}" scope="page"/>
 									 		<tr style="font-weight: bold;">
 									 			<td><c:out value="${dettaglio.getProdotto().getId()}"/></td>
 										 		<td><img width='100px' src='images/<c:out value="${dettaglio.getProdotto().getId()}"/>.png'><br><c:out value="${dettaglio.getProdotto().getNome()}"/></td>
@@ -67,6 +70,8 @@
 									</tbody>
 								</table>
 							</div><br>
+							<span>Totale da pagare: <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${tot}"/> €</span>
+							<br><br>
 							<h4><button id="submitOrder" style="border:3px solid #f1f8ee;" onclick="deliver(<c:out value="${ordine.getId_ordine()}"/>)">Consegna</button></h4>
 						</div>
 				</c:forEach> 

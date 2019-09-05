@@ -146,7 +146,11 @@ public ArrayList<Ordine> doRetrieveOrderConfirmedByUser(Utente u) {
 		}
 	}
 
-	//non consente di eliminare ordini conseganti.
+	/*
+	 * non consente di eliminare ordini conseganti.
+	 * @return true se l'ordine non cosegnato e' stato eliminato
+	 * @return false se l'ordine non e' stato eliminato o era gia' consegnato 
+	 */
 	public boolean doDeleteById(int id) {
 		
 		try(Connection con = ConnectionPool.getConnection()) {

@@ -57,6 +57,21 @@
         </section>
 <jsp:include page="footer.html"/>
 <script> 
+
+	function reloadPage(){
+		resp="";
+		jQuery.ajaxSetup({async:false});
+		
+		$.get("Carrello");
+		
+		$.get(document.URL,
+				function(data){
+					resp=data;
+				});
+		jQuery.ajaxSetup({async:true});
+		return resp;
+	}
+	
 	function addToCart(id){
 		
 		var quant=document.getElementById("quant"+id).value;
@@ -73,6 +88,7 @@
 		$.get("AddToCart?id=" + id + "&quant=" + quant + "&nota=" + not, 
 			function(data){
 					alert(data);
+					$('body').html(reloadPage());
 		});
 	
 	}
