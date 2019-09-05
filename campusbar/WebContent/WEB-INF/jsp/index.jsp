@@ -7,6 +7,12 @@
 	<jsp:param value="Home" name="title"/>
 </jsp:include>
 
+   <div id="alertBox">
+        
+        <label id="msg"></label><p>
+            <input value="ok" id="btnA" type="button" onClick='CloseAlert();'></p>
+    </div>
+
 			<section class="content">
 		<!-- if per verificare il titolo da mettere  -->
 		<c:choose>      
@@ -59,6 +65,16 @@
 <jsp:include page="footer.html"/>
 <script> 
 
+	function CloseAlert(){
+		$("#alertBox").hide();
+		$('body').html(reloadPage());
+	}
+	
+	function OpenAlert(){
+		$("#alertBox").show(70);
+	}
+
+
 	function reloadPage(){
 		resp="";
 		jQuery.ajaxSetup({async:false});
@@ -82,14 +98,15 @@
 		document.getElementById("nota"+id).value="";
 		
 		if(!quant){
-			alert("inserisci quantita'");
+			$("#msg").text("Inserisci Quantita'");
+			OpenAlert();
 			return;
 		}
 
 		$.get("AddToCart?id=" + id + "&quant=" + quant + "&nota=" + not, 
 			function(data){
-					alert(data);
-					$('body').html(reloadPage());
+				$("#msg").text(data);
+				OpenAlert();
 		});
 	
 	}

@@ -7,6 +7,12 @@
 	<jsp:param value="Lista Ordini" name="title"/>
 </jsp:include>
 
+    <div id="alertBox">
+        
+        <label id="msg"></label><p>
+            <input value="ok" id="btnA" type="button" onClick='CloseAlert();'></p>
+    </div>
+    
 <div class="container" id="orders">
 	<h2 style="text-align: center;">Lista Ordini</h2>
 	<br>
@@ -110,6 +116,14 @@
 </div>
 <jsp:include page="footer.html" />
 <script>
+	function CloseAlert(){
+		$("#alertBox").hide();
+		
+	}
+	
+	function OpenAlert(){
+		$("#alertBox").show(70);
+	}
 
 	var t=setInterval(updateOrders, 5000);
  function OpenDetails(ord){
@@ -125,7 +139,8 @@
  function DelOrder(ord){
 	 $.get("DeleteOrder?id=" +ord, 
 				function(data){
-						alert(data);
+						 $("#msg").text("Compila tutti i campi");
+						 OpenAlert();
 						$('#orders').load(document.URL +  ' #orders');
 			});
  }

@@ -7,6 +7,13 @@
 	<jsp:param value="Gestione Quantita'" name="title"/>
 </jsp:include>
 
+    <div id="alertBox">
+        
+        <label id="msg"></label><p>
+            <input value="ok" id="btnA" type="button" onClick='CloseAlert();'></p>
+    </div>
+
+
         <div class="container" id="orders">
 				<h2 style="text-align:center;">Gestione quantità prodotti </h2><br><br>
 				<h3 style="text-align:center;">Categoria Alimento:
@@ -34,6 +41,14 @@
 			</div>
 <jsp:include page="footer.html"/>
 <script>
+
+	function CloseAlert(){
+		$("#alertBox").hide();
+	}
+	
+	function OpenAlert(){
+		$("#alertBox").show(70);
+	}
 	function uploadDisponibilita(){
 		
 		var cat=$('#categorie').find(":selected").val();
@@ -62,7 +77,8 @@
 	 var q=$("#q"+prod).val();
 	 $.get("UpdateQuantity?id=" + prod+"&q="+q, 
 				function(data){
-						alert(data);
+					 $("#msg").text(data);
+					 OpenAlert();
 			});
  }
 </script>

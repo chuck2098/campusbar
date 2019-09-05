@@ -7,6 +7,11 @@
 	<jsp:param value="Gestione Bar" name="title"/>
 </jsp:include>
 
+    <div id="alertBox">
+        <label id="msg"></label><p>
+        <input value="ok" id="btnA" type="button" onClick='CloseAlert();'></p>
+    </div>
+
         <div class="container" id="bars">
 				<h2 style="text-align:center; cursor:pointer;" onclick="location.reload()" >Gestione Bar </h2><br><br>
 				<c:if test="${pattern!=null}">
@@ -85,6 +90,13 @@
 </div>
 <jsp:include page="footer.html"/>
 <script>
+	function CloseAlert(){
+		$("#alertBox").hide();
+		$('body').html(reloadPage());
+	}
+	function OpenAlert(){
+		$("#alertBox").show(70);
+	}
 
 	function reloadPage(){
 		resp="";
@@ -148,7 +160,8 @@
 				 $("#email").val().trim().length==0 || $("#pass").val().trim().length==0 || 
 				 $("#matr_attuale").val().trim().length==0){
 				
-					alert("Compila tutti i campi");
+					$("#msg").text("Compila tutti i campi");
+					OpenAlert();
 					return;
 			}
 
@@ -161,9 +174,9 @@
 					matr:$("#matr_attuale").val()
 				},
 				function(data){
-					alert(data);
+					$("#msg").text(data);
 					chiudi_modifiche();
-					$('body').html(reloadPage());
+					OpenAlert();
 				});
 	}
 	
@@ -185,7 +198,7 @@
 
         xhr.onload = function(e) {
             if (this.status == 200) {
-               alert(this.responseText);
+            	alert(this.responseText);
             }
         };                    
 	}
@@ -196,7 +209,8 @@
 			 $("#email_bar").val().trim().length==0 || $("#password_bar").val().trim().length==0 || 
 			 $("#matricola_bar").val().trim().length==0){
 			
-				alert("Compila tutti i campi");
+			$("#msg").text("Compila tutti i campi");
+			OpenAlert();
 				return;
 		}
 		
@@ -208,9 +222,9 @@
 			matr:$("#matricola_bar").val()
 		},
 		function(data){
-			alert(data);
+			$("#msg").text(data);
 			chiudi_inserimento();
-			$('body').html(reloadPage());
+			OpenAlert();
 		});
 	}
 	
@@ -221,6 +235,7 @@
 	function chiudi_inserimento(){
 		$("#insertbar").fadeOut();
 	}
+	
 </script>
 </body>
 </html>

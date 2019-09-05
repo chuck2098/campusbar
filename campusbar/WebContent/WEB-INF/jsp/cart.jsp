@@ -6,6 +6,11 @@
 <jsp:param value="Carrello" name="title"/>
 </jsp:include>
 
+    <div id="alertBox">
+        <label id="msg"></label>
+        <br><p>
+            <input value="ok" id="btnA" type="button" onClick='CloseAlert();'></p>
+    </div>
         <div class="container" id="cart">
         	<h2 style="text-align:center;">Carrello</h2><br>
             <div class="row">
@@ -80,7 +85,14 @@
 <jsp:include page="footer.html"/>
 <script>
 
+function CloseAlert(){
+	$("#alertBox").hide();
+	$('body').html(reloadPage());
+}
 
+function OpenAlert(){
+	$("#alertBox").show();
+}
 	function reloadPage(){
 		resp="";
 		jQuery.ajaxSetup({async:false});
@@ -98,8 +110,8 @@
 	function del(cod){
 		$.get("DelToCart?id=" + cod,
 				function(data){
-						alert(data);
-						$('body').html(reloadPage());
+			       $("#msg").text(data);
+					OpenAlert();			
 			});
 	}
 	
@@ -117,9 +129,7 @@
 					if(data.trim()=="notLogged")
 						window.location.href="login.html";
 					
-							
-						
-						$('#cart').load(document.URL +  ' #cart');
+					CloseAlert();
 			});
 	}
 	

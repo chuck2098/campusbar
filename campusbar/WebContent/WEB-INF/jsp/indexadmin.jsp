@@ -7,6 +7,12 @@
 	<jsp:param value="Home" name="title"/>
 </jsp:include>
 
+    <div id="alertBox">
+       <center> 
+        <label id="msg"></label><p>
+            <input value="ok" id="btnA" type="button" onClick='nascondiDIV(),aggiornaQ();'></center>
+    </div>
+
 			<section class="content">
 					<br><h1 class="text-center">Prodotti piu venduti</h1>
 

@@ -77,6 +77,13 @@ height:40px;
 	height:40px;
 }
 </style>
+
+	<div id="alertBox">
+        
+        <label id="msg"></label><p>
+            <input value="ok" id="btnA" type="button" onClick='CloseAlert();'></p>
+    </div>
+    
         <div class="container" id="prodotti">
 				<h2 style="text-align:center; cursor:pointer;" onclick="location.href='GestioneProdottiAdmin'">Gestione Prodotti</h2><br><br>
 				<c:if test="${pattern!=null}">
@@ -187,6 +194,16 @@ height:40px;
 <jsp:include page="footer.html"/>
 <script>
 
+	function CloseAlert(){
+		$("#alertBox").hide();
+		$('body').html(reloadPage());
+	}
+	
+	function OpenAlert(){
+		$("#alertBox").show(70);
+	}
+
+
 	function reloadPage(){
 		resp="";
 		jQuery.ajaxSetup({async:false});
@@ -242,7 +259,8 @@ height:40px;
 	function update(cod){
 		
 		if($("#nome").val().trim().length==0 || $("#descrizione").val().trim()==0 || $("#prezzo").val().trim()==0 ){
-			alert("Compila tutti i campi");
+			$("#msg").text("Compila tutti i campi");
+			OpenAlert();
 			return;
 		}	
 		var cat=$('#categoria_prodotto').find(":selected").val();
@@ -257,9 +275,10 @@ height:40px;
 					cat:cat,
 				},
 				function(data){
-					alert(data);
+					$("#msg").text(data);
+					
 					chiudi_modifiche();
-					$('body').html(reloadPage());
+					OpenAlert();
 				});
 	}
 	
@@ -281,7 +300,8 @@ height:40px;
 		
 		xhr.onload = function(e) {
 		    if (this.status == 200) {
-		       alert(this.responseText);
+		    	alert(this.responseText);
+		       
 		    }
 		};                    
 	}
@@ -297,7 +317,8 @@ height:40px;
 	function inserisci(){
 		
 		if($("#nome_prod").val().trim().length==0 || $("#descrizione_prod").val().trim()==0 || $("#prezzo_prod").val().trim()==0 ){
-			alert("Compila tutti i campi");							
+			$("#msg").text("Compila tutti i campi");
+			OpenAlert();					
 			return;
 		}	
 		
@@ -306,7 +327,8 @@ height:40px;
 		if(cat.trim().length==0) cat=$("#cat_attuale").val().trim();
 		
 		if(cat.length==0){
-			alert("inserisci categoria");
+			$("#msg").text("inserisci categoria");
+			OpenAlert();
 			return;
 		}
 		
@@ -317,8 +339,10 @@ height:40px;
 			cate:cat
 		},
 		function(data){
-			alert(data);
-			chiudi_inserimento();
+			$("#msg").text(data);
+			//chiudi_inserimento();
+			OpenAlert();
+
 			window.location.href="GestioneProdottiAdmin?id="+cat
 		});
 		

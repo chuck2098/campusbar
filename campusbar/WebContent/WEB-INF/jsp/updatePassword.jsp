@@ -7,6 +7,12 @@
 	<jsp:param value="Cambio Password" name="title"/>
 </jsp:include>
 
+    <div id="alertBox">
+        
+        <label id="msg"></label><p>
+            <input value="ok" id="btnA" type="button" onClick='CloseAlert();'></p>
+    </div>
+
 <div class="container" id="orders">
 	<h2 style="text-align: center;">Cambio Password</h2>
 	<br>
@@ -38,6 +44,13 @@
 </div>
 <jsp:include page="footer.html" />
 <script>
+function CloseAlert(){
+	$("#alertBox").hide();
+}
+
+function OpenAlert(){
+	$("#alertBox").show(70);
+}
 
 function ValidatePassword(pass){
 	var pass=document.getElementById(3).value; 
@@ -49,13 +62,14 @@ function ValidatePassword(pass){
 		return true;
 	}
 	else{
-		alert("Hai inserito una password non valida");
+		$("#msg").text("Hai inserito una password non valida");
+		OpenAlert();
 		pass.focus();
 		return false;
 	}
 }
 function Update(){
-	alert("ciao");
+	
 	var pass1=document.getElementById(1).value;
 	var pass2=document.getElementById(2).value;
 	var pass3=document.getElementById(3).value;
@@ -65,14 +79,16 @@ function Update(){
 	document.getElementById(3).value="";
 	
 	if(!pass1 && !pass2 && !pass3){
-		alert("completa tutti i campi prima di procedere'");
+		$("#msg").text("completa tutti i campi prima di procedere'");
+		OpenAlert();
 		return;
 	}
 		
 
 		$.get("UpdatePassword?pass1=" + pass1 + "&pass2=" + pass2 + "&pass3=" + pass3, 
 			function(data){
-					alert(data);
+			$("#msg").text(data);
+			OpenAlert();
 		});
 	}
 

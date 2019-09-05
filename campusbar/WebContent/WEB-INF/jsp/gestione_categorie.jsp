@@ -7,6 +7,12 @@
 	<jsp:param value="Gestione Categorie" name="title"/>
 </jsp:include>
 
+    <div id="alertBox">
+        
+        <label id="msg"></label><p>
+            <input value="ok" id="btnA" type="button" onClick='CloseAlert();'></p>
+    </div>
+    
         <div class="container" id="bars">
 				<h2 style="text-align:center; cursor:pointer;" onclick="location.reload()">Gestione Categorie </h2><br><br>
 				<c:if test="${pattern!=null}">
@@ -69,6 +75,14 @@
 </div>
 <jsp:include page="footer.html"/>
 <script>
+	function CloseAlert(){
+		$("#alertBox").hide();
+		$('body').html(reloadPage());
+	}
+	
+	function OpenAlert(){
+		$("#alertBox").show(70);
+	}
 
 	function reloadPage(){
 		resp="";
@@ -123,7 +137,8 @@
 	function update(cod){
 			
 		if($("#nome_cat").val().trim().length==0 ){
-			alert("Compila tutti i campi");
+			$("#msg").text("Compila tutti i campi");
+			OpenAlert();
 			return;
 		}
 
@@ -134,9 +149,10 @@
 					
 				},
 				function(data){
-					alert(data);
+					$("#msg").text(data);
 					chiudi_modifiche();
-					$('body').html(reloadPage());
+					OpenAlert();
+					
 				});
 	}
 	
@@ -158,7 +174,8 @@
 
         xhr.onload = function(e) {
             if (this.status == 200) {
-               alert(this.responseText);
+            	alert(this.responseText);
+               
             }
         };                    
 	}
@@ -166,7 +183,9 @@
 	function inserisci(){
 
 		if($("#nome_categoria").val().trim().length==0 ){
-			alert("Compila tutti i campi");
+			$("#msg").text("Compila tutti i campi");
+			OpenAlert();
+			
 			return;
 		}
 		
@@ -174,8 +193,10 @@
 			nome:$("#nome_categoria").val(),
 		},
 		function(data){
-			alert(data);
+			$("#msg").text(data);
+			
 			chiudi_inserimento();
+			OpenAlert();
 			$('body').html(reloadPage());
 			//$('#bars').load(document.URL +  ' #bars');
 		});

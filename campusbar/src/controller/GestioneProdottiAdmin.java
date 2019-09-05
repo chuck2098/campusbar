@@ -40,6 +40,8 @@ public class GestioneProdottiAdmin extends HttpServlet {
 			if(cate!=null && cate!="") {
 				int id=Integer.parseInt(cate);
 				pro=(ArrayList<Prodotto>) new ProdottoDAO().doRetrieveByIdCategoria(id);
+				if(pro.size() <= 0)
+					pro=null;
 				
 			}else {//se non c'e' nessuna categoria selezionata,le restituisco
 				categories=(ArrayList<Categoria>) new CategoriaDAO().doRetrieveAll();
