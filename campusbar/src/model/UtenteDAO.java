@@ -254,5 +254,27 @@ public boolean doUpdatePassword(String pass,String mat) {
 
 		return true;
 	}
+	
+	public boolean doDeleteUser(Utente u) {
+
+		try(Connection con = ConnectionPool.getConnection()) {
+
+
+			PreparedStatement ps0 = con.prepareStatement("DELETE FROM utenti "
+														+"WHERE matricola=?  ");
+			ps0.setString(1,u.getMatricola());
+			
+
+			if(ps0.executeUpdate()==0)
+				return false;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
+	}
+	
 }
 
