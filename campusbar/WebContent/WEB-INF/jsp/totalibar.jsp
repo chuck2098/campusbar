@@ -51,7 +51,10 @@
 		var quant=0,totali=0,prez=0;
 		for(i=0;i<tot.length;i++){
 			response+="<tr>";
-				response+="<td style='font-size:18px; font-weight:700;''>"+tot[i]["prodotto"]["nome"]+"</td>";
+				if(isEmpty(tot[i]["prodotto"]))
+					response+="<td style='font-size:18px; font-weight:700;''>Non Disponibile</td>";
+				else
+					response+="<td style='font-size:18px; font-weight:700;''>"+tot[i]["prodotto"]["nome"]+"</td>";
 				response+="<td style='font-size:18px; font-weight:700;'>"+tot[i]["quantita"]+"</td>";
 				response+="<td style='font-size:18px; font-weight:700;'>"+Math.round(tot[i]["prezzo_acquisto"] * 100) / 100+"</td>";
 				response+="<td style='font-size:18px; font-weight:700;'>"+Math.round(tot[i]["totale"]*100)/100+"</td>";
@@ -67,6 +70,14 @@
 		
 		$("#totali").html(response);
 		
+	}
+	
+	function isEmpty(obj) {
+	    for(var key in obj) {
+	        if(obj.hasOwnProperty(key))
+	            return false;
+	    }
+	    return true;
 	}
 </script>
 </body>

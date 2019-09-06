@@ -34,7 +34,7 @@ public class UpdateQuantity extends HttpServlet {
 			disp.setProdotto(p);
 			disp.setEdificio(u.getEdificio());
 			disp.setQuantita(quant);
-			
+			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out=response.getWriter();
 			if(d.doUpdateByEdificio(disp))
 				out.println("Quantità aggiornata correttamente");
